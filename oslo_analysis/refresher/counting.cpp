@@ -8,9 +8,9 @@
    m = (TH1F*)gROOT->FindObject("h");
    if (m) m->Delete();
    TCanvas *c1 = new TCanvas("c1","Normalization of level density",600,600);
-   TH2F *h = new TH2F("h"," ",10,-0.816500,11.303500,50,0.026062,388310.000000);
+   TH2F *h = new TH2F("h"," ",10,-0.816500,11.303500,50,0.085891,388310.000000);
    ifstream rholev("rholev.cnt"), rhopaw("rhopaw.cnt"), fermi("fermigas.cnt");
-   float levels[94],rho[94],rhoerr[94],energy[835],energyerr[835],fermigas[835];
+   float levels[96],rho[96],rhoerr[96],energy[835],energyerr[835],fermigas[835];
    float Bn[1]={10.853000};
    float Bnerr[1]={0.001};
    float rho_Bn[1]={38831.000000};
@@ -29,10 +29,10 @@
    i=0;
    while(rhopaw){
    	rhopaw >> y;
-   	if(i<93){
+   	if(i<95){
    		rho[i]=y;
    	}
-   	else{rhoerr[i-93]=y;}
+   	else{rhoerr[i-95]=y;}
    	i++;
    }
   	i=0;
@@ -41,10 +41,10 @@
 		levels[i]=z;
 		i++;
   }
-   TGraphErrors *rhoexp = new TGraphErrors(93,energy,rho,energyerr,rhoerr);
+   TGraphErrors *rhoexp = new TGraphErrors(95,energy,rho,energyerr,rhoerr);
    TGraphErrors *rhoBn = new TGraphErrors(1,Bn,rho_Bn,Bnerr,rho_Bnerr);
    TGraph *fermicalc = new TGraph(834,energy,fermigas);
-   TGraph *level = new TGraph(93,energy,levels);
+   TGraph *level = new TGraph(95,energy,levels);
    c1->SetLogy();
    c1->SetLeftMargin(0.14);
    h->GetXaxis()->CenterTitle();
@@ -73,13 +73,13 @@
    TLatex t;
    t.SetTextSize(0.05);
    t.DrawLatex(    9.043,1.942e+05,"^{xx}Yy");
-   TArrow *arrow1 = new TArrow(0.623500,63.663692,0.623500,17.578182,0.02,">");
+   TArrow *arrow1 = new TArrow(0.623500,97.711014,0.623500,26.978989,0.02,">");
    arrow1->Draw();
-   TArrow *arrow2 = new TArrow(3.383500,559.068128,3.383500,154.364304,0.02,">");
+   TArrow *arrow2 = new TArrow(3.383500,576.029362,3.383500,159.047470,0.02,">");
    arrow2->Draw();
-   TArrow *arrow3 = new TArrow(4.223500,1090.151512,4.223500,301.001740,0.02,">");
+   TArrow *arrow3 = new TArrow(4.223500,1137.517366,4.223500,314.079926,0.02,">");
    arrow3->Draw();
-   TArrow *arrow4 = new TArrow(6.383500,10042.888141,6.383500,2772.941895,0.02,">");
+   TArrow *arrow4 = new TArrow(6.383500,10017.775549,6.383500,2766.008057,0.02,">");
    arrow4->Draw();
    c1->Update();
    c1->Print("counting.pdf");

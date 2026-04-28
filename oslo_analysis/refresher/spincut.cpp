@@ -8,9 +8,9 @@
    m = (TH1F*)gROOT->FindObject("h");
    if (m) m->Delete();
    TCanvas *c1 = new TCanvas("c1","Spincut parameter",600,600);
-   TH2F *h = new TH2F("h"," ",10,-0.816500,32.303501,50,0.001,    4.3);
+   TH2F *h = new TH2F("h"," ",10,-0.816500,33.023499,50,0.001,    4.3);
    ifstream spincutfile("spincut.cnt");
-   float energy[278],spincut[278];
+   float energy[284],spincut[284];
    int i = 0;
    float a0 =  -0.8165;
    float a1 =   0.1200;
@@ -21,7 +21,7 @@
 	   energy[i]=a0+(a1*i);
 	   i++;
    }
-   TGraph *spincutgraph = new TGraph(277,energy,spincut);
+   TGraph *spincutgraph = new TGraph(283,energy,spincut);
    c1->SetLeftMargin(0.14);
    h->GetXaxis()->CenterTitle();
    h->GetXaxis()->SetTitle("Excitation energy E (MeV)");

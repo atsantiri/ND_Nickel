@@ -8,25 +8,25 @@
 	m = (TH1F*)gROOT->FindObject("h");
 	if (m) m->Delete();
 	TCanvas *c1 = new TCanvas("c1","Gamma-ray strength function",600,600);
-	TH2F *h = new TH2F("h"," ",10,0.0,  16 ,10,3.110e-10,6.781e-06);
+	TH2F *h = new TH2F("h"," ",10,0.0,  15.964,10,3.503e-10,6.036e-07);
 	ifstream strengthfile("strength.nrm");
-	float strength[94],strengtherr[94],energyerr[94];
-	float energy[931],trans[931];
+	float strength[96],strengtherr[96],energyerr[96];
+	float energy[951],trans[951];
 	int i = 0;
    float a0 =  -0.8165;
    float a1 =   0.1200;
 	float x;	
 	while(strengthfile){
 		strengthfile >> x;
-		if(i<93){
+		if(i<95){
 			strength[i] = x;
 			energy[i] = a0 + (a1*i);
 			energyerr[i] = 0.0;
 		}	
-		else{strengtherr[i-93] = x;}
+		else{strengtherr[i-95] = x;}
 		i++;
 	}
-	TGraphErrors *strengthexp = new TGraphErrors(94,energy,strength,energyerr,strengtherr);
+	TGraphErrors *strengthexp = new TGraphErrors(96,energy,strength,energyerr,strengtherr);
     i = 0;
     ifstream transfile("transext.nrm");
     while(transfile){
@@ -52,7 +52,7 @@
     rsfext->Draw("L");
 	TLatex t;
 	t.SetTextSize(0.05);
-	t.DrawLatex(    2.045,2.034e-07,"^{xx}Yy");
+	t.DrawLatex(    2.093,1.811e-07,"^{xx}Yy");
 	c1->Update();
 	c1->Print("strength.pdf");
 	c1->Print("strength.eps");

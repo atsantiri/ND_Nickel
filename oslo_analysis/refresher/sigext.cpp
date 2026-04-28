@@ -8,9 +8,9 @@
    m = (TH1F*)gROOT->FindObject("h");
    if (m) m->Delete();
    TCanvas *c1 = new TCanvas("c1","Normalization of gamma-transmission coefficient",600,600);
-   TH2F *h = new TH2F("h"," ",10,-0.816500,  11.224,50,1.000e-04,1.410e+05);
+   TH2F *h = new TH2F("h"," ",10,-0.816500,  11.464,50,9.082e-01,1.075e+05);
    ifstream sigfile("sigpaw.cnt");
-   float sig[94],sigerr[94];
+   float sig[96],sigerr[96];
    float energy[167],energyerr[167];
    float extL[168],extH[168];
    int i;
@@ -26,10 +26,10 @@
    i = 0;
    while(sigfile){
    	sigfile >> x;
-   	if(i<93){
+   	if(i<95){
    		sig[i]=x;
    	}
-   	else{sigerr[i-93]=x;}
+   	else{sigerr[i-95]=x;}
    	i++;
    }
    ifstream extendfile("extendLH.cnt");
@@ -42,7 +42,7 @@
    }
    TGraph *extLgraph = new TGraph(102,energy,extL);
    TGraph *extHgraph = new TGraph(102,energy,extH);
-   TGraphErrors *sigexp = new TGraphErrors(93,energy,sig,energyerr,sigerr);
+   TGraphErrors *sigexp = new TGraphErrors(95,energy,sig,energyerr,sigerr);
    c1->SetLogy();
    c1->SetLeftMargin(0.14);
    h->GetXaxis()->CenterTitle();
@@ -58,13 +58,13 @@
    extLgraph->DrawGraph(51,&extLgraph->GetX()[0],&extLgraph->GetY()[0],"L");
    extHgraph->SetLineStyle(1);
    extHgraph->DrawGraph(42,&extHgraph->GetX()[60],&extHgraph->GetY()[60],"L");
-   TArrow *arrow1 = new TArrow(3.984e+00,2.770e+02,3.984e+00,8.463e+01,0.02,">");
+   TArrow *arrow1 = new TArrow(3.984e+00,1.947e+02,3.984e+00,6.114e+01,0.02,">");
    arrow1->Draw();
-   TArrow *arrow2 = new TArrow(5.183e+00,8.403e+02,5.183e+00,2.568e+02,0.02,">");
+   TArrow *arrow2 = new TArrow(5.183e+00,6.363e+02,5.183e+00,1.998e+02,0.02,">");
    arrow2->Draw();
-   TArrow *arrow3 = new TArrow(6.384e+00,2.980e+03,6.384e+00,9.105e+02,0.02,">");
+   TArrow *arrow3 = new TArrow(6.384e+00,2.361e+03,6.384e+00,7.413e+02,0.02,">");
    arrow3->Draw();
-   TArrow *arrow4 = new TArrow(7.583e+00,9.168e+03,7.583e+00,2.801e+03,0.02,">");
+   TArrow *arrow4 = new TArrow(7.583e+00,8.213e+03,7.583e+00,2.578e+03,0.02,">");
    arrow4->Draw();
    c1->Update();
    c1->Print("sigext.pdf");
