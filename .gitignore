@@ -4,8 +4,15 @@
 
 .clang-format
 
-*.so
 *.so.*
 *.dylib
-*.d
 *.pcm
+*.d
+*.so
+*_rdict.pcm
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+.vscode/
