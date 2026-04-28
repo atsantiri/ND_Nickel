@@ -1,0 +1,11 @@
+*.pdf
+*.png
+*.root
+
+.clang-format
+
+*.so
+*.so.*
+*.dylib
+*.d
+*.pcm

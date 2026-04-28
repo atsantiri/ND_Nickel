@@ -1,0 +1,44 @@
+/home/artemis/Personal_Space/MSU/SuN_Stuff/ND_Nickel/rootfiles_raw/Ni62_gated_2D_matrices.root
+/home/artemis/Personal_Space/MSU/SuN_Stuff/ND_Nickel/talys/gSF_band_cu63.txt
+
+matrixName msum
+MeV: 1
+mode 2
+doInterpol 1
+doOslo 1
+alphaLimit -1 1
+alphaIter 100
+doEffi 0
+doAutoScale 1
+colour 1
+doGRF 0
+displayAverage 0
+displaySingle 1
+doSlidingWindow 0
+doBinVariation 0
+doBackground 1
+verbose 0
+gSF_norm 0.012
+lit_norm 1
+lit_alpha 0
+lit_alpha_error 0 0
+level1 588 801
+level1_2 0 0
+bg_level1 790.876 838.294 529.322 585.441
+bg_level2 1606.23 1669.13 2216.91 2269.32
+level2 1951 2103
+level2_2 2070 2090
+excitation 8700 10300
+excitationMCLimits 2000 3000
+excitation_bin_1 300
+excitation_bin_2 800
+nOfBins 6
+eff_corr 1
+minCounts 50
+doWidthCal 0
+widthCal 0 0 0 0
+rhoFileName 
+rhoScale 1
+spinLow 0
+spinHigh 8
+discreteLevelFile 100 100

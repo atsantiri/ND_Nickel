@@ -1,0 +1,2869 @@
+[suntan@granite spyrou]$ cp oslo152.root ../jordan/
+[suntan@granite spyrou]$ cp th22mama.C ../jordan/
+[suntan@granite spyrou]$ cd Jordan/
+[suntan@granite Jordan]$ ll
+total 0
+[suntan@granite Jordan]$ 
+[suntan@granite Jordan]$ 
+[suntan@granite Jordan]$ cd ../../jordan/
+[suntan@granite jordan]$ mama
+ 
+ ____________________________________________________
+|                                                    |
+|              Welcome to M A M A  7.5.5             |
+|                                                    |
+|   MAtrix MAnipulation, Oslo Cyclotron Laboratory   |
+|           Magne Guttormsen, January 1995           |
+|                                                    |
+|   MAMA handles 2 matrices of dimension 4096x2048   |
+|       and 2 singles spectra of length 8192         |
+|                                                    |
+| Important commands:                                |
+|  HE - help            ST - stop MAMA               |
+|  RE - read file       WR - write file              |
+|  DS - display spec.   CR - curser, activate spec.  |
+|  HE NW - news                                      |
+|____________________________________________________|
+mama>re
+Destination spectrum <1>:
+Filename          <TEST>:Nd152.m
+ FILE=Disk
+ KIND=Matrix
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=siri2root
+ COMMENT=none
+ TIME=2022-09-26 16:32:10
+ CALIBRATION EkeV=6, 1.000000E+00, 6.000000E+00, 0.000000E+00, 1.000000E+00, 6.000000E+00, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0: 999,0: 999
+ CHANNEL=(0: 999,0: 999)
+....................  
+mama>ds2
+  
+mama>co
+Destination spectrum <2>:
+Source spectrum      <1>:
+ Compression factors must be integer. With a factor
+ of e.g. 3, channels 0,1,2,3 goes to 0,0,0,1
+
+Compression along x-axis <  1>:2
+Compression along y-axis <  1>:2
+....................................................................  
+New dimension (0: 499,0: 499)
+  
+mama>ds2
+  
+mama>rm
+Dimension of response-matrix < 500>:
+
+Cal. coeff. a0 (keV)     <     4.0>:
+Cal. coeff. a1 (keV/ch)  <    12.0>:
+  
+ List of response functions. The ones marked old, are not recommended
+  (0) Gaussian
+  (1) NaI_old         CACTUS 5x5 inch before 2012
+  (2) LaBr_2012       Campaign 4x8 inch LaBr from Milano in CACTUS frame
+  (3) NaI_2012        CACTUS 5x5 inch after 2012
+  (4) Seg2            SuN at MSU 2014, with target inside  (2 cm?), GEANT4
+  (5) Seg3            SuN at MSU 2014, with target outside (2 cm?), GEANT4
+  (6) Clover_old      Notre Dame 2015, GEANT4
+  (7) Clover          Notre Dame 2015, GEANT4
+  (8) Seg23           SuN at MSU 2015 with target in center, GEANT4
+  (9) Oscar2017       [For comparison] "Old" OSCAR at OCL 2017 with 15 LaBr, GEANT4
+ (10) Afrodite_Clover iThemba 2015, 8 Clover, GEANT4 (2018)
+ (11) Afrodite_LaBr   iThemba 2015, 2 LaBr, GEANT4 (2018)
+ (12) Gretina2018     MSU, GEANT4 one quad, Remco and Lew
+  or:
+ (13) Read from disk: # OSCAR 2017 LaBr; SCALED compton by 1.15                                       
+
+Choose your response function <13>:8
+  
+ If you are unfolding/folding a gamma-ray matrix or spectrum,
+ you should create response functions with 10 times less FWHM
+ than experimentally known. Then FWHM(response) = FWHM(real)/10,
+ which is optimal for the unfolding (UN) and folding (FO) procedures.
+ If you just want to view the response matrix with command GR,
+ then use a factor = 1. Then FWHM(response) = FWHM(real).
+
+Respons functions for unfolding (10.) or folding/viewing (1.) <10.0>:
+ Typical experimental relative FWHM values (%) at Egam=1.33 MeV, are:
+ OSCAR(LaBr)=3.000, Clover(Ge)= 0.361, Gretina(Ge)= 0.361
+ SuN(NaI)=   5.980, CACTUS(NaI)=6.000, Hyperion(Ge)=0.550
+
+Give relative energy resolution at Egam=1.33 MeV (FWHM/Egam) (%) < 5.980>:
+
+(In the calculation the response function is obtained
+with a FWHM value of (1/10.0)*(the real experimental FWHM)
+due to technical reasons in the unfolding procedure)
+.................
+Calibration of response function spectra (b0, b1)=   3.500   4.000
+Calibration of raw spectra (a0,a1) =                 4.000  12.000
+
+ Parameters for response function written to respxout.dat
+
+mama>un
+Destination spectrum <1>:
+Source spectrum      <2>:
+  Old unfolding: Iterative guessing U and folding U until convergence
+  New unfolding: Compton subtraction method with reduced fluctuations
+
+New (0) or old (1) unfolding procedure <0>:
+
+Dimension along x-axis < 500>:
+Dimension along y-axis < 500>:
+ Give upper x-limits for the unfolding. The boarder is
+ given by interpolation between (x1,y1) and (x2,y2)
+  
+             (x2,y2)  second point
+ xxxxxxxxxxxxxxx
+ xx matrix xxx
+ xxxxxxxxx
+ xxxxxxx
+     (x1,y1)  first point
+  
+
+First point x1  <  499>:10
+First point y1  <    0>:8
+Second point x2 <  499>:400
+Second point y2 <  499>:390
+  Give lower limits for the Chi**2-test:
+  Opt. 1: Sliding limit for gamma-spectra with known Ex.
+          For excitation Ex>2 MeV, we set lower limit Eg=500 keV.
+          Below, the Eg limit is 1/4*Ex, but never below your
+          lowest limit for Chi**2 testing.
+  Opt. 2: A fixed lower limit for the chi-test is applied
+  Opt. 3: Return and set proper upper limits for unfolding
+
+
+Give lowest x-channel for Chi**2 testing  <    8>:
+
+Option (1/2/3)                  <1>:
+
+Include total detector efficiency (y/n) <y>:
+  
+ The efficiency at low energy (< 1000 keV) have to be given.
+ It depends on various experimental conditions as thresholds
+ on ADCs, gamma-absorber (2 mm Cu), timing etc. The program
+ always assumes Eff = 0.0 at Egam < 30 keV and Eff = 1.00 at
+ Egam > 1000 keV. However, in between these energies you can
+ define a new shape of the discrimination.
+  
+   |                                                ************
+   |                                  **************            
+0.8|                                **                          
+   |                             ***                            
+0.6|                           **                               
+   |                        ***                                 
+0.4|                      **                                    
+   |                     *                                      
+0.2|                    *                                       
+   |                 ***                                        
+0.0|---------.---------.---------.---------.---------.---------.
+   0        100       200       300       400       500   E(keV)
+
+Do you want to change the discriminator threshold <n>:
+
+Number of iterations ( <500 )  < 50>:
+  
+ The iteration is terminated when the folding of
+ the unfolded spectrum equals the raw spectrum. It
+ is however recommended to stop before the Chi2 is
+ at minimum. Thus, you can put a certain weight on
+ the importance not to have too strong fluctuations
+ in the final spectrum. We recommend a weight-factor
+ of 0.2 (valid range is 0.0 - 0.5)
+
+Weight on fluctuations <0.2>:
+y-ch:   0 Mode: n Area: 0.561E+04( 0.108E+04) Chi:  0.000 Fluct:  0.00 Iter: 14
+y-ch:   1 Mode: n Area: 0.561E+04( 0.108E+04) Chi:  0.000 Fluct:  0.00 Iter: 13
+... 
+... Removed lines
+...
+y-ch: 498 Mode: d Area: 0.000E+00( 0.120E+02) Chi:  0.000 Fluct:  1.00 Iter: 14
+y-ch: 499 Mode: d Area: 0.000E+00( 0.600E+01) Chi:  0.000 Fluct:  1.00 Iter: 13
+Calibration is a0=   4.0keV, a1=  12.00keV/ch
+mama>ds2
+  
+mama>fn
+Destination spectrum <2>:
+Source spectrum      <1>:
+
+Dimension along x-axis < 500>:
+Dimension along y-axis < 500>:
+
+Lowest and highest counts are (min,max) = (-0.14E+06 0.14E+07)
+You may now delete the most negative numbers before filling
+Do you want to delete these negative counts     <n>:
+
+Write FWHMx (ch) around ch x=   50 <   3.1>:
+Write FWHMx (ch) around ch x=  450 <  18.5>:
+
+Write FWHMy (ch) around ch y=   50 <   1.0>:
+Write FWHMy (ch) around ch y=  450 <   1.0>:
+ FWHM have been expressed by A + B * SQRT(ch):
+Ax= -4.6260  Bx=  1.0905     Ay=  1.0000 By= -0.0000
+Probability-matrix around (x,y)=(  50,  50):
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0070.0210.0390.0490.0390.0210.0070.0000.0000.0000.000
+ 0.0000.0000.0000.0050.0240.0700.1340.1660.1340.0700.0240.0050.0000.0000.000
+ 0.0000.0000.0000.0000.0070.0210.0390.0490.0390.0210.0070.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+
+ Probability-matrix around (x,y)=( 450, 450):
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0060.0070.0080.0080.0090.0090.0090.0090.0090.0090.0090.0080.0080.0070.006
+ 0.0210.0240.0260.0280.0290.0300.0310.0310.0310.0300.0290.0280.0260.0240.021
+ 0.0060.0070.0080.0080.0090.0090.0090.0090.0090.0090.0090.0080.0080.0070.006
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+
+Probability-matrix OK? (y/n) <y>:
+..................................................
+Before number of neg. ch. was:  49336, with total counts:  -2011221
+After  number of neg. ch. is:    5926, with total counts:  -1665814
+mama>ds2
+  
+mama>rn
+Destination spectrum <1>:
+Source spectrum      <2>:
+  
+ With this command you may replace the counts in the
+ spectrum/matrix with a given value. The options are:
+ Replace counts if they are below a certain value, or,
+ if the counts are in-between two values, or if the
+ counts exceed a certain value. The defaults are:
+ Choose (1), replace-value = 0 and Max = 0 which will
+ delete all negative numbers.
+ You may also change floating point values -> integers.
+ ----------------------------------------------------- 
+       Counts < Max is replaced........... choose: (1)
+ Min < Counts < Max is replaced........... choose: (2)
+ Min < Counts       is replaced........... choose: (3)
+ Replace floating counts by integers...... choose: (4)
+ Return to MAMA........................... choose: (5)
+ ----------------------------------------------------- 
+ Choose your option                               <1>:
+
+Give new value for the counts to be replaced <  0.00>:
+Delete counts with value lower than          <  0.00>:
+
+Number of channels replaced:          5926
+Number of counts before:        13790512.0
+Number of counts after:         15456158.0
+Increase of counts:              1665646.0
+mama>
+mama>ds2
+  
+mama>wr
+
+Spectrum to write            <1>:
+Singles spectrum                1
+Set of spectra NA-0, NA-1,...   2
+2-dimensional spectrum (matrix) 3
+Please, choose your type     <3>:
+
+Cal. coeff. a0 (keV) on x-axis     <        4.0>:
+Cal. coeff. a1 (keV/ch) on x-axis  <     12.000>:
+Cal. coeff. a2 (keV/ch2) on x-axis < 0.0000E+00>:
+
+Cal. coeff. a0 (keV) on y-axis     <        4.0>:
+Cal. coeff. a1 (keV/ch) on y-axis  <     12.000>:
+Cal. coeff. a2 (keV/ch2) on y-axis < 0.0000E+00>:
+
+Dimension on x-axis (max=4096) < 500>:
+Dimension on y-axis (max=2048) < 500>:
+Filename                       <TEST>:Nd152.un
+mama>co
+Destination spectrum <2>:
+Source spectrum      <1>:
+ Compression factors must be integer. With a factor
+ of e.g. 3, channels 0,1,2,3 goes to 0,0,0,1
+
+Compression along x-axis <  1>:2
+Compression along y-axis <  1>:2
+....................................................................  
+New dimension (0: 249,0: 249)
+  
+mama>ds2
+  
+mama>fg
+ The original gamma-matrix should be stored in
+ the source matrix and the extracted 1.gen. matrix
+ will appear in the destination spectrum. The last
+ weighting functions used can be accessed from the
+ response matrix using the command GR
+  
+Destination spectrum <1>:
+Source spectrum      <2>:
+
+Calibration for gamma-energies:
+Cal. coeff. a0 (keV) on x-axis   <    10.0>:
+Cal. coeff. a1 (keV/ch) on x-axis<    24.0>:
+
+Calibration for excitation energies:
+Cal. coeff. a0 (keV) on y-axis   <    10.0>:
+Cal. coeff. a1 (keV/ch) on y-axis<    24.0>:
+
+Excitation energy of highest gate (keV)  <  5986.0>:5000
+
+Normalization: singles(1) or multiplicity(2)    <2>:
+Multiplicity:  statistical(1) or total(2)       <1>:2
+Area correction for 1. gen. spectra (y/n)       <y>:
+Experimental lower gamma thresholds (keV)  <  200.>:50
+Upper threshold for nonstat. gammas (keV)  <  430.>:50
+Average entry point in ground band (keV)   <    0.>:0
+
+It is recommended to use a sliding upper threshold when the
+excitation energy is lower than 1 - 2 MeV. This is performed
+by defining a ratio R, giving Thres=Ex*R with a lower and
+higher limit of  50. and  50. keV. Use R = 0.2 - 0.3.
+
+Give ratio R           (no sliding = 100.) <  0.30>:
+
+First geneneration spectra extracted for
+excitation energies between  5002.-   10. keV
+corresponding to y-channels   208 -    0
+
+You may read weighting functions from disk
+Weighting by exp. 1. gen. spectra (y/n)         <n>:
+
+ Multiplicity in each gate: 
+ -----------------------------------
+ Y-ch= 208 Ex=  5002.0 keV < 8.327>:3
+ Y-ch= 207 Ex=  4978.0 keV < 9.879>:3
+ Y-ch= 206 Ex=  4954.0 keV < 5.358>:2.8
+ Y-ch= 205 Ex=  4930.0 keV < 4.289>:2.8
+ Y-ch= 204 Ex=  4906.0 keV < 4.745>:2.7
+ Y-ch= 203 Ex=  4882.0 keV < 8.166>:2.7
+...
+...
+...
+ Y-ch=   2 Ex=    58.0 keV < 0.000>:
+ Y-ch=   1 Ex=    34.0 keV < 0.000>:
+ Y-ch=   0 Ex=    10.0 keV < 0.000>:
+ 
+ -----------------------------------
+  
+
+Iteration number:   1
+Y-ch= 208  Ex=   5002.  Area=       914.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 207  Ex=   4978.  Area=      1305.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 206  Ex=   4954.  Area=       587.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 205  Ex=   4930.  Area=       638.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 204  Ex=   4906.  Area=       734.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 203  Ex=   4882.  Area=      1576.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 202  Ex=   4858.  Area=       929.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 201  Ex=   4834.  Area=      1059.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 200  Ex=   4810.  Area=      1438.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 199  Ex=   4786.  Area=      1044.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 198  Ex=   4762.  Area=      1338.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 197  Ex=   4738.  Area=      1584.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 196  Ex=   4714.  Area=      1507.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 195  Ex=   4690.  Area=      2131.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 194  Ex=   4666.  Area=      1983.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 193  Ex=   4642.  Area=      2264.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 192  Ex=   4618.  Area=      1904.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 191  Ex=   4594.  Area=      2803.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 190  Ex=   4570.  Area=      3277.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 189  Ex=   4546.  Area=      2112.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 188  Ex=   4522.  Area=      3187.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 187  Ex=   4498.  Area=      2592.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 186  Ex=   4474.  Area=      3231.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 185  Ex=   4450.  Area=      3285.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 184  Ex=   4426.  Area=      5969.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 183  Ex=   4402.  Area=      3181.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 182  Ex=   4378.  Area=      4127.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 181  Ex=   4354.  Area=      4060.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 180  Ex=   4330.  Area=      4017.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 179  Ex=   4306.  Area=      4874.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 178  Ex=   4282.  Area=      5251.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 177  Ex=   4258.  Area=      6292.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 176  Ex=   4234.  Area=      5800.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 175  Ex=   4210.  Area=      6841.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 174  Ex=   4186.  Area=      7933.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 173  Ex=   4162.  Area=      8429.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 172  Ex=   4138.  Area=     10105.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 171  Ex=   4114.  Area=     10358.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 170  Ex=   4090.  Area=     11399.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 169  Ex=   4066.  Area=     13124.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 168  Ex=   4042.  Area=     13435.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 167  Ex=   4018.  Area=     14755.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 166  Ex=   3994.  Area=     14803.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 165  Ex=   3970.  Area=     17353.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 164  Ex=   3946.  Area=     16626.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 163  Ex=   3922.  Area=     17882.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 162  Ex=   3898.  Area=     18387.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 161  Ex=   3874.  Area=     18042.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 160  Ex=   3850.  Area=     19186.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 159  Ex=   3826.  Area=     26273.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 158  Ex=   3802.  Area=     21401.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 157  Ex=   3778.  Area=     21490.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 156  Ex=   3754.  Area=     22154.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 155  Ex=   3730.  Area=     24128.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 154  Ex=   3706.  Area=     24732.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 153  Ex=   3682.  Area=     26534.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 152  Ex=   3658.  Area=     28605.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 151  Ex=   3634.  Area=     28651.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 150  Ex=   3610.  Area=     33324.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 149  Ex=   3586.  Area=     28810.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 148  Ex=   3562.  Area=     30187.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 147  Ex=   3538.  Area=     35584.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 146  Ex=   3514.  Area=     30151.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 145  Ex=   3490.  Area=     28904.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 144  Ex=   3466.  Area=     37190.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 143  Ex=   3442.  Area=     26757.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 142  Ex=   3418.  Area=     30481.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 141  Ex=   3394.  Area=     26754.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 140  Ex=   3370.  Area=     27187.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 139  Ex=   3346.  Area=     25036.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 138  Ex=   3322.  Area=     26943.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 137  Ex=   3298.  Area=     27969.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 136  Ex=   3274.  Area=     25335.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 135  Ex=   3250.  Area=     27134.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 134  Ex=   3226.  Area=     26698.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 133  Ex=   3202.  Area=     29523.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 132  Ex=   3178.  Area=     24821.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 131  Ex=   3154.  Area=     28818.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 130  Ex=   3130.  Area=     30670.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 129  Ex=   3106.  Area=     27642.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 128  Ex=   3082.  Area=     29484.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 127  Ex=   3058.  Area=     28739.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 126  Ex=   3034.  Area=     33788.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 125  Ex=   3010.  Area=     36512.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 124  Ex=   2986.  Area=     40739.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 123  Ex=   2962.  Area=     41964.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 122  Ex=   2938.  Area=     46642.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 121  Ex=   2914.  Area=     47440.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 120  Ex=   2890.  Area=     53187.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 119  Ex=   2866.  Area=     55914.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 118  Ex=   2842.  Area=     59212.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 117  Ex=   2818.  Area=     57045.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 116  Ex=   2794.  Area=     54695.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 115  Ex=   2770.  Area=     53490.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 114  Ex=   2746.  Area=     54572.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 113  Ex=   2722.  Area=     51643.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 112  Ex=   2698.  Area=     57100.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 111  Ex=   2674.  Area=     66620.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 110  Ex=   2650.  Area=     75073.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 109  Ex=   2626.  Area=     84168.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 108  Ex=   2602.  Area=     95220.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 107  Ex=   2578.  Area=    109206.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 106  Ex=   2554.  Area=    116967.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 105  Ex=   2530.  Area=    131775.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 104  Ex=   2506.  Area=    153165.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 103  Ex=   2482.  Area=    168410.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 102  Ex=   2458.  Area=    187228.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 101  Ex=   2434.  Area=    197469.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch= 100  Ex=   2410.  Area=    171161.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  99  Ex=   2386.  Area=    156298.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  98  Ex=   2362.  Area=    129302.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  97  Ex=   2338.  Area=     94603.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  96  Ex=   2314.  Area=     75299.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  95  Ex=   2290.  Area=     54470.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  94  Ex=   2266.  Area=     60909.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  93  Ex=   2242.  Area=     63948.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  92  Ex=   2218.  Area=     60130.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  91  Ex=   2194.  Area=     56821.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  90  Ex=   2170.  Area=     59234.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  89  Ex=   2146.  Area=     63925.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  88  Ex=   2122.  Area=     66008.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  87  Ex=   2098.  Area=     72066.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  86  Ex=   2074.  Area=     63508.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  85  Ex=   2050.  Area=     70348.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  84  Ex=   2026.  Area=     69992.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  83  Ex=   2002.  Area=     88792.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  82  Ex=   1978.  Area=     86597.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  81  Ex=   1954.  Area=    117192.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  80  Ex=   1930.  Area=    131553.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  79  Ex=   1906.  Area=    165722.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  78  Ex=   1882.  Area=    214314.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  77  Ex=   1858.  Area=    263380.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  76  Ex=   1834.  Area=    304499.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  75  Ex=   1810.  Area=    329592.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  74  Ex=   1786.  Area=    333691.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  73  Ex=   1762.  Area=    324728.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  72  Ex=   1738.  Area=    276381.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  71  Ex=   1714.  Area=    229412.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  70  Ex=   1690.  Area=    201562.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  69  Ex=   1666.  Area=    208315.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  68  Ex=   1642.  Area=    276513.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  67  Ex=   1618.  Area=    244694.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  66  Ex=   1594.  Area=    275567.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  65  Ex=   1570.  Area=    232070.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  64  Ex=   1546.  Area=    203073.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  63  Ex=   1522.  Area=    144281.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  62  Ex=   1498.  Area=    157366.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  61  Ex=   1474.  Area=    138328.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  60  Ex=   1450.  Area=     83910.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  59  Ex=   1426.  Area=     62229.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  58  Ex=   1402.  Area=     69731.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  57  Ex=   1378.  Area=     54565.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  56  Ex=   1354.  Area=     46985.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  55  Ex=   1330.  Area=     69456.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  54  Ex=   1306.  Area=     51538.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  53  Ex=   1282.  Area=     69662.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  52  Ex=   1258.  Area=     60617.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  51  Ex=   1234.  Area=     60478.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  50  Ex=   1210.  Area=     57457.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  49  Ex=   1186.  Area=     59526.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  48  Ex=   1162.  Area=     48821.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  47  Ex=   1138.  Area=     69800.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  46  Ex=   1114.  Area=     56974.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  45  Ex=   1090.  Area=     76894.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  44  Ex=   1066.  Area=     58070.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  43  Ex=   1042.  Area=     65358.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  42  Ex=   1018.  Area=     49593.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  41  Ex=    994.  Area=     73267.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  40  Ex=    970.  Area=     55886.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  39  Ex=    946.  Area=     67528.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  38  Ex=    922.  Area=     48198.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  37  Ex=    898.  Area=     62547.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  36  Ex=    874.  Area=     64274.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  35  Ex=    850.  Area=     54354.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  34  Ex=    826.  Area=     55512.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  33  Ex=    802.  Area=     66790.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  32  Ex=    778.  Area=     77176.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  31  Ex=    754.  Area=     79987.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  30  Ex=    730.  Area=     83825.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  29  Ex=    706.  Area=     70942.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  28  Ex=    682.  Area=     68186.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  27  Ex=    658.  Area=     57024.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  26  Ex=    634.  Area=     56101.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  25  Ex=    610.  Area=     60675.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  24  Ex=    586.  Area=     52386.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  23  Ex=    562.  Area=     56130.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  22  Ex=    538.  Area=     54794.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  21  Ex=    514.  Area=     62389.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  20  Ex=    490.  Area=     83763.2  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  19  Ex=    466.  Area=    154682.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  18  Ex=    442.  Area=    240688.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  17  Ex=    418.  Area=    221578.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  16  Ex=    394.  Area=    169674.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  15  Ex=    370.  Area=    124026.3  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  14  Ex=    346.  Area=     61484.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  13  Ex=    322.  Area=     50875.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  12  Ex=    298.  Area=     57253.6  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  11  Ex=    274.  Area=     42941.7  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=  10  Ex=    250.  Area=     52164.9  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   9  Ex=    226.  Area=     16602.8  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   8  Ex=    202.  Area=     22880.1  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   7  Ex=    178.  Area=    219207.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   6  Ex=    154.  Area=    198815.4  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   5  Ex=    130.  Area=   1541162.5  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   4  Ex=    106.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   3  Ex=     82.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   2  Ex=     58.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   1  Ex=     34.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   0  Ex=     10.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+----------------------------------------------
+ You may now iterate on the last first-
+ generation spectra just obtained. Remember,the
+ input spectra must be of unfolded type.
+ WARNING! Your first-generation spectra just
+ obtained, will be overwritten by the new one
+ for each iteration.
+
+
+
+Iteration loop =  1, stop(0), activate/modify direct decay(1) or continue(2)  <2>:
+
+Iteration number:   2
+Y-ch= 208  Ex=   5002.  Area=      -111.3  Alpha=   0.51  dA/A(%)=  -112.17
+Y-ch= 207  Ex=   4978.  Area=      -243.1  Alpha=   0.48  dA/A(%)=  -118.63
+...
+...
+...
+Iteration loop = 15, stop(0), activate/modify direct decay(1) or continue(2)  <2>:
+
+Iteration number:  16
+Y-ch= 208  Ex=   5002.  Area=      -139.8  Alpha=   0.49  dA/A(%)=  9999.99
+Y-ch= 207  Ex=   4978.  Area=      -257.8  Alpha=   0.47  dA/A(%)=  9999.99
+Y-ch= 206  Ex=   4954.  Area=      -128.2  Alpha=   0.45  dA/A(%)=  9999.99
+Y-ch= 205  Ex=   4930.  Area=      -152.6  Alpha=   0.44  dA/A(%)=  9999.99
+Y-ch= 204  Ex=   4906.  Area=      -194.0  Alpha=   0.42  dA/A(%)=  9999.99
+Y-ch= 203  Ex=   4882.  Area=      -471.8  Alpha=   0.41  dA/A(%)=  9999.99
+Y-ch= 202  Ex=   4858.  Area=      -265.4  Alpha=   0.42  dA/A(%)=  9999.99
+Y-ch= 201  Ex=   4834.  Area=      -292.0  Alpha=   0.41  dA/A(%)=  9999.99
+Y-ch= 200  Ex=   4810.  Area=      -583.0  Alpha=   0.36  dA/A(%)=  9999.99
+Y-ch= 199  Ex=   4786.  Area=       -62.0  Alpha=   0.56  dA/A(%)=  9999.99
+Y-ch= 198  Ex=   4762.  Area=       166.2  Alpha=   0.73  dA/A(%)=     0.00
+Y-ch= 197  Ex=   4738.  Area=      -125.9  Alpha=   0.52  dA/A(%)=  9999.99
+Y-ch= 196  Ex=   4714.  Area=      -200.5  Alpha=   0.50  dA/A(%)=  9999.99
+Y-ch= 195  Ex=   4690.  Area=      -271.5  Alpha=   0.50  dA/A(%)=  9999.99
+Y-ch= 194  Ex=   4666.  Area=      -238.0  Alpha=   0.51  dA/A(%)=  9999.99
+Y-ch= 193  Ex=   4642.  Area=      -175.0  Alpha=   0.53  dA/A(%)=  9999.99
+Y-ch= 192  Ex=   4618.  Area=      -170.9  Alpha=   0.52  dA/A(%)=  9999.99
+Y-ch= 191  Ex=   4594.  Area=      -199.8  Alpha=   0.53  dA/A(%)=  9999.99
+Y-ch= 190  Ex=   4570.  Area=      -261.8  Alpha=   0.52  dA/A(%)=  9999.99
+Y-ch= 189  Ex=   4546.  Area=      -185.8  Alpha=   0.52  dA/A(%)=  9999.99
+Y-ch= 188  Ex=   4522.  Area=      -320.3  Alpha=   0.51  dA/A(%)=  9999.99
+Y-ch= 187  Ex=   4498.  Area=      -231.3  Alpha=   0.52  dA/A(%)=  9999.99
+Y-ch= 186  Ex=   4474.  Area=      -281.7  Alpha=   0.52  dA/A(%)=  9999.99
+Y-ch= 185  Ex=   4450.  Area=       -86.5  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 184  Ex=   4426.  Area=      -606.3  Alpha=   0.51  dA/A(%)=  9999.99
+Y-ch= 183  Ex=   4402.  Area=      -266.0  Alpha=   0.52  dA/A(%)=  9999.99
+Y-ch= 182  Ex=   4378.  Area=      -143.3  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 181  Ex=   4354.  Area=        58.5  Alpha=   0.57  dA/A(%)=    -0.00
+Y-ch= 180  Ex=   4330.  Area=       -99.0  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 179  Ex=   4306.  Area=      -107.2  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 178  Ex=   4282.  Area=      -337.1  Alpha=   0.53  dA/A(%)=  9999.99
+Y-ch= 177  Ex=   4258.  Area=      -272.1  Alpha=   0.54  dA/A(%)=  9999.99
+Y-ch= 176  Ex=   4234.  Area=      -363.8  Alpha=   0.53  dA/A(%)=  9999.99
+Y-ch= 175  Ex=   4210.  Area=      -324.8  Alpha=   0.54  dA/A(%)=  9999.99
+Y-ch= 174  Ex=   4186.  Area=      -278.3  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 173  Ex=   4162.  Area=      -199.9  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 172  Ex=   4138.  Area=      -345.5  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 171  Ex=   4114.  Area=      -353.3  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 170  Ex=   4090.  Area=      -393.5  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 169  Ex=   4066.  Area=      -301.7  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 168  Ex=   4042.  Area=      -405.0  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch= 167  Ex=   4018.  Area=      -136.9  Alpha=   0.56  dA/A(%)=  9999.99
+Y-ch= 166  Ex=   3994.  Area=      -223.7  Alpha=   0.56  dA/A(%)=  9999.99
+Y-ch= 165  Ex=   3970.  Area=      3850.1  Alpha=   1.01  dA/A(%)=     0.00
+Y-ch= 164  Ex=   3946.  Area=      4041.3  Alpha=   0.92  dA/A(%)=    -0.00
+Y-ch= 163  Ex=   3922.  Area=      4194.1  Alpha=   0.97  dA/A(%)=     0.00
+Y-ch= 162  Ex=   3898.  Area=      4315.1  Alpha=   0.99  dA/A(%)=    -0.00
+Y-ch= 161  Ex=   3874.  Area=      4482.1  Alpha=   0.91  dA/A(%)=     0.00
+Y-ch= 160  Ex=   3850.  Area=      4654.6  Alpha=   0.96  dA/A(%)=     0.00
+Y-ch= 159  Ex=   3826.  Area=      7816.7  Alpha=   1.32  dA/A(%)=    -0.00
+Y-ch= 158  Ex=   3802.  Area=      5060.6  Alpha=   1.00  dA/A(%)=    -0.00
+Y-ch= 157  Ex=   3778.  Area=      5252.8  Alpha=   0.99  dA/A(%)=     0.00
+Y-ch= 156  Ex=   3754.  Area=      5471.6  Alpha=   0.99  dA/A(%)=    -0.00
+Y-ch= 155  Ex=   3730.  Area=      5746.3  Alpha=   1.05  dA/A(%)=    -0.00
+Y-ch= 154  Ex=   3706.  Area=      5789.2  Alpha=   1.11  dA/A(%)=    -0.00
+Y-ch= 153  Ex=   3682.  Area=      6292.4  Alpha=   1.10  dA/A(%)=     0.00
+Y-ch= 152  Ex=   3658.  Area=      7653.1  Alpha=   1.22  dA/A(%)=    -0.00
+Y-ch= 151  Ex=   3634.  Area=      7409.2  Alpha=   1.20  dA/A(%)=    -0.00
+Y-ch= 150  Ex=   3610.  Area=     11467.4  Alpha=   1.40  dA/A(%)=    -0.00
+Y-ch= 149  Ex=   3586.  Area=      7474.5  Alpha=   1.20  dA/A(%)=    -0.00
+Y-ch= 148  Ex=   3562.  Area=      7278.7  Alpha=   1.17  dA/A(%)=    -0.00
+Y-ch= 147  Ex=   3538.  Area=     12979.7  Alpha=   1.46  dA/A(%)=    -0.00
+Y-ch= 146  Ex=   3514.  Area=      7414.7  Alpha=   1.18  dA/A(%)=    -0.00
+Y-ch= 145  Ex=   3490.  Area=      7091.3  Alpha=   1.04  dA/A(%)=    -0.00
+Y-ch= 144  Ex=   3466.  Area=     13579.8  Alpha=   1.45  dA/A(%)=    -0.00
+Y-ch= 143  Ex=   3442.  Area=      7106.5  Alpha=   0.97  dA/A(%)=    -0.00
+Y-ch= 142  Ex=   3418.  Area=      7363.5  Alpha=   1.16  dA/A(%)=    -0.00
+Y-ch= 141  Ex=   3394.  Area=      7167.7  Alpha=   0.97  dA/A(%)=    -0.00
+Y-ch= 140  Ex=   3370.  Area=      7182.0  Alpha=   0.98  dA/A(%)=     0.00
+Y-ch= 139  Ex=   3346.  Area=      7072.9  Alpha=   0.89  dA/A(%)=     0.00
+Y-ch= 138  Ex=   3322.  Area=      7190.6  Alpha=   0.97  dA/A(%)=     0.00
+Y-ch= 137  Ex=   3298.  Area=      7392.0  Alpha=   1.00  dA/A(%)=    -0.00
+Y-ch= 136  Ex=   3274.  Area=      6916.0  Alpha=   0.98  dA/A(%)=     0.00
+Y-ch= 135  Ex=   3250.  Area=      7106.0  Alpha=   1.10  dA/A(%)=     0.00
+Y-ch= 134  Ex=   3226.  Area=      6832.0  Alpha=   1.13  dA/A(%)=    -0.00
+Y-ch= 133  Ex=   3202.  Area=      9672.1  Alpha=   1.30  dA/A(%)=    -0.00
+Y-ch= 132  Ex=   3178.  Area=      6548.4  Alpha=   1.07  dA/A(%)=     0.00
+Y-ch= 131  Ex=   3154.  Area=      8746.7  Alpha=   1.27  dA/A(%)=    -0.00
+Y-ch= 130  Ex=   3130.  Area=     10187.7  Alpha=   1.33  dA/A(%)=    -0.00
+Y-ch= 129  Ex=   3106.  Area=      7260.9  Alpha=   1.06  dA/A(%)=    -0.00
+Y-ch= 128  Ex=   3082.  Area=      7620.4  Alpha=   1.07  dA/A(%)=    -0.00
+Y-ch= 127  Ex=   3058.  Area=      8185.1  Alpha=   0.93  dA/A(%)=     0.00
+Y-ch= 126  Ex=   3034.  Area=      9169.2  Alpha=   1.03  dA/A(%)=     0.00
+Y-ch= 125  Ex=   3010.  Area=      9960.9  Alpha=   1.03  dA/A(%)=     0.00
+Y-ch= 124  Ex=   2986.  Area=     10846.5  Alpha=   1.13  dA/A(%)=     0.00
+Y-ch= 123  Ex=   2962.  Area=     11497.6  Alpha=   1.12  dA/A(%)=    -0.00
+Y-ch= 122  Ex=   2938.  Area=     13570.0  Alpha=   1.19  dA/A(%)=    -0.00
+Y-ch= 121  Ex=   2914.  Area=     14600.1  Alpha=   1.23  dA/A(%)=    -0.00
+Y-ch= 120  Ex=   2890.  Area=     18465.6  Alpha=   1.34  dA/A(%)=    -0.00
+Y-ch= 119  Ex=   2866.  Area=     21944.0  Alpha=   1.47  dA/A(%)=    -0.00
+Y-ch= 118  Ex=   2842.  Area=     24869.1  Alpha=   1.56  dA/A(%)=    -0.00
+Y-ch= 117  Ex=   2818.  Area=     22853.8  Alpha=   1.51  dA/A(%)=    -0.00
+Y-ch= 116  Ex=   2794.  Area=     20056.4  Alpha=   1.41  dA/A(%)=    -0.00
+Y-ch= 115  Ex=   2770.  Area=     17596.3  Alpha=   1.32  dA/A(%)=    -0.00
+Y-ch= 114  Ex=   2746.  Area=     17950.3  Alpha=   1.31  dA/A(%)=    -0.00
+Y-ch= 113  Ex=   2722.  Area=     13536.3  Alpha=   1.12  dA/A(%)=     0.00
+Y-ch= 112  Ex=   2698.  Area=     15103.1  Alpha=   1.14  dA/A(%)=    -0.00
+Y-ch= 111  Ex=   2674.  Area=     20996.0  Alpha=   1.26  dA/A(%)=    -0.00
+Y-ch= 110  Ex=   2650.  Area=     26872.8  Alpha=   1.36  dA/A(%)=    -0.00
+Y-ch= 109  Ex=   2626.  Area=     33253.3  Alpha=   1.45  dA/A(%)=    -0.00
+Y-ch= 108  Ex=   2602.  Area=     43395.4  Alpha=   1.64  dA/A(%)=     0.00
+Y-ch= 107  Ex=   2578.  Area=     55629.6  Alpha=   1.85  dA/A(%)=    -0.00
+Y-ch= 106  Ex=   2554.  Area=     61680.5  Alpha=   1.93  dA/A(%)=    -0.00
+Y-ch= 105  Ex=   2530.  Area=     75725.6  Alpha=   2.17  dA/A(%)=    -0.00
+Y-ch= 104  Ex=   2506.  Area=     29049.5  Alpha=   1.12  dA/A(%)=     0.00
+Y-ch= 103  Ex=   2482.  Area=     49996.7  Alpha=   1.34  dA/A(%)=     0.00
+Y-ch= 102  Ex=   2458.  Area=     68771.1  Alpha=   1.50  dA/A(%)=     0.00
+Y-ch= 101  Ex=   2434.  Area=     75235.5  Alpha=   1.56  dA/A(%)=     0.00
+Y-ch= 100  Ex=   2410.  Area=     61070.6  Alpha=   1.48  dA/A(%)=     0.00
+Y-ch=  99  Ex=   2386.  Area=     52840.7  Alpha=   1.44  dA/A(%)=    -0.00
+Y-ch=  98  Ex=   2362.  Area=     37162.4  Alpha=   1.31  dA/A(%)=     0.00
+Y-ch=  97  Ex=   2338.  Area=     21239.4  Alpha=   1.15  dA/A(%)=     0.00
+Y-ch=  96  Ex=   2314.  Area=     19490.4  Alpha=   1.07  dA/A(%)=     0.00
+Y-ch=  95  Ex=   2290.  Area=     17276.1  Alpha=   0.92  dA/A(%)=    -0.00
+Y-ch=  94  Ex=   2266.  Area=     16918.7  Alpha=   1.03  dA/A(%)=     0.00
+Y-ch=  93  Ex=   2242.  Area=     16150.4  Alpha=   1.07  dA/A(%)=     0.00
+Y-ch=  92  Ex=   2218.  Area=     15392.1  Alpha=   0.97  dA/A(%)=    -0.00
+Y-ch=  91  Ex=   2194.  Area=     11607.3  Alpha=   0.78  dA/A(%)=     0.00
+Y-ch=  90  Ex=   2170.  Area=     10474.2  Alpha=   0.76  dA/A(%)=    -0.00
+Y-ch=  89  Ex=   2146.  Area=     12187.6  Alpha=   0.78  dA/A(%)=     0.00
+Y-ch=  88  Ex=   2122.  Area=     13647.9  Alpha=   0.79  dA/A(%)=     0.00
+Y-ch=  87  Ex=   2098.  Area=     17583.2  Alpha=   0.95  dA/A(%)=     0.00
+Y-ch=  86  Ex=   2074.  Area=     16512.4  Alpha=   0.90  dA/A(%)=     0.00
+Y-ch=  85  Ex=   2050.  Area=     16563.5  Alpha=   1.01  dA/A(%)=     0.00
+Y-ch=  84  Ex=   2026.  Area=     16251.5  Alpha=   1.02  dA/A(%)=     0.00
+Y-ch=  83  Ex=   2002.  Area=     18023.2  Alpha=   1.11  dA/A(%)=    -0.00
+Y-ch=  82  Ex=   1978.  Area=     19068.0  Alpha=   1.13  dA/A(%)=    -0.00
+Y-ch=  81  Ex=   1954.  Area=     33163.5  Alpha=   1.29  dA/A(%)=    -0.00
+Y-ch=  80  Ex=   1930.  Area=     38783.2  Alpha=   1.29  dA/A(%)=    -0.00
+Y-ch=  79  Ex=   1906.  Area=     42505.4  Alpha=   1.20  dA/A(%)=    -0.00
+Y-ch=  78  Ex=   1882.  Area=     50183.5  Alpha=   1.06  dA/A(%)=     0.00
+Y-ch=  77  Ex=   1858.  Area=     65545.2  Alpha=   0.87  dA/A(%)=     0.00
+Y-ch=  76  Ex=   1834.  Area=     36542.8  Alpha=   0.71  dA/A(%)=    -0.00
+Y-ch=  75  Ex=   1810.  Area=      5334.6  Alpha=   0.61  dA/A(%)=     0.00
+Y-ch=  74  Ex=   1786.  Area=     -8145.6  Alpha=   0.56  dA/A(%)=  9999.99
+Y-ch=  73  Ex=   1762.  Area=     -2537.6  Alpha=   0.55  dA/A(%)=  9999.99
+Y-ch=  72  Ex=   1738.  Area=     18172.7  Alpha=   0.59  dA/A(%)=    -0.00
+Y-ch=  71  Ex=   1714.  Area=     25517.8  Alpha=   0.64  dA/A(%)=     0.00
+Y-ch=  70  Ex=   1690.  Area=     36190.5  Alpha=   0.74  dA/A(%)=    -0.00
+Y-ch=  69  Ex=   1666.  Area=     39840.0  Alpha=   0.79  dA/A(%)=    -0.00
+Y-ch=  68  Ex=   1642.  Area=     52345.2  Alpha=   1.06  dA/A(%)=     0.00
+Y-ch=  67  Ex=   1618.  Area=     46392.2  Alpha=   1.14  dA/A(%)=     0.00
+Y-ch=  66  Ex=   1594.  Area=     63739.5  Alpha=   1.24  dA/A(%)=     0.00
+Y-ch=  65  Ex=   1570.  Area=     69911.1  Alpha=   1.37  dA/A(%)=     0.00
+Y-ch=  64  Ex=   1546.  Area=     61016.8  Alpha=   1.37  dA/A(%)=     0.00
+Y-ch=  63  Ex=   1522.  Area=     35853.7  Alpha=   1.25  dA/A(%)=    -0.00
+Y-ch=  62  Ex=   1498.  Area=     48615.5  Alpha=   1.37  dA/A(%)=     0.00
+Y-ch=  61  Ex=   1474.  Area=     34444.4  Alpha=   1.25  dA/A(%)=     0.00
+Y-ch=  60  Ex=   1450.  Area=     19699.0  Alpha=   1.09  dA/A(%)=    -0.00
+Y-ch=  59  Ex=   1426.  Area=     16605.8  Alpha=   0.99  dA/A(%)=    -0.00
+Y-ch=  58  Ex=   1402.  Area=     16011.0  Alpha=   1.06  dA/A(%)=    -0.00
+Y-ch=  57  Ex=   1378.  Area=     14077.4  Alpha=   0.96  dA/A(%)=     0.00
+Y-ch=  56  Ex=   1354.  Area=     12863.7  Alpha=   0.90  dA/A(%)=     0.00
+Y-ch=  55  Ex=   1330.  Area=     14945.7  Alpha=   1.11  dA/A(%)=     0.00
+Y-ch=  54  Ex=   1306.  Area=     13026.8  Alpha=   0.93  dA/A(%)=     0.00
+Y-ch=  53  Ex=   1282.  Area=     14771.3  Alpha=   1.13  dA/A(%)=    -0.00
+Y-ch=  52  Ex=   1258.  Area=     13899.0  Alpha=   1.04  dA/A(%)=     0.00
+Y-ch=  51  Ex=   1234.  Area=     14365.3  Alpha=   1.02  dA/A(%)=    -0.00
+Y-ch=  50  Ex=   1210.  Area=     13932.9  Alpha=   1.04  dA/A(%)=     0.00
+Y-ch=  49  Ex=   1186.  Area=     14429.3  Alpha=   1.05  dA/A(%)=     0.00
+Y-ch=  48  Ex=   1162.  Area=     13231.8  Alpha=   0.91  dA/A(%)=    -0.00
+Y-ch=  47  Ex=   1138.  Area=     15948.5  Alpha=   1.08  dA/A(%)=    -0.00
+Y-ch=  46  Ex=   1114.  Area=     14335.6  Alpha=   1.02  dA/A(%)=     0.00
+Y-ch=  45  Ex=   1090.  Area=     16936.2  Alpha=   1.10  dA/A(%)=    -0.00
+Y-ch=  44  Ex=   1066.  Area=     14672.2  Alpha=   1.05  dA/A(%)=     0.00
+Y-ch=  43  Ex=   1042.  Area=     15916.5  Alpha=   1.09  dA/A(%)=     0.00
+Y-ch=  42  Ex=   1018.  Area=     13918.8  Alpha=   1.06  dA/A(%)=     0.00
+Y-ch=  41  Ex=    994.  Area=     18688.5  Alpha=   1.18  dA/A(%)=    -0.00
+Y-ch=  40  Ex=    970.  Area=     14812.8  Alpha=   1.08  dA/A(%)=    -0.00
+Y-ch=  39  Ex=    946.  Area=     16525.0  Alpha=   1.15  dA/A(%)=     0.00
+Y-ch=  38  Ex=    922.  Area=     13825.8  Alpha=   0.87  dA/A(%)=    -0.00
+Y-ch=  37  Ex=    898.  Area=     16664.8  Alpha=   1.00  dA/A(%)=     0.00
+Y-ch=  36  Ex=    874.  Area=     18298.1  Alpha=   1.02  dA/A(%)=    -0.00
+Y-ch=  35  Ex=    850.  Area=     18097.3  Alpha=   1.00  dA/A(%)=    -0.00
+Y-ch=  34  Ex=    826.  Area=     18724.1  Alpha=   1.04  dA/A(%)=    -0.00
+Y-ch=  33  Ex=    802.  Area=     20023.0  Alpha=   1.10  dA/A(%)=    -0.00
+Y-ch=  32  Ex=    778.  Area=     22455.8  Alpha=   1.18  dA/A(%)=     0.00
+Y-ch=  31  Ex=    754.  Area=     24626.1  Alpha=   1.22  dA/A(%)=     0.00
+Y-ch=  30  Ex=    730.  Area=     26871.6  Alpha=   1.25  dA/A(%)=     0.00
+Y-ch=  29  Ex=    706.  Area=     20469.5  Alpha=   1.15  dA/A(%)=     0.00
+Y-ch=  28  Ex=    682.  Area=     20844.7  Alpha=   1.06  dA/A(%)=     0.00
+Y-ch=  27  Ex=    658.  Area=     20071.6  Alpha=   1.01  dA/A(%)=     0.00
+Y-ch=  26  Ex=    634.  Area=     21705.9  Alpha=   0.93  dA/A(%)=     0.00
+Y-ch=  25  Ex=    610.  Area=     23773.8  Alpha=   0.90  dA/A(%)=    -0.00
+Y-ch=  24  Ex=    586.  Area=     21379.3  Alpha=   0.84  dA/A(%)=     0.00
+Y-ch=  23  Ex=    562.  Area=     21039.1  Alpha=   0.92  dA/A(%)=    -0.00
+Y-ch=  22  Ex=    538.  Area=     20225.5  Alpha=   0.94  dA/A(%)=     0.00
+Y-ch=  21  Ex=    514.  Area=     23144.8  Alpha=   1.03  dA/A(%)=    -0.00
+Y-ch=  20  Ex=    490.  Area=     30694.6  Alpha=   1.11  dA/A(%)=    -0.00
+Y-ch=  19  Ex=    466.  Area=     50888.5  Alpha=   1.13  dA/A(%)=     0.00
+Y-ch=  18  Ex=    442.  Area=    101740.1  Alpha=   1.34  dA/A(%)=     0.00
+Y-ch=  17  Ex=    418.  Area=     98475.5  Alpha=   1.35  dA/A(%)=     0.00
+Y-ch=  16  Ex=    394.  Area=     71256.6  Alpha=   1.25  dA/A(%)=    -0.00
+Y-ch=  15  Ex=    370.  Area=     56216.0  Alpha=   1.27  dA/A(%)=     0.00
+Y-ch=  14  Ex=    346.  Area=     30786.8  Alpha=   1.20  dA/A(%)=     0.00
+Y-ch=  13  Ex=    322.  Area=     29817.3  Alpha=   1.02  dA/A(%)=     0.00
+Y-ch=  12  Ex=    298.  Area=     40200.7  Alpha=   0.87  dA/A(%)=     0.00
+Y-ch=  11  Ex=    274.  Area=     29170.6  Alpha=   0.95  dA/A(%)=    -0.00
+Y-ch=  10  Ex=    250.  Area=     40448.2  Alpha=   1.69  dA/A(%)=     0.00
+Y-ch=   9  Ex=    226.  Area=     16602.8  Alpha=   1.00  dA/A(%)=     0.00
+Y-ch=   8  Ex=    202.  Area=     22880.1  Alpha=   1.00  dA/A(%)=     0.00
+Y-ch=   7  Ex=    178.  Area=    219207.0  Alpha=   1.00  dA/A(%)=     0.00
+Y-ch=   6  Ex=    154.  Area=    198815.4  Alpha=   1.00  dA/A(%)=     0.00
+Y-ch=   5  Ex=    130.  Area=   1541162.5  Alpha=   1.00  dA/A(%)=     0.00
+Y-ch=   4  Ex=    106.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   3  Ex=     82.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   2  Ex=     58.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   1  Ex=     34.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+Y-ch=   0  Ex=     10.  Area=         0.0  Alpha=   1.00  dA/A(%)=  9999.99
+----------------------------------------------
+
+Iteration loop = 16, stop(0), activate/modify direct decay(1) or continue(2)  <2>:0
+Last iteration 16 stored in matrix 1
+Additional results written to figegaout.dat
+mama>ds2
+  
+mama>fn
+Destination spectrum <2>:
+Source spectrum      <1>:
+
+Dimension along x-axis < 250>:
+Dimension along y-axis < 250>:
+
+Lowest and highest counts are (min,max) = (-0.16E+06 0.15E+07)
+You may now delete the most negative numbers before filling
+Do you want to delete these negative counts     <y>:
+Counts < Limit will be deleted, Limit = <-0.15E+06>:
+
+Write FWHMx (ch) around ch x=   25 <   1.5>:
+Write FWHMx (ch) around ch x=  225 <   9.2>:
+
+Write FWHMy (ch) around ch y=   25 <   1.0>:
+Write FWHMy (ch) around ch y=  225 <   1.0>:
+ FWHM have been expressed by A + B * SQRT(ch):
+Ax= -2.3111  Bx=  0.7706     Ay=  1.0000 By= -0.0000
+Probability-matrix around (x,y)=(  25,  25):
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0060.0440.0850.0440.0060.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0210.1500.2900.1500.0210.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0060.0440.0850.0440.0060.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+
+ Probability-matrix around (x,y)=( 225, 225):
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0040.0060.0090.0110.0140.0160.0170.0180.0170.0160.0140.0110.0090.0060.004
+ 0.0150.0210.0290.0380.0470.0540.0590.0610.0590.0540.0470.0380.0290.0210.015
+ 0.0040.0060.0090.0110.0140.0160.0170.0180.0170.0160.0140.0110.0090.0060.004
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+ 0.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.0000.000
+
+Probability-matrix OK? (y/n) <y>:
+......
+...............
+....
+Before number of neg. ch. was:   6787, with total counts:  -2591139
+After  number of neg. ch. is:    4516, with total counts:  -1950680
+mama>
+mama>
+mama>rn
+Destination spectrum <1>:
+Source spectrum      <2>:
+  
+ With this command you may replace the counts in the
+ spectrum/matrix with a given value. The options are:
+ Replace counts if they are below a certain value, or,
+ if the counts are in-between two values, or if the
+ counts exceed a certain value. The defaults are:
+ Choose (1), replace-value = 0 and Max = 0 which will
+ delete all negative numbers.
+ You may also change floating point values -> integers.
+ ----------------------------------------------------- 
+       Counts < Max is replaced........... choose: (1)
+ Min < Counts < Max is replaced........... choose: (2)
+ Min < Counts       is replaced........... choose: (3)
+ Replace floating counts by integers...... choose: (4)
+ Return to MAMA........................... choose: (5)
+ ----------------------------------------------------- 
+ Choose your option                               <1>:
+
+Give new value for the counts to be replaced <  0.00>:
+Delete counts with value lower than          <  0.00>:
+
+Number of channels replaced:          4516
+Number of counts before:         5850453.0
+Number of counts after:          7801118.5
+Increase of counts:              1950665.5
+mama>
+mama>ds2
+  
+mama>wr
+
+Spectrum to write            <1>:
+Singles spectrum                1
+Set of spectra NA-0, NA-1,...   2
+2-dimensional spectrum (matrix) 3
+Please, choose your type     <3>:
+
+Cal. coeff. a0 (keV) on x-axis     <       10.0>:
+Cal. coeff. a1 (keV/ch) on x-axis  <     24.000>:
+Cal. coeff. a2 (keV/ch2) on x-axis < 0.0000E+00>:
+
+Cal. coeff. a0 (keV) on y-axis     <       10.0>:
+Cal. coeff. a1 (keV/ch) on y-axis  <     24.000>:
+Cal. coeff. a2 (keV/ch2) on y-axis < 0.0000E+00>:
+
+Dimension on x-axis (max=4096) < 250>:
+Dimension on y-axis (max=2048) < 250>:
+Filename                       <TEST>:Nd152.fg24keV
+mama>co
+Destination spectrum <2>:
+Source spectrum      <1>:
+ Compression factors must be integer. With a factor
+ of e.g. 3, channels 0,1,2,3 goes to 0,0,0,1
+
+Compression along x-axis <  1>:2
+Compression along y-axis <  1>:2
+....................................................................  
+New dimension (0: 124,0: 124)
+  
+mama>co
+Destination spectrum <1>:
+Source spectrum      <2>:
+ Compression factors must be integer. With a factor
+ of e.g. 3, channels 0,1,2,3 goes to 0,0,0,1
+
+Compression along x-axis <  1>:2
+Compression along y-axis <  1>:2
+....................................................................  
+New dimension (0:  61,0:  61)
+  
+mama>ds2
+  
+mama>ce
+ Energy-display activated
+mama>ds2
+  
+mama>cr
+Type X or click on green button to exit
+x=   16, energy =   1582.000 keV  
+y=   26, energy =   2542.000 keV
+Number of counts=  0.127935E+04
+x=   17, energy =   1678.000 keV  
+y=   26, energy =   2542.000 keV
+Number of counts=  0.131715E+04
+x=   19, energy =   1870.000 keV  
+y=   50, energy =   4846.000 keV
+Number of counts=  0.466804E+01
+x=    0, energy =     46.000 keV  
+y=    0, energy =     46.000 keV
+Number of counts=  0.000000E+00
+x=    0, energy =     46.000 keV  
+y=    0, energy =     46.000 keV
+Number of counts=  0.000000E+00
+x=    0, energy =     46.000 keV  
+y=    0, energy =     46.000 keV
+Number of counts=  0.000000E+00
+x=   18, energy =   1774.000 keV  
+y=   21, energy =   2062.000 keV
+Number of counts=  0.279184E+04
+mama>st                           
+Are you sure you want to exit? (y/n)y
+ 
+[suntan@granite jordan]$ robin
+     __________________________________________
+    |                                          |
+    |                 ROBIN 1.91               |
+    |                                          |
+    |  Program to calculate the level density  |
+    |         and spin cut-off parameter       |
+    |       at Rho(Bn) for a nucleus with      |
+    | given proton number Z and mass number A. |
+    |       See T. Egidy and Bucurescu:        |
+    |                                          |
+    |    (E&B2009): PRC 80, 054310 (2009)      |
+    |                                          |
+    |    (E&B2006): PRC 72, 044311 (2005) and  |
+    |               PRC 73, 049901 (E) (2006)  |
+    |                                          |
+    |        Oslo Cyclotron Laboratory         |
+    |             Magne Guttormsen             |
+    |            Created: 13 Jun 2005          |
+    |           Modified: 14 Sep 2012          |
+    |           Modified: 25 Mar 2013          |
+    | Modified: 16 Aug 2016:                   |
+    | Opt(2) proposes better a and E1 values   |
+    | Modified: 19 Nov 2016:                   |
+    | In Opt(1) you may choose reduct. of RMI  |
+    | Temp. given at Bn and Bp for Fermi gas   |
+    |__________________________________________|
+  
+ Reading file /home/phy/suntan/analysis/oslo-method-software/prog/lib/egidy03/mass.mas03                                                                                                                                                                                     
+ Number of nuclei read is        3179  with last (A,Z) = (         293 ,         118 )
+ Reading file /home/phy/suntan/analysis/oslo-method-software/prog/lib/egidy03/rct2.mas03                                                                                                                                                                                     
+ Number of nuclei read is        3179  with last (A,Z) = (         293 ,         118 )
+ Reading file /home/phy/suntan/analysis/oslo-method-software/prog/lib/egidy03/rct7.mas03                                                                                                                                                                                     
+ Number of nuclei read is        3179  with last (A,Z) = (         293 ,         118 )
+  
+ Please, check that the same number of nuclei is read.
+ (If not, mismatch of values will give wrong results.)
+ Could not read input.rbn, using default values
+  
+Give proton number of the nucleus < 66>:60
+Give mass number of the nucleus   <162>:152
+  
+ You should take care to use formulas from the same reference.
+ Example: If you use rigid moment of inertia from (E&B2006),
+ you should also use temperature T from (E&B2006), as well.
+ We recommend to use (E&B2006) (or maybe the old (G&C)) for nuclei heavier than A > 150,
+ and (E&B2009) for lighter nuclei with A < 150.
+  
+ You may choose between 4 spin cut-off formulas:
+ 1 The rigid moment of inertia formula (RMI)(E&B2006)
+ 2 The Gilbert and Cameron formula (G&C) Can. J. Phys 43(1965) 1446
+ 3 The constant temperature (CT) formula (E&B2009) and NPA 481 (1988) 189
+ 4 The Fermi gas formula with appropriate cut-off parameter (E&B2009)
+ Type 1 for RMI: sig**2=0.0146*(A**(5/3))*T for FG (E&B2006)
+ Type 2 for G&C: sig**2=0.0888*(A**(2/3))*a*T for FG
+ Type 3 for E&B: sig**2=(0.98*(A**(0.29)))**2 for CT
+ Type 4 for E&B: sig**2=0.391*A**0.675*(E-0.5*Pa_prime)**0.312 for FG
+Choose RMI(FG) (1), G&C(FG) (2), E&B(CT) (3) or E&B(FG) (4)  <4>:3
+  
+ You may choose another T and/or E0 than proposed by CT(E&B):
+Constant temperature T(MeV)  <  0.581>:
+Total backshift parameter E0 < -0.125>:
+  
+Results for 152Nd with sig**2=(0.98*(A**(0.29)))**2.:
+Shell values            : S=     -0.489 MeV,   dS/dA= -0.177 MeV
+Pairing energies        : P_n=    0.989 MeV,   P_p=    1.075 MeV, P_d=  -1.757 MeV, Pa_prime=   1.757 MeV
+Binding energies        : B_n=    7.276 MeV,   B_p=   10.676 MeV
+Constant temp. param.   : T=      0.581 MeV,   E0=    -0.125 MeV
+Spin cut-off parameters : sig_n=  4.207        sig_p=  4.207
+Level densities         : rho_n= 0.59224E+06 1/MeV, rho_p= 0.20673E+09 1/MeV
+Calculate rho and sigma at Ex (MeV)  <  7.276>:
+For Ex =  7.276 MeV     : rho  = 0.59224E+06 1/MeV, sig =  4.207
+Write file with spin distribution for spin cut-off sig = <  4.207>:
+  
+File spindis.rbn written with <I> = 4.76, Pmax @ I = sigma-0.5 = 3.7 and sum_P =1.002
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ mama
+ 
+ ____________________________________________________
+|                                                    |
+|              Welcome to M A M A  7.5.5             |
+|                                                    |
+|   MAtrix MAnipulation, Oslo Cyclotron Laboratory   |
+|           Magne Guttormsen, January 1995           |
+|                                                    |
+|   MAMA handles 2 matrices of dimension 4096x2048   |
+|       and 2 singles spectra of length 8192         |
+|                                                    |
+| Important commands:                                |
+|  HE - help            ST - stop MAMA               |
+|  RE - read file       WR - write file              |
+|  DS - display spec.   CR - curser, activate spec.  |
+|  HE NW - news                                      |
+|____________________________________________________|
+mama>re
+Destination spectrum <1>:
+Filename          <TEST>:
+File: TEST or TESTxx (xx=number) do not exist
+
+mama>mama>re
+Destination spectrum <1>:
+Filename          <TEST>:Nd152.fg24keV
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=none|RE:Nd152.mCO:2-2UN:FN:RN:CO:2-2FG:FN:RN:
+ TIME=DATE:26-Sep-22 17:08:30
+ CALIBRATION EkeV=6, 0.100000E+02, 0.240000E+02, 0.000000E+00, 0.100000E+02, 0.240000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0: 249,0: 249
+ CHANNEL=(0: 249,0: 249)
+.....  
+mama>ds2
+  
+mama>co
+Destination spectrum <2>:
+Source spectrum      <1>:
+ Compression factors must be integer. With a factor
+ of e.g. 3, channels 0,1,2,3 goes to 0,0,0,1
+
+Compression along x-axis <  1>:4
+Compression along y-axis <  1>:4
+....................................................................  
+New dimension (0:  61,0:  61)
+  
+mama>ds2
+  
+mama>wr
+
+Spectrum to write            <2>:
+Singles spectrum                1
+Set of spectra NA-0, NA-1,...   2
+2-dimensional spectrum (matrix) 3
+Please, choose your type     <3>:
+
+Cal. coeff. a0 (keV) on x-axis     <       46.0>:
+Cal. coeff. a1 (keV/ch) on x-axis  <     96.000>:
+Cal. coeff. a2 (keV/ch2) on x-axis < 0.0000E+00>:
+
+Cal. coeff. a0 (keV) on y-axis     <       46.0>:
+Cal. coeff. a1 (keV/ch) on y-axis  <     96.000>:
+Cal. coeff. a2 (keV/ch2) on y-axis < 0.0000E+00>:
+
+Dimension on x-axis (max=4096) <  62>:
+Dimension on y-axis (max=2048) <  62>:
+Filename                       <TEST>:Nd152.fg96keV
+mama>st
+Are you sure you want to exit? (y/n)y
+ 
+[suntan@granite jordan]$ rhosigchi
+  ________________________________________
+ |                                        |
+ |         R H O S I G C H I  1.6         |
+ |                                        |
+ |  Program to calculate level density    |
+ | Rho, and gamma-strength function Sig   |
+ | from first-generation spectra, using   |
+ |   FgNorm(Ex,Eg)=Rho(Ex-Eg)*Sig(Eg)     |
+ |                                        |
+ |      Oslo Cyclotron Laboratory         |
+ |        Created: 13/08 - 1999           |
+ |           Andreas Schiller             |
+ |  Lisbeth Bergholt, Magne Guttormsen    |
+ |                                        |
+ |        Improved: 01/05 - 2003          |
+ |           Alexander Voinov             |
+ |  Magne Guttormsen, Andreas Schiller    |
+ |        Dubna, Oslo, Livermore          |
+ |  Modified 28 Mar 2014: Ex < 0 MeV      |
+ |  Modified 13 Feb 2015: One ch shift,   |
+ |  ch ig < 0, cut igmax                  |
+ |  Modified 31 Aug 2015: No normalization|
+ |  Modified 15 Dec 2015: input > 10**-06 |
+ |  Modified 11 Feb 2016: new Ydim, Xdim  |
+ |  REAL->REAL*8 precision, smooth 300 keV|
+ |  Modified 06 Dec 2016: Turns y-axis if |
+ |  a1 < 0                                |
+ |  Modified 16 Dec 2020: More accurate   |
+ |  uncertainties for fgerr.rsg           |
+ |________________________________________|
+ Please, answer 1 and the name of your input first-
+ generation matrix in the two next questions... 
+ Remember that data of the fg-matrix are not read for channels > 511
+ Remember that we only take into account lin. energy calibration (a2 = 0)
+Destination spectrum <1>:
+Filename          <TEST>:Nd152.fg96keV
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=e|RE:Nd152.mCO:2-2UN:FN:RN:CO:2-2FG:FN:RN:|RE:Nd152.fgCO:4-4
+ TIME=DATE:26-Sep-22 17:16:31
+ CALIBRATION EkeV=6, 0.460000E+02, 0.960000E+02, 0.000000E+00, 0.460000E+02, 0.960000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0:  61,0:  61
+ CHANNEL=(0:  61,0:  61)
+.  
+  
+ The first generation matrix should have equal energy
+ calibration for Ex and Eg. The usual dispersion is
+ around 120 keV/channel, often taken as a multiple
+ of the dispersion of the Ex calibration of the 
+ input first-generation matrix.
+  
+Give dispersion of (compressed) fg-matrix (keV/ch) <   96.0>:
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=                    Total matrix, all generations (figega.f)
+ TIME=DATE:26-Sep-22 17:06:51
+ CALIBRATION EkeV=6, 0.100000E+02, 0.240000E+02, 0.000000E+00, 0.100000E+02, 0.240000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0: 249,0: 249
+ CHANNEL=(0: 249,0: 249)
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=                       gen > 1, normalized to M=1 (figega.f)
+ TIME=DATE:26-Sep-22 17:06:51
+ CALIBRATION EkeV=6, 0.100000E+02, 0.240000E+02, 0.000000E+00, 0.100000E+02, 0.240000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0: 249,0: 249
+ CHANNEL=(0: 249,0: 249)
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=           gen > 1, all counts to estimate errors (figega.f)
+ TIME=DATE:26-Sep-22 17:06:51
+ CALIBRATION EkeV=6, 0.100000E+02, 0.240000E+02, 0.000000E+00, 0.100000E+02, 0.240000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0: 249,0: 249
+ CHANNEL=(0: 249,0: 249)
+ Warning: no input.rsg file found, defaults taken
+Lower limit of gamma energy (keV)      < 1006.0>:1600
+Lower limit of excitation energy (keV) < 3982.0>:2500
+Upper limit of excitation energy (keV) < 5998.0>:4200
+ Number of data points            363
+ DOF, data points-rho-sig         315
+Common calibration is a0=-722.00keV and a1=  96.00keV/ch
+Dimension is  62 x  52
+excitation energy region is  2542.keV to   4174.keV
+rho extracted from  -722.keV to   2638.keV
+sig extracted from  1582.keV to   5134.keV
+  
+ The uncertainty of the first-generation (fg) matrix can be evaluated 
+ by two methods. Method (1) is the recommended method.
+ If you have created the fg matrix with mama ver. 7.5.5 or newer,
+ matrices are written out to accurately estimate the fg errors.
+ Method (2) is the old way, only taking the fg matrix into account.
+  
+Use method (1) recommended, or (2) <1>:
+ _______________________________________________________
+        Convergence test using various indicators
+Indicator Iteration =   0    10    20    30    40    50
+Rho/Rho0 at  U= 430.  1.00  3.13  2.09  1.61  1.46  1.32
+Rho/Rho0 at  U=1678.  1.00  4.01  4.29  3.42  3.10  2.80
+Sig/Sig0 at Eg=1678.  1.00  4.01  6.13  7.23  7.98  8.77
+Sig/Sig0 at Eg=2926.  1.00  3.19  5.71  7.49  8.27  9.14
+Chi^2 for 1.gen.sp. ******816.91382.56217.54163.64118.55
+ _______________________________________________________
+
+ ch   Ex(keV)     Rho(1/MeV)  dRho(1/MeV) (UNNORMALIZED)
+    0  -722.0     0.000E+00   0.000E+00
+    1  -626.0     0.000E+00   0.000E+00
+    2  -530.0     0.000E+00   0.000E+00
+    3  -434.0     0.000E+00   0.000E+00
+    4  -338.0     0.000E+00   0.000E+00
+    5  -242.0     0.000E+00   0.000E+00
+    6  -146.0     0.872E-01   0.000E+00
+    7   -50.0     0.872E-01   0.000E+00
+    8    46.0     0.115E+02   0.000E+00
+    9   142.0     0.154E+01   0.149E-01
+   10   238.0     0.407E+01   0.196E-01
+   11   334.0     0.170E+01   0.120E-01
+   12   430.0     0.132E+01   0.102E-01
+   13   526.0     0.137E+01   0.107E-01
+   14   622.0     0.143E+01   0.108E-01
+   15   718.0     0.125E+01   0.113E-01
+   16   814.0     0.121E+01   0.104E-01
+   17   910.0     0.113E+01   0.884E-02
+   18  1006.0     0.123E+01   0.117E-01
+   19  1102.0     0.155E+01   0.132E-01
+   20  1198.0     0.200E+01   0.134E-01
+   21  1294.0     0.179E+01   0.163E-01
+   22  1390.0     0.189E+01   0.169E-01
+   23  1486.0     0.295E+01   0.232E-01
+   24  1582.0     0.297E+01   0.270E-01
+   25  1678.0     0.280E+01   0.253E-01
+   26  1774.0     0.356E+01   0.329E-01
+   27  1870.0     0.370E+01   0.335E-01
+   28  1966.0     0.272E+01   0.358E-01
+   29  2062.0     0.193E+01   0.383E-01
+   30  2158.0     0.194E+01   0.452E-01
+   31  2254.0     0.208E+01   0.563E-01
+   32  2350.0     0.205E+01   0.542E-01
+   33  2446.0     0.169E+01   0.753E-01
+   34  2542.0     0.179E+01   0.101E+00
+   35  2638.0     0.139E+01   0.162E+00
+
+ ch   Eg(keV)         Sig        dSig (UNNORMALIZED)
+   24  1582.0     0.728E+01   0.608E-01
+   25  1678.0     0.703E+01   0.592E-01
+   26  1774.0     0.784E+01   0.592E-01
+   27  1870.0     0.741E+01   0.510E-01
+   28  1966.0     0.692E+01   0.483E-01
+   29  2062.0     0.645E+01   0.419E-01
+   30  2158.0     0.687E+01   0.555E-01
+   31  2254.0     0.735E+01   0.552E-01
+   32  2350.0     0.836E+01   0.595E-01
+   33  2446.0     0.809E+01   0.502E-01
+   34  2542.0     0.840E+01   0.503E-01
+   35  2638.0     0.872E+01   0.592E-01
+   36  2734.0     0.758E+01   0.535E-01
+   37  2830.0     0.713E+01   0.523E-01
+   38  2926.0     0.741E+01   0.480E-01
+   39  3022.0     0.741E+01   0.564E-01
+   40  3118.0     0.656E+01   0.530E-01
+   41  3214.0     0.627E+01   0.577E-01
+   42  3310.0     0.595E+01   0.513E-01
+   43  3406.0     0.593E+01   0.510E-01
+   44  3502.0     0.513E+01   0.574E-01
+   45  3598.0     0.440E+01   0.439E-01
+   46  3694.0     0.378E+01   0.470E-01
+   47  3790.0     0.287E+01   0.457E-01
+   48  3886.0     0.260E+01   0.507E-01
+   49  3982.0     0.179E+01   0.432E-01
+   50  4078.0     0.106E+01   0.335E-01
+   51  4174.0     0.930E+00   0.412E-01
+   52  4270.0     0.000E+00   0.000E+00
+   53  4366.0     0.000E+00   0.000E+00
+Observed first generation matrix written to file:     fg.rsg     
+Estimated first gen. err. matrix written to file:  fgerr.rsg  
+Theoret. first generation matrix written to file:  fgteo.rsg  
+Unnormalized Rho and dRho written to array file:  rhopaw.rsg 
+Unnormalized T and dT     written to array file:  sigpaw.rsg 
+Unnormalized Rho and dRho written to mama file:    rhosp.rsg  
+Unnormalized T and dT     written to mama file:    sigsp.rsg  
+ Remember that data of the fg-matrix are not read for channels > 511
+ Remember that we only take into account lin. energy calibration (a2 = 0)
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ cp ../spyrou/counting.dat ./
+[suntan@granite jordan]$ emacs counting.dat -nw
+[suntan@granite jordan]$ counting 
+
+  ______________________________________________________________ 
+ |                                                              |
+ |                    C O U N T I N G   1.8.4.2                 |
+ |                                                              |
+ |Program to normalize experimental nuclear level density (NLD) |
+ |  to NLD from known low energy levels and NLD extracted from  |
+ |     resonances spacing data at Bn. Thus, the A and alpha     |
+ |     parameters are determined for NLD. The slope of the      |
+ |   transmision coefficient T(Eg) is normalized according to   |
+ |                    the alpha parameter.                      |
+ |                                                              |
+ |  Input files: counting.dat    Output files: rhopaw.cnt       |
+ |               rhosp.rsg                     rhotmopaw.cnt    |
+ |               sigsp.rsg                     sigpaw.cnt       |
+ |               rhopaw.rsg                    input.cnt        |
+ |               sigpaw.rsg                    spincut.cnt      |
+ |               (input.cnt)                   fermigas.cnt     |
+ |                                             sigextpaw.cnt    |
+ |                                             counting.cpp     |
+ |                                             spincut.cpp      |
+ |                                             sigext.cpp       |
+ |                                             talys_nld_cnt.txt|
+ |  Fermi gas or constant temperatur parameteres are calculated |
+ |      from Egidy and Bucurescu: PRC 80, 054310 (2009)         |
+ | E-mail  : magne.guttormsen@fys.uio.no                        |
+ | Created : 11 Aug 2006                                        |
+ | Modified: 17 Jun 2009                                        |
+ | Modified: 16 Nov 2014 Ex < 0 MeV, CT output, CT with sig_FG  |
+ | Modified: 10 Feb 2015 dimRhox, dimSigx                       |
+ | Modified: 01 Jun 2015 allow modifying ExL and ExH of sigext  |
+ | Modified: 28 Aug 2015 ? replaced by " for root scripts      |
+ | and deleting kumac output files                              |
+ | Modified: 15 Feb 2016 Cosmetics                              |
+ | Modified: 19 Jul 2016 Extension of gSF starts at TL2         |
+ | and down and at TH1 and up in g-energy. NLD from H1 and up   |
+ | Modified: 01 Nov 2016 You may choose reduct. factor of RMI   |
+ | The code also suggests a temperature for the CT NLD formula  |
+ | Modified: 21 Dec 2016 Larger dim for sigextpaw.cnt           |
+ | Modified: 15 Mar 2017 New spin cutoff opt.(5) from Alexander |
+ | Modified: 01 Apr 2017 The upbend gSF is now lin. in log.     |
+ | Modified: 17 Apr 2017 TALYS nld spin-formated outputfile     |
+ | Modified: 13 Jun 2018 Smoothing of discrete level density    |
+ | Modified: 02 Aug 2018 Update printing of chi2 fit T          |
+ |______________________________________________________________|
+                                                                 
+Reading calibration and dimensions from: rhosp.rsg
+rhosp.rsg has dimension (0 : 51, 0 : 1) and calibration (a0, a1) = (-722.000000, 96.000000)
+Reading calibration and dimensions from: sigsp.rsg
+sigsp.rsg has dimension (0 : 61, 0 : 1) and calibration (a0, a1) = (-722.000000, 96.000000)
+
+Reading data and errors of experimental nuclear level density: rhopaw.rsg
+ No   Ex(keV)      Rho(1/MeV)     dRho(1/MeV)
+  0   -722.00       0.000e+00       0.000e+00 
+  1   -626.00       0.000e+00       0.000e+00 
+  2   -530.00       0.000e+00       0.000e+00 
+  3   -434.00       0.000e+00       0.000e+00 
+  4   -338.00       0.000e+00       0.000e+00 
+  5   -242.00       0.000e+00       0.000e+00 
+  6   -146.00       8.724e-02       0.000e+00 
+  7    -50.00       8.724e-02       0.000e+00 
+  8     46.00       1.146e+01       0.000e+00 
+  9    142.00       1.535e+00       1.486e-02 
+ 10    238.00       4.072e+00       1.959e-02 
+ 11    334.00       1.705e+00       1.199e-02 
+ 12    430.00       1.322e+00       1.021e-02 
+ 13    526.00       1.367e+00       1.068e-02 
+ 14    622.00       1.427e+00       1.078e-02 
+ 15    718.00       1.250e+00       1.126e-02 
+ 16    814.00       1.207e+00       1.040e-02 
+ 17    910.00       1.133e+00       8.838e-03 
+ 18   1006.00       1.226e+00       1.172e-02 
+ 19   1102.00       1.547e+00       1.324e-02 
+ 20   1198.00       2.001e+00       1.336e-02 
+ 21   1294.00       1.786e+00       1.634e-02 
+ 22   1390.00       1.892e+00       1.691e-02 
+ 23   1486.00       2.952e+00       2.319e-02 
+ 24   1582.00       2.974e+00       2.703e-02 
+ 25   1678.00       2.803e+00       2.527e-02 
+ 26   1774.00       3.562e+00       3.294e-02 
+ 27   1870.00       3.705e+00       3.350e-02 
+ 28   1966.00       2.718e+00       3.582e-02 
+ 29   2062.00       1.926e+00       3.828e-02 
+ 30   2158.00       1.943e+00       4.515e-02 
+ 31   2254.00       2.079e+00       5.630e-02 
+ 32   2350.00       2.050e+00       5.419e-02 
+ 33   2446.00       1.694e+00       7.531e-02 
+ 34   2542.00       1.792e+00       1.012e-01 
+ 35   2638.00       1.394e+00       1.617e-01 
+ 36   2734.00       0.000e+00       0.000e+00 
+ 37   2830.00       0.000e+00       0.000e+00 
+ 38   2926.00       0.000e+00       0.000e+00 
+ 39   3022.00       0.000e+00       0.000e+00 
+ 40   3118.00       0.000e+00       0.000e+00 
+ 41   3214.00       0.000e+00       0.000e+00 
+ 42   3310.00       0.000e+00       0.000e+00 
+ 43   3406.00       0.000e+00       0.000e+00 
+ 44   3502.00       0.000e+00       0.000e+00 
+ 45   3598.00       0.000e+00       0.000e+00 
+ 46   3694.00       0.000e+00       0.000e+00 
+ 47   3790.00       0.000e+00       0.000e+00 
+ 48   3886.00       0.000e+00       0.000e+00 
+ 49   3982.00       0.000e+00       0.000e+00 
+ 50   4078.00       0.000e+00       0.000e+00 
+ 51   4174.00       0.000e+00       0.000e+00 
+
+Reading data and errors of experimental transmision coefficient: sigpaw.rsg
+ No   Eg(keV)         Trans           dTrans
+  0   -722.00       0.000e+00       0.000e+00 
+  1   -626.00       0.000e+00       0.000e+00 
+  2   -530.00       0.000e+00       0.000e+00 
+  3   -434.00       0.000e+00       0.000e+00 
+  4   -338.00       0.000e+00       0.000e+00 
+  5   -242.00       0.000e+00       0.000e+00 
+  6   -146.00       0.000e+00       0.000e+00 
+  7    -50.00       0.000e+00       0.000e+00 
+  8     46.00       0.000e+00       0.000e+00 
+  9    142.00       0.000e+00       0.000e+00 
+ 10    238.00       0.000e+00       0.000e+00 
+ 11    334.00       0.000e+00       0.000e+00 
+ 12    430.00       0.000e+00       0.000e+00 
+ 13    526.00       0.000e+00       0.000e+00 
+ 14    622.00       0.000e+00       0.000e+00 
+ 15    718.00       0.000e+00       0.000e+00 
+ 16    814.00       0.000e+00       0.000e+00 
+ 17    910.00       0.000e+00       0.000e+00 
+ 18   1006.00       0.000e+00       0.000e+00 
+ 19   1102.00       0.000e+00       0.000e+00 
+ 20   1198.00       0.000e+00       0.000e+00 
+ 21   1294.00       0.000e+00       0.000e+00 
+ 22   1390.00       0.000e+00       0.000e+00 
+ 23   1486.00       0.000e+00       0.000e+00 
+ 24   1582.00       7.276e+00       6.085e-02 
+ 25   1678.00       7.028e+00       5.920e-02 
+ 26   1774.00       7.840e+00       5.924e-02 
+ 27   1870.00       7.410e+00       5.100e-02 
+ 28   1966.00       6.922e+00       4.827e-02 
+ 29   2062.00       6.452e+00       4.193e-02 
+ 30   2158.00       6.866e+00       5.554e-02 
+ 31   2254.00       7.349e+00       5.520e-02 
+ 32   2350.00       8.364e+00       5.954e-02 
+ 33   2446.00       8.094e+00       5.018e-02 
+ 34   2542.00       8.404e+00       5.027e-02 
+ 35   2638.00       8.718e+00       5.917e-02 
+ 36   2734.00       7.582e+00       5.346e-02 
+ 37   2830.00       7.129e+00       5.229e-02 
+ 38   2926.00       7.413e+00       4.804e-02 
+ 39   3022.00       7.406e+00       5.637e-02 
+ 40   3118.00       6.562e+00       5.297e-02 
+ 41   3214.00       6.274e+00       5.775e-02 
+ 42   3310.00       5.946e+00       5.131e-02 
+ 43   3406.00       5.929e+00       5.097e-02 
+ 44   3502.00       5.133e+00       5.742e-02 
+ 45   3598.00       4.404e+00       4.394e-02 
+ 46   3694.00       3.780e+00       4.704e-02 
+ 47   3790.00       2.868e+00       4.566e-02 
+ 48   3886.00       2.602e+00       5.070e-02 
+ 49   3982.00       1.793e+00       4.323e-02 
+ 50   4078.00       1.059e+00       3.351e-02 
+ 51   4174.00       9.298e-01       4.124e-02 
+ 52   4270.00       0.000e+00       0.000e+00 
+ 53   4366.00       0.000e+00       0.000e+00 
+ 54   4462.00       0.000e+00       0.000e+00 
+ 55   4558.00       0.000e+00       0.000e+00 
+ 56   4654.00       0.000e+00       0.000e+00 
+ 57   4750.00       0.000e+00       0.000e+00 
+ 58   4846.00       0.000e+00       0.000e+00 
+ 59   4942.00       0.000e+00       0.000e+00 
+ 60   5038.00       0.000e+00       0.000e+00 
+ 61   5134.00       0.000e+00       0.000e+00 
+
+Reading excitation energies of known levels: counting.dat
+Binning 37 known levels:
+ No   Ex(keV)   NoLev   RhoLeV(1/MeV)
+  0   -722.00       0       0.000e+00
+  1   -626.00       0       0.000e+00
+  2   -530.00       0       0.000e+00
+  3   -434.00       0       0.000e+00
+  4   -338.00       0       0.000e+00
+  5   -242.00       0       0.000e+00
+  6   -146.00       0       0.000e+00
+  7    -50.00       0       0.000e+00
+  8     46.00       2       2.083e+01
+  9    142.00       0       0.000e+00
+ 10    238.00       1       1.042e+01
+ 11    334.00       0       0.000e+00
+ 12    430.00       0       0.000e+00
+ 13    526.00       1       1.042e+01
+ 14    622.00       0       0.000e+00
+ 15    718.00       0       0.000e+00
+ 16    814.00       1       1.042e+01
+ 17    910.00       0       0.000e+00
+ 18   1006.00       0       0.000e+00
+ 19   1102.00       1       1.042e+01
+ 20   1198.00       1       1.042e+01
+ 21   1294.00       1       1.042e+01
+ 22   1390.00       1       1.042e+01
+ 23   1486.00       1       1.042e+01
+ 24   1582.00       2       2.083e+01
+ 25   1678.00       2       2.083e+01
+ 26   1774.00       2       2.083e+01
+ 27   1870.00       4       4.167e+01
+ 28   1966.00       3       3.125e+01
+ 29   2062.00       1       1.042e+01
+ 30   2158.00       1       1.042e+01
+ 31   2254.00       1       1.042e+01
+ 32   2350.00       0       0.000e+00
+ 33   2446.00       1       1.042e+01
+ 34   2542.00       2       2.083e+01
+ 35   2638.00       2       2.083e+01
+ 36   2734.00       3       3.125e+01
+ 37   2830.00       0       0.000e+00
+ 38   2926.00       0       0.000e+00
+ 39   3022.00       1       1.042e+01
+ 40   3118.00       2       2.083e+01
+ 41   3214.00       0       0.000e+00
+ 42   3310.00       0       0.000e+00
+ 43   3406.00       0       0.000e+00
+ 44   3502.00       0       0.000e+00
+ 45   3598.00       0       0.000e+00
+ 46   3694.00       0       0.000e+00
+ 47   3790.00       0       0.000e+00
+ 48   3886.00       0       0.000e+00
+ 49   3982.00       0       0.000e+00
+ 50   4078.00       0       0.000e+00
+ 51   4174.00       0       0.000e+00
+ 52   4270.00       0       0.000e+00
+
+Could not open file input.cnt, default values are used 
+You may want to smooth the discrete level density with the
+resolution of the experimental level density (FWHM = 100–500 keV).
+If no smoothing, set FWHM = 0.
+Excitation energy FWHM (keV) < 0.000>:
+Mass number A             <164>:152
+Neutron or proton binding energy (Bn or Bp) (MeV)  < 8.197>:7.27
+
+
+Choose constant temperature CT (1) or Fermi gas FG (2) formula <1>:
+
+
+You should take care to use formulas from the same reference.
+Example: If you use rigid moment of inertia from (E&B2006),
+you should also use temperature T from (E&B2006), as well.
+We recommend to use (E&B2006) (or maybe the old (G&C)) for nuclei heavier than A > 150,
+and (E&B2009) for lighter nuclei with A < 150.
+
+If you have chosen the CT formula, we recommend to use FG spin cutoff formula since
+the CT spin cutoff formula is a constant, which is rather unphysical. In the following,
+option (1) might be the most appropriate for the CT-model (instead of (3)).
+
+You may choose between 5 spin cutoff formulas.
+The chosen formula is written to the spincut.cnt file,
+which will be automatically read by the normalization program.
+Be sure that the spin cutoff parameter at Sn sigma(Sn) is the same as the
+one you used for the d2rho program in order to estimate rho(Sn).
+
+Please, choose your spin cutoff formula:
+1 The rigid moment of inertia formula (RMI) (E&B2006)
+2 The Gilbert and Cameron formula (G&C) Can. J. Phys 43(1965) 1446
+3 The constant temperature (CT) formula (E&B2009) and NPA 481 (1988) 189
+4 The Fermi gas formula with appropriate cutoff parameter (E&B2009)
+5 Interpolate between known cutoff parameters (Alex2017)
+Type 1 for RMI:  sig**2=0.0146*(A**(5/3))*T for FG+CT (E&B2006)
+Type 2 for G&C:  sig**2=0.0888*(A**(2/3))*a*T for FG+CT
+Type 3 for E&B:  sig**2=(0.98*(A**(0.29)))**2 for CT
+Type 4 for E&B:  sig**2=0.391*A**0.675*(E-0.5*Pa_prime)**0.312 for FG+CT
+Type 5 for Alex: sig**2=A + B * Ex
+
+
+Choose RMI(FG+CT) (1), G&C(FG+CT) (2), E&B(CT) (3), E&B(FG+CT) (4), or Alex (5) <1>:3
+
+Be sure to use the correct Rho(Bn or Bp) according
+to type 1, 2, 3, 4 or 5. Run the d2rho program to find Rho
+or use the systematic value found by running Robin
+Level density at Bn or Bp (1/MeV)                < 3630000>:600000
+Uncertainty of level density at Bn or Bp (1/MeV) <  363000>:60000
+
+You need to run the program Robin to get the constant temperature parameters T:
+Temperature parameter T (MeV) <  0.500>:0.581
+
+The level density goes through Rho(Bn), thus determining the
+const. temp. shift parameter to be E0 =  -0.145 MeV
+
+ No   Ex(keV)   RhoLeV(1/MeV)
+  0   -722.00       0.000e+00
+  1   -626.00       0.000e+00
+  2   -530.00       0.000e+00
+  3   -434.00       0.000e+00
+  4   -338.00       0.000e+00
+  5   -242.00       0.000e+00
+  6   -146.00       0.000e+00
+  7    -50.00       0.000e+00
+  8     46.00       2.083e+01
+  9    142.00       0.000e+00
+ 10    238.00       1.042e+01
+ 11    334.00       0.000e+00
+ 12    430.00       0.000e+00
+ 13    526.00       1.042e+01
+ 14    622.00       0.000e+00
+ 15    718.00       0.000e+00
+ 16    814.00       1.042e+01
+ 17    910.00       0.000e+00
+ 18   1006.00       0.000e+00
+-----------------------------
+ 19   1102.00       1.042e+01
+ 20   1198.00       1.042e+01
+ 21   1294.00       1.042e+01
+ 22   1390.00       1.042e+01
+ 23   1486.00       1.042e+01
+ 24   1582.00       2.083e+01
+ 25   1678.00       2.083e+01
+ 26   1774.00       2.083e+01
+ 27   1870.00       4.167e+01
+ 28   1966.00       3.125e+01
+ 29   2062.00       1.042e+01
+-----------------------------
+ 30   2158.00       1.042e+01
+ 31   2254.00       1.042e+01
+ 32   2350.00       0.000e+00
+ 33   2446.00       1.042e+01
+ 34   2542.00       2.083e+01
+ 35   2638.00       2.083e+01
+ 36   2734.00       3.125e+01
+ 37   2830.00       0.000e+00
+ 38   2926.00       0.000e+00
+ 39   3022.00       1.042e+01
+Lower fit limit L1 for known levels  < 19>:8
+Higher fit limit L2 for known levels < 29>:18
+
+ No   Ex(keV)      Rho(1/MeV)     dRho(1/MeV)
+ 39   3022.00       0.000e+00       0.000e+00 
+ 40   3118.00       0.000e+00       0.000e+00 
+ 41   3214.00       0.000e+00       0.000e+00 
+ 42   3310.00       0.000e+00       0.000e+00 
+ 43   3406.00       0.000e+00       0.000e+00 
+ 44   3502.00       0.000e+00       0.000e+00 
+ 45   3598.00       0.000e+00       0.000e+00 
+ 46   3694.00       0.000e+00       0.000e+00 
+ 47   3790.00       0.000e+00       0.000e+00 
+ 48   3886.00       0.000e+00       0.000e+00 
+---------------------------------------------
+ 49   3982.00       0.000e+00       0.000e+00 
+ 50   4078.00       0.000e+00       0.000e+00 
+ 51   4174.00       0.000e+00       0.000e+00 
+ 52   4270.00       0.000e+00       0.000e+00 
+Lower fit limit H1 for Rho around Bn or Bp  < 49>:30
+Higher fit limit H2 for Rho around Bn or Bp < 56>:35
+
+ No   Eg(keV)         Trans           dTrans
+  0   -722.00       0.000e+00       0.000e+00 
+  1   -626.00       0.000e+00       0.000e+00 
+  2   -530.00       0.000e+00       0.000e+00 
+  3   -434.00       0.000e+00       0.000e+00 
+  4   -338.00       0.000e+00       0.000e+00 
+  5   -242.00       0.000e+00       0.000e+00 
+  6   -146.00       0.000e+00       0.000e+00 
+  7    -50.00       0.000e+00       0.000e+00 
+  8     46.00       0.000e+00       0.000e+00 
+  9    142.00       0.000e+00       0.000e+00 
+ 10    238.00       0.000e+00       0.000e+00 
+ 11    334.00       0.000e+00       0.000e+00 
+ 12    430.00       0.000e+00       0.000e+00 
+ 13    526.00       0.000e+00       0.000e+00 
+ 14    622.00       0.000e+00       0.000e+00 
+ 15    718.00       0.000e+00       0.000e+00 
+ 16    814.00       0.000e+00       0.000e+00 
+ 17    910.00       0.000e+00       0.000e+00 
+ 18   1006.00       0.000e+00       0.000e+00 
+ 19   1102.00       0.000e+00       0.000e+00 
+ 20   1198.00       0.000e+00       0.000e+00 
+ 21   1294.00       0.000e+00       0.000e+00 
+ 22   1390.00       0.000e+00       0.000e+00 
+ 23   1486.00       0.000e+00       0.000e+00 
+ 24   1582.00       7.276e+00       6.085e-02 
+ 25   1678.00       7.028e+00       5.920e-02 
+ 26   1774.00       7.840e+00       5.924e-02 
+ 27   1870.00       7.410e+00       5.100e-02 
+ 28   1966.00       6.922e+00       4.827e-02 
+ 29   2062.00       6.452e+00       4.193e-02 
+ 30   2158.00       6.866e+00       5.554e-02 
+ 31   2254.00       7.349e+00       5.520e-02 
+ 32   2350.00       8.364e+00       5.954e-02 
+ 33   2446.00       8.094e+00       5.018e-02 
+ 34   2542.00       8.404e+00       5.027e-02 
+ 35   2638.00       8.718e+00       5.917e-02 
+ 36   2734.00       7.582e+00       5.346e-02 
+ 37   2830.00       7.129e+00       5.229e-02 
+ 38   2926.00       7.413e+00       4.804e-02 
+ 39   3022.00       7.406e+00       5.637e-02 
+ 40   3118.00       6.562e+00       5.297e-02 
+---------------------------------------------
+ 41   3214.00       6.274e+00       5.775e-02 
+ 42   3310.00       5.946e+00       5.131e-02 
+ 43   3406.00       5.929e+00       5.097e-02 
+ 44   3502.00       5.133e+00       5.742e-02 
+ 45   3598.00       4.404e+00       4.394e-02 
+ 46   3694.00       3.780e+00       4.704e-02 
+ 47   3790.00       2.868e+00       4.566e-02 
+ 48   3886.00       2.602e+00       5.070e-02 
+ 49   3982.00       1.793e+00       4.323e-02 
+ 50   4078.00       1.059e+00       3.351e-02 
+Lower fit limit L1 for low energy region of T(Eg)  < 59>:24
+Higher fit limit L2 for low energy region of T(Eg) < 40>:34
+
+ No   Eg(keV)         Trans           dTrans
+ 34   2542.00       8.404e+00       5.027e-02 
+ 35   2638.00       8.718e+00       5.917e-02 
+ 36   2734.00       7.582e+00       5.346e-02 
+ 37   2830.00       7.129e+00       5.229e-02 
+ 38   2926.00       7.413e+00       4.804e-02 
+ 39   3022.00       7.406e+00       5.637e-02 
+ 40   3118.00       6.562e+00       5.297e-02 
+ 41   3214.00       6.274e+00       5.775e-02 
+---------------------------------------------
+ 42   3310.00       5.946e+00       5.131e-02 
+ 43   3406.00       5.929e+00       5.097e-02 
+ 44   3502.00       5.133e+00       5.742e-02 
+ 45   3598.00       4.404e+00       4.394e-02 
+ 46   3694.00       3.780e+00       4.704e-02 
+ 47   3790.00       2.868e+00       4.566e-02 
+ 48   3886.00       2.602e+00       5.070e-02 
+ 49   3982.00       1.793e+00       4.323e-02 
+ 50   4078.00       1.059e+00       3.351e-02 
+ 51   4174.00       9.298e-01       4.124e-02 
+---------------------------------------------
+ 52   4270.00       0.000e+00       0.000e+00 
+Lower fit limit H1 for high energy region of T(Eg)  < 42>:45
+Higher fit limit H2 for high energy region of T(Eg) < 51>:49
+
+Temperature parameter T (MeV) =   0.581
+CT shift parameter is E0(MeV) =  -0.145
+CT level density has been multiplied with eta =  1.000
+in order to match Rho(Bn or Bp) = 600000.0 (1/MeV)
+
+Spin cutoff parameter used at Bn or Bp =  4.207
+
+ Fitting T to chosen data in the higher region
+     T                E0          Chi2          Chi2/free
+   0.460 	     1.507 	 137.250 	  34.312
+   0.465 	     1.439 	 143.655 	  35.914
+   0.470 	     1.372 	 148.771 	  37.193
+   0.475 	     1.304 	 152.511 	  38.128
+   0.480 	     1.236 	 154.758 	  38.690
+   0.485 	     1.168 	 155.396 	  38.849
+   0.490 	     1.100 	 154.339 	  38.585
+   0.495 	     1.032 	 151.563 	  37.891
+   0.500 	     0.964 	 147.125 	  36.781
+   0.505 	     0.896 	 141.173 	  35.293
+   0.510 	     0.828 	 133.929 	  33.482
+   0.515 	     0.760 	 125.670 	  31.417
+   0.520 	     0.692 	 116.701 	  29.175
+   0.525 	     0.623 	 107.329 	  26.832
+   0.530 	     0.555 	  97.843 	  24.461
+   0.535 	     0.487 	  88.497 	  22.124
+   0.540 	     0.418 	  79.505 	  19.876
+   0.545 	     0.350 	  71.032 	  17.758
+   0.550 	     0.281 	  63.192 	  15.798
+   0.555 	     0.213 	  56.059 	  14.015
+   0.560 	     0.144 	  49.671 	  12.418
+   0.565 	     0.075 	  44.035 	  11.009
+   0.570 	     0.007 	  39.144 	   9.786
+   0.575 	    -0.062 	  34.975 	   8.744
+   0.580 	    -0.131 	  31.502 	   7.875
+   0.585 	    -0.200 	  28.688 	   7.172
+   0.590 	    -0.268 	  26.500 	   6.625
+   0.595 	    -0.337 	  24.904 	   6.226
+   0.600 	    -0.406 	  23.865 	   5.966
+   0.605 	    -0.475 	  23.349 	   5.837
+   0.610 	    -0.544 	  23.324 	   5.831
+   0.615 	    -0.613 	  23.758 	   5.940
+   0.620 	    -0.683 	  24.627 	   6.157
+   0.625 	    -0.752 	  25.898 	   6.475
+   0.630 	    -0.821 	  27.550 	   6.887
+   0.635 	    -0.890 	  29.555 	   7.389
+   0.640 	    -0.959 	  31.892 	   7.973
+   0.645 	    -1.029 	  34.539 	   8.635
+   0.650 	    -1.098 	  37.476 	   9.369
+   0.655 	    -1.167 	  40.683 	  10.171
+   0.660 	    -1.237 	  44.140 	  11.035
+   0.665 	    -1.306 	  47.833 	  11.958
+   0.670 	    -1.376 	  51.744 	  12.936
+   0.675 	    -1.445 	  55.858 	  13.965
+   0.680 	    -1.515 	  60.161 	  15.040
+   0.685 	    -1.585 	  64.639 	  16.160
+   0.690 	    -1.654 	  69.280 	  17.320
+   0.695 	    -1.724 	  74.070 	  18.518
+Number of free parameter in upper region: 4
+Note: Uncertainty can be rerived from intersection with (Chi2_min + 1)
+
+You may change your choice of T from the info of the Chi2 tests above
+Temperature parameter T (MeV) <  0.581>:
+
+The level density goes through Rho(Bn), thus determining the
+const. temp. shift parameter to be E0 =  -0.145 MeV
+
+First estimate of normalization parameters: A =  0.9932 and alpha = 1.7787
+Improved Chi2 for lower part:  35.29 -> 30.69 with count correction = 1.101 
+Improved Chi2 for higher part: 126.72 ->  6.18 with count correction = 1.002 
+Final estimate of normalization parameters: A =  1.1236 and alpha = 1.7271
+
+File fermigas.cnt (0:52) written to disk, (a0,a1)=( -722.00,  96.000)
+File rhotmopaw.cnt (0:1041) written to disk, (a0,a1)=( -722.00,  96.000)
+File rhopaw.cnt (0:105) written to disk, (a0,a1)=( -722.00,  96.000)
+File sigpaw.cnt (0:105) written to disk, (a0,a1)=( -722.00,  96.000)
+
+ A transmission function exp(a*Eg+b) has been fitted to the lower
+ data points with result: Chi2 = 111.582741 a = 1.891105 b = 1.782701 
+ From the lower fit-marker (L) for exp(a*Eg+b), we extrapolate down to
+ Eg = 0 MeV by the function (Eg**3)exp(c*Eg+d). Both functions have the same
+ absolute value and derivative at L. This determine the c and d parameters, which
+ control the upbend for low Eg. You may now change c and d. The suggested value
+ for the d parameter ensures continoues match at L, but may as well be changed.
+ (Some believe that (1/c) should correspond to the nuclear temperature T...)
+ Values are c = -0.005 /MeV (corresponds to T =216.01 MeV) and d=  3.406
+
+ Change c and d parameters? (0 = no, 1 = yes)       <0>:
+
+ Transmission function sigext = exp(a*Eg + b) is fitted to the 
+ upper data points with result: Chi2 = 11.252186 a = -0.427297 b = 9.367295 
+ Change a and b parameters? (0 = no, 1 = yes) <0>:
+
+File sigpawext.cnt (0:208) written to disk, (a0,a1)=( -722.00,  96.000)
+File extendLH.cnt (0:208) (0:208) written to disk, (a0,a1)=( -722.00,  96.000)
+File rholev.cnt (0:52) written to disk, (a0,a1)=( -722.00,  96.000)
+File spincut.cnt (0:156) written to disk, (a0,a1)=( -722.00,  96.000)
+File talys_nld_cnt.txt written to disk. The table has 43 rows and 35 columns.
+File counting.cpp written to disk. Run root to plot normalized NLD.
+File spincut.cpp written to disk. Run root to plot the spincut.
+File sigext.cpp written to disk. Run root to plot sigextpaw.cnt.
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ root counting.cpp
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for linuxx8664gcc on Sep 02 2021, 14:20:23                 |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With c++ (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)                 |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+root [0] 
+Processing counting.cpp...
+Info in <TCanvas::Print>: pdf file counting.pdf has been created
+Info in <TCanvas::Print>: eps file counting.eps has been created
+Info in <TCanvas::Print>: ps file counting.ps has been created
+root [1] .q
+[suntan@granite jordan]$ normalization
+
+  ______________________________________________________________ 
+ |                                                              |
+ |               N O R M A L I Z A T I O N  1.5.6               |
+ |                                                              |
+ |  Program to normalize the gamma-ray strength function f(Eg)  |
+ |         to the total average radiation width Gamma           |
+ |                     measured at Bn or Bp                     |
+ |        (based on normalization.f by Andreas Schiller)        |
+ |                                                              |
+ |  Input files: rhotmopaw.cnt    Output files: input.nrm       |
+ |               sigextpaw.cnt                  strength.nrm    |
+ |               spincut.cnt                    trans.nrm       |
+ |               sigpaw.cnt                     transext.nrm    |
+ |               (input.nrm)                    strength.cpp    |
+ |                                                              |
+ | E-mail  : magne.guttormsen@fys.uio.no                        |
+ | Created : 14 Nov 2006                                        |
+ | Modified: 26 Mar 2014                                        |
+ | Modified: 28 Aug 2015 replace ? and deleting kumac files     |
+ | Modified: 19 Apr 2016 larger dim for root vec. + corr. table |
+ | Modified: 21 Dec 2016 larger dim for transext                |
+ | Modified: 04 Dec 2017 corrected dim (Fabio)                  |
+ |______________________________________________________________|
+                                                                 
+Reading calibration and dimensions from: rhosp.rsg
+Dimension (0 : 51, 0 : 1) and calibration (a0, a1) = ( -722.00,  96.000)
+
+Could not open file input.nrm, default values are used 
+s- (l=0) or p- (l=1) wave neutron/proton capture               <0>:
+Neutron or proton binding energy (Bn or Bp) (MeV)         < 9.154>:7.26
+Target spin in (n,g) or (p,g) reaction (for the A-1 nucleus). Use
+values 0.0, 1.0,... for even and 0.5, 1.5,... for odd spins < 1.5>:
+Neutron resonance spacing parameter D (eV)                < 105.0>:
+Average total radiative resonance width G (meV)           < 150.0>:
+
+Reading data of experimental nuclear level density: rhotmopaw.cnt
+Reading data of experimental transmision coefficient: sigextpaw.cnt
+Reading data and errors of experimental transmision coefficient: sigpaw.cnt
+Reading spincutoff parameters: spincut.cnt
+
+ No Ex(keV) Rho(1/MeV)  2*Spincut**2  Eg(keV)    Sigext      Sigpaw      dSigpaw  
+  0  -722.0  0.000e+00    35.40       -722.0   -1.138e+01    0.000e+00 ( 0.000e+00)
+  1  -626.0  0.000e+00    35.40       -626.0   -7.414e+00    0.000e+00 ( 0.000e+00)
+  2  -530.0  0.000e+00    35.40       -530.0   -4.497e+00    0.000e+00 ( 0.000e+00)
+  3  -434.0  0.000e+00    35.40       -434.0   -2.468e+00    0.000e+00 ( 0.000e+00)
+  4  -338.0  0.000e+00    35.40       -338.0   -1.165e+00    0.000e+00 ( 0.000e+00)
+  5  -242.0  0.000e+00    35.40       -242.0   -4.276e-01    0.000e+00 ( 0.000e+00)
+  6  -146.0  7.617e-02    35.40       -146.0   -9.385e-02    0.000e+00 ( 0.000e+00)
+  7   -50.0  8.991e-02    35.40        -50.0   -3.768e-03    0.000e+00 ( 0.000e+00)
+  8    46.0  1.394e+01    35.40         46.0    2.933e-03    0.000e+00 ( 0.000e+00)
+  9   142.0  2.205e+00    35.40        142.0    8.623e-02    0.000e+00 ( 0.000e+00)
+ 10   238.0  6.901e+00    35.40        238.0    4.058e-01    0.000e+00 ( 0.000e+00)
+ 11   334.0  3.410e+00    35.40        334.0    1.121e+00    0.000e+00 ( 0.000e+00)
+ 12   430.0  3.121e+00    35.40        430.0    2.391e+00    0.000e+00 ( 0.000e+00)
+ 13   526.0  3.809e+00    35.40        526.0    4.375e+00    0.000e+00 ( 0.000e+00)
+ 14   622.0  4.693e+00    35.40        622.0    7.231e+00    0.000e+00 ( 0.000e+00)
+ 15   718.0  4.853e+00    35.40        718.0    1.112e+01    0.000e+00 ( 0.000e+00)
+ 16   814.0  5.533e+00    35.40        814.0    1.619e+01    0.000e+00 ( 0.000e+00)
+ 17   910.0  6.129e+00    35.40        910.0    2.261e+01    0.000e+00 ( 0.000e+00)
+ 18  1006.0  7.830e+00    35.40       1006.0    3.054e+01    0.000e+00 ( 0.000e+00)
+ 19  1102.0  1.166e+01    35.40       1102.0    4.012e+01    0.000e+00 ( 0.000e+00)
+ 20  1198.0  1.780e+01    35.40       1198.0    5.153e+01    0.000e+00 ( 0.000e+00)
+ 21  1294.0  1.875e+01    35.40       1294.0    6.490e+01    0.000e+00 ( 0.000e+00)
+ 22  1390.0  2.344e+01    35.40       1390.0    8.041e+01    0.000e+00 ( 0.000e+00)
+ 23  1486.0  4.319e+01    35.40       1486.0    9.821e+01    0.000e+00 ( 0.000e+00)
+ 24  1582.0  5.135e+01    35.40       1582.0    1.184e+02    1.256e+02 ( 1.051e+00)
+ 25  1678.0  5.712e+01    35.40       1678.0    1.420e+02    1.432e+02 ( 1.207e+00)
+ 26  1774.0  8.569e+01    35.40       1774.0    1.703e+02    1.886e+02 ( 1.425e+00)
+ 27  1870.0  1.052e+02    35.40       1870.0    2.042e+02    2.104e+02 ( 1.448e+00)
+ 28  1966.0  9.109e+01    35.40       1966.0    2.448e+02    2.320e+02 ( 1.618e+00)
+ 29  2062.0  7.617e+01    35.40       2062.0    2.936e+02    2.552e+02 ( 1.659e+00)
+ 30  2158.0  9.056e+01    35.40       2158.0    3.520e+02    3.206e+02 ( 2.593e+00)
+ 31  2254.0  1.068e+02    35.40       2254.0    4.221e+02    4.050e+02 ( 3.042e+00)
+ 32  2350.0  1.260e+02    35.40       2350.0    5.061e+02    5.441e+02 ( 3.873e+00)
+ 33  2446.0  1.487e+02    35.40       2446.0    6.069e+02    6.215e+02 ( 3.853e+00)
+ 34  2542.0  1.754e+02    35.40       2542.0    7.277e+02    7.616e+02 ( 4.556e+00)
+ 35  2638.0  2.069e+02    35.40       2638.0    9.326e+02    9.326e+02 ( 6.330e+00)
+ 36  2734.0  2.441e+02    35.40       2734.0    9.573e+02    9.573e+02 ( 6.750e+00)
+ 37  2830.0  2.879e+02    35.40       2830.0    1.062e+03    1.062e+03 ( 7.793e+00)
+ 38  2926.0  3.397e+02    35.40       2926.0    1.304e+03    1.304e+03 ( 8.451e+00)
+ 39  3022.0  4.007e+02    35.40       3022.0    1.538e+03    1.538e+03 ( 1.170e+01)
+ 40  3118.0  4.727e+02    35.40       3118.0    1.608e+03    1.608e+03 ( 1.298e+01)
+ 41  3214.0  5.576e+02    35.40       3214.0    1.815e+03    1.815e+03 ( 1.670e+01)
+ 42  3310.0  6.578e+02    35.40       3310.0    2.030e+03    2.030e+03 ( 1.752e+01)
+ 43  3406.0  7.759e+02    35.40       3406.0    2.389e+03    2.389e+03 ( 2.054e+01)
+ 44  3502.0  9.154e+02    35.40       3502.0    2.442e+03    2.442e+03 ( 2.732e+01)
+ 45  3598.0  1.080e+03    35.40       3598.0    2.515e+03    2.473e+03 ( 2.467e+01)
+ 46  3694.0  1.274e+03    35.40       3694.0    2.414e+03    2.505e+03 ( 3.117e+01)
+ 47  3790.0  1.503e+03    35.40       3790.0    2.317e+03    2.244e+03 ( 3.572e+01)
+ 48  3886.0  1.773e+03    35.40       3886.0    2.223e+03    2.403e+03 ( 4.681e+01)
+ 49  3982.0  2.091e+03    35.40       3982.0    2.134e+03    1.955e+03 ( 4.711e+01)
+ 50  4078.0  2.467e+03    35.40       4078.0    2.048e+03    1.362e+03 ( 4.311e+01)
+ 51  4174.0  2.910e+03    35.40       4174.0    1.966e+03    1.412e+03 ( 6.262e+01)
+ 52  4270.0  3.433e+03    35.40       4270.0    1.887e+03    0.000e+00 ( 0.000e+00)
+ 53  4366.0  4.050e+03    35.40       4366.0    1.811e+03    0.000e+00 ( 0.000e+00)
+ 54  4462.0  4.777e+03    35.40       4462.0    1.738e+03    0.000e+00 ( 0.000e+00)
+ 55  4558.0  5.636e+03    35.40       4558.0    1.668e+03    0.000e+00 ( 0.000e+00)
+ 56  4654.0  6.648e+03    35.40       4654.0    1.601e+03    0.000e+00 ( 0.000e+00)
+ 57  4750.0  7.843e+03    35.40       4750.0    1.537e+03    0.000e+00 ( 0.000e+00)
+ 58  4846.0  9.252e+03    35.40       4846.0    1.475e+03    0.000e+00 ( 0.000e+00)
+ 59  4942.0  1.091e+04    35.40       4942.0    1.416e+03    0.000e+00 ( 0.000e+00)
+ 60  5038.0  1.287e+04    35.40       5038.0    1.359e+03    0.000e+00 ( 0.000e+00)
+ 61  5134.0  1.519e+04    35.40       5134.0    1.304e+03    0.000e+00 ( 0.000e+00)
+ 62  5230.0  1.792e+04    35.40       5230.0    1.252e+03    0.000e+00 ( 0.000e+00)
+ 63  5326.0  2.114e+04    35.40       5326.0    1.202e+03    0.000e+00 ( 0.000e+00)
+ 64  5422.0  2.493e+04    35.40       5422.0    1.153e+03    0.000e+00 ( 0.000e+00)
+ 65  5518.0  2.941e+04    35.40       5518.0    1.107e+03    0.000e+00 ( 0.000e+00)
+ 66  5614.0  3.470e+04    35.40       5614.0    1.063e+03    0.000e+00 ( 0.000e+00)
+ 67  5710.0  4.093e+04    35.40       5710.0    1.020e+03    0.000e+00 ( 0.000e+00)
+ 68  5806.0  4.829e+04    35.40       5806.0    9.789e+02    0.000e+00 ( 0.000e+00)
+ 69  5902.0  5.696e+04    35.40       5902.0    9.395e+02    0.000e+00 ( 0.000e+00)
+ 70  5998.0  6.720e+04    35.40       5998.0    9.018e+02    0.000e+00 ( 0.000e+00)
+ 71  6094.0  7.927e+04    35.40       6094.0    8.655e+02    0.000e+00 ( 0.000e+00)
+ 72  6190.0  9.351e+04    35.40       6190.0    8.307e+02    0.000e+00 ( 0.000e+00)
+ 73  6286.0  1.103e+05    35.40       6286.0    7.974e+02    0.000e+00 ( 0.000e+00)
+ 74  6382.0  1.301e+05    35.40       6382.0    7.653e+02    0.000e+00 ( 0.000e+00)
+ 75  6478.0  1.535e+05    35.40       6478.0    7.346e+02    0.000e+00 ( 0.000e+00)
+ 76  6574.0  1.811e+05    35.40       6574.0    7.050e+02    0.000e+00 ( 0.000e+00)
+ 77  6670.0  2.136e+05    35.40       6670.0    6.767e+02    0.000e+00 ( 0.000e+00)
+ 78  6766.0  2.520e+05    35.40       6766.0    6.495e+02    0.000e+00 ( 0.000e+00)
+ 79  6862.0  2.973e+05    35.40       6862.0    6.234e+02    0.000e+00 ( 0.000e+00)
+ 80  6958.0  3.507e+05    35.40       6958.0    5.983e+02    0.000e+00 ( 0.000e+00)
+ 81  7054.0  4.137e+05    35.40       7054.0    5.743e+02    0.000e+00 ( 0.000e+00)
+ 82  7150.0  4.880e+05    35.40       7150.0    5.512e+02    0.000e+00 ( 0.000e+00)
+ 83  7246.0  5.757e+05    35.40       7246.0    5.291e+02    0.000e+00 ( 0.000e+00)
+
+Normalization integral =  4.1201539e+09
+Normalization factor =    2.8841075e+09
+File strength.nrm (0:105) written to disk, (a0,a1)=( -722.00,  96.000)
+File trans.nrm (0:105) written to disk, (a0,a1)=( -722.00,  96.000)
+File transext.nrm (0:529) written to disk, (a0,a1)=( -722.00,  96.000)
+File strength.cpp written to disk. Run root to plot strength.nrm
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ root strength.cpp -l
+root [0] 
+Processing strength.cpp...
+Info in <TCanvas::Print>: pdf file strength.pdf has been created
+Info in <TCanvas::Print>: eps file strength.eps has been created
+Info in <TCanvas::Print>: ps file strength.ps has been created
+root [1] .q
+[suntan@granite jordan]$ rhosigchi
+  ________________________________________
+ |                                        |
+ |         R H O S I G C H I  1.6         |
+ |                                        |
+ |  Program to calculate level density    |
+ | Rho, and gamma-strength function Sig   |
+ | from first-generation spectra, using   |
+ |   FgNorm(Ex,Eg)=Rho(Ex-Eg)*Sig(Eg)     |
+ |                                        |
+ |      Oslo Cyclotron Laboratory         |
+ |        Created: 13/08 - 1999           |
+ |           Andreas Schiller             |
+ |  Lisbeth Bergholt, Magne Guttormsen    |
+ |                                        |
+ |        Improved: 01/05 - 2003          |
+ |           Alexander Voinov             |
+ |  Magne Guttormsen, Andreas Schiller    |
+ |        Dubna, Oslo, Livermore          |
+ |  Modified 28 Mar 2014: Ex < 0 MeV      |
+ |  Modified 13 Feb 2015: One ch shift,   |
+ |  ch ig < 0, cut igmax                  |
+ |  Modified 31 Aug 2015: No normalization|
+ |  Modified 15 Dec 2015: input > 10**-06 |
+ |  Modified 11 Feb 2016: new Ydim, Xdim  |
+ |  REAL->REAL*8 precision, smooth 300 keV|
+ |  Modified 06 Dec 2016: Turns y-axis if |
+ |  a1 < 0                                |
+ |  Modified 16 Dec 2020: More accurate   |
+ |  uncertainties for fgerr.rsg           |
+ |________________________________________|
+ Please, answer 1 and the name of your input first-
+ generation matrix in the two next questions... 
+ Remember that data of the fg-matrix are not read for channels > 511
+ Remember that we only take into account lin. energy calibration (a2 = 0)
+Destination spectrum <1>:
+Filename          <TEST>:Nd152.fg96keV
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=e|RE:Nd152.mCO:2-2UN:FN:RN:CO:2-2FG:FN:RN:|RE:Nd152.fgCO:4-4
+ TIME=DATE:26-Sep-22 17:16:31
+ CALIBRATION EkeV=6, 0.460000E+02, 0.960000E+02, 0.000000E+00, 0.460000E+02, 0.960000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0:  61,0:  61
+ CHANNEL=(0:  61,0:  61)
+.  
+  
+ The first generation matrix should have equal energy
+ calibration for Ex and Eg. The usual dispersion is
+ around 120 keV/channel, often taken as a multiple
+ of the dispersion of the Ex calibration of the 
+ input first-generation matrix.
+  
+Give dispersion of (compressed) fg-matrix (keV/ch) <   96.0>:
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=                    Total matrix, all generations (figega.f)
+ TIME=DATE:26-Sep-22 17:06:51
+ CALIBRATION EkeV=6, 0.100000E+02, 0.240000E+02, 0.000000E+00, 0.100000E+02, 0.240000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0: 249,0: 249
+ CHANNEL=(0: 249,0: 249)
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=                       gen > 1, normalized to M=1 (figega.f)
+ TIME=DATE:26-Sep-22 17:06:51
+ CALIBRATION EkeV=6, 0.100000E+02, 0.240000E+02, 0.000000E+00, 0.100000E+02, 0.240000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0: 249,0: 249
+ CHANNEL=(0: 249,0: 249)
+ FILE=Disk
+ KIND=Spectrum
+ LABORATORY=Oslo Cyclotron Laboratory (OCL)
+ EXPERIMENT=mama
+ COMMENT=           gen > 1, all counts to estimate errors (figega.f)
+ TIME=DATE:26-Sep-22 17:06:51
+ CALIBRATION EkeV=6, 0.100000E+02, 0.240000E+02, 0.000000E+00, 0.100000E+02, 0.240000E+02, 0.000000E+00
+ PRECISION=16
+ DIMENSION=2,0: 249,0: 249
+ CHANNEL=(0: 249,0: 249)
+Lower limit of gamma energy (keV)      < 1582.0>:
+Lower limit of excitation energy (keV) < 2542.0>:
+Upper limit of excitation energy (keV) < 4174.0>:
+ Number of data points            363
+ DOF, data points-rho-sig         315
+Common calibration is a0=-722.00keV and a1=  96.00keV/ch
+Dimension is  62 x  52
+excitation energy region is  2542.keV to   4174.keV
+rho extracted from  -722.keV to   2638.keV
+sig extracted from  1582.keV to   5134.keV
+  
+ The uncertainty of the first-generation (fg) matrix can be evaluated 
+ by two methods. Method (1) is the recommended method.
+ If you have created the fg matrix with mama ver. 7.5.5 or newer,
+ matrices are written out to accurately estimate the fg errors.
+ Method (2) is the old way, only taking the fg matrix into account.
+  
+Use method (1) recommended, or (2) <1>:2
+ _______________________________________________________
+        Convergence test using various indicators
+Indicator Iteration =   0    10    20    30    40    50
+Rho/Rho0 at  U= 430.  1.00  0.33  0.35  0.35  0.36  0.36
+Rho/Rho0 at  U=1678.  1.00  1.11  1.15  1.12  1.15  1.15
+Sig/Sig0 at Eg=1678.  1.00  0.91  0.94  0.93  0.95  0.95
+Sig/Sig0 at Eg=2926.  1.00  1.49  1.53  1.56  1.57  1.57
+Chi^2 for 1.gen.sp.  20.14  0.88  0.51  0.44  0.41  0.40
+ _______________________________________________________
+
+ ch   Ex(keV)     Rho(1/MeV)  dRho(1/MeV) (UNNORMALIZED)
+    0  -722.0     0.000E+00   0.000E+00
+    1  -626.0     0.000E+00   0.000E+00
+    2  -530.0     0.000E+00   0.000E+00
+    3  -434.0     0.000E+00   0.000E+00
+    4  -338.0     0.000E+00   0.000E+00
+    5  -242.0     0.000E+00   0.000E+00
+    6  -146.0     0.872E-01   0.325E-03
+    7   -50.0     0.872E-01   0.239E-03
+    8    46.0     0.351E+01   0.146E+00
+    9   142.0     0.398E+00   0.412E-01
+   10   238.0     0.103E+01   0.508E-01
+   11   334.0     0.452E+00   0.339E-01
+   12   430.0     0.360E+00   0.359E-01
+   13   526.0     0.383E+00   0.370E-01
+   14   622.0     0.413E+00   0.352E-01
+   15   718.0     0.368E+00   0.386E-01
+   16   814.0     0.369E+00   0.370E-01
+   17   910.0     0.367E+00   0.365E-01
+   18  1006.0     0.402E+00   0.445E-01
+   19  1102.0     0.544E+00   0.510E-01
+   20  1198.0     0.750E+00   0.648E-01
+   21  1294.0     0.680E+00   0.607E-01
+   22  1390.0     0.719E+00   0.673E-01
+   23  1486.0     0.120E+01   0.912E-01
+   24  1582.0     0.122E+01   0.104E+00
+   25  1678.0     0.115E+01   0.920E-01
+   26  1774.0     0.149E+01   0.144E+00
+   27  1870.0     0.162E+01   0.143E+00
+   28  1966.0     0.122E+01   0.139E+00
+   29  2062.0     0.980E+00   0.135E+00
+   30  2158.0     0.976E+00   0.174E+00
+   31  2254.0     0.107E+01   0.210E+00
+   32  2350.0     0.105E+01   0.238E+00
+   33  2446.0     0.889E+00   0.257E+00
+   34  2542.0     0.911E+00   0.329E+00
+   35  2638.0     0.679E+00   0.471E+00
+
+ ch   Eg(keV)         Sig        dSig (UNNORMALIZED)
+   24  1582.0     0.766E+00   0.768E-01
+   25  1678.0     0.765E+00   0.714E-01
+   26  1774.0     0.895E+00   0.806E-01
+   27  1870.0     0.906E+00   0.744E-01
+   28  1966.0     0.897E+00   0.856E-01
+   29  2062.0     0.868E+00   0.775E-01
+   30  2158.0     0.949E+00   0.855E-01
+   31  2254.0     0.924E+00   0.821E-01
+   32  2350.0     0.111E+01   0.969E-01
+   33  2446.0     0.118E+01   0.100E+00
+   34  2542.0     0.114E+01   0.948E-01
+   35  2638.0     0.111E+01   0.899E-01
+   36  2734.0     0.103E+01   0.795E-01
+   37  2830.0     0.104E+01   0.940E-01
+   38  2926.0     0.128E+01   0.111E+00
+   39  3022.0     0.127E+01   0.123E+00
+   40  3118.0     0.116E+01   0.123E+00
+   41  3214.0     0.131E+01   0.123E+00
+   42  3310.0     0.128E+01   0.117E+00
+   43  3406.0     0.138E+01   0.129E+00
+   44  3502.0     0.126E+01   0.131E+00
+   45  3598.0     0.126E+01   0.133E+00
+   46  3694.0     0.118E+01   0.116E+00
+   47  3790.0     0.977E+00   0.105E+00
+   48  3886.0     0.921E+00   0.107E+00
+   49  3982.0     0.695E+00   0.694E-01
+   50  4078.0     0.555E+00   0.638E-01
+   51  4174.0     0.549E+00   0.741E-01
+   52  4270.0     0.000E+00   0.000E+00
+   53  4366.0     0.000E+00   0.000E+00
+Observed first generation matrix written to file:     fg.rsg     
+Estimated first gen. err. matrix written to file:  fgerr.rsg  
+Theoret. first generation matrix written to file:  fgteo.rsg  
+Unnormalized Rho and dRho written to array file:  rhopaw.rsg 
+Unnormalized T and dT     written to array file:  sigpaw.rsg 
+Unnormalized Rho and dRho written to mama file:    rhosp.rsg  
+Unnormalized T and dT     written to mama file:    sigsp.rsg  
+ Remember that data of the fg-matrix are not read for channels > 511
+ Remember that we only take into account lin. energy calibration (a2 = 0)
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ counting
+
+  ______________________________________________________________ 
+ |                                                              |
+ |                    C O U N T I N G   1.8.4.2                 |
+ |                                                              |
+ |Program to normalize experimental nuclear level density (NLD) |
+ |  to NLD from known low energy levels and NLD extracted from  |
+ |     resonances spacing data at Bn. Thus, the A and alpha     |
+ |     parameters are determined for NLD. The slope of the      |
+ |   transmision coefficient T(Eg) is normalized according to   |
+ |                    the alpha parameter.                      |
+ |                                                              |
+ |  Input files: counting.dat    Output files: rhopaw.cnt       |
+ |               rhosp.rsg                     rhotmopaw.cnt    |
+ |               sigsp.rsg                     sigpaw.cnt       |
+ |               rhopaw.rsg                    input.cnt        |
+ |               sigpaw.rsg                    spincut.cnt      |
+ |               (input.cnt)                   fermigas.cnt     |
+ |                                             sigextpaw.cnt    |
+ |                                             counting.cpp     |
+ |                                             spincut.cpp      |
+ |                                             sigext.cpp       |
+ |                                             talys_nld_cnt.txt|
+ |  Fermi gas or constant temperatur parameteres are calculated |
+ |      from Egidy and Bucurescu: PRC 80, 054310 (2009)         |
+ | E-mail  : magne.guttormsen@fys.uio.no                        |
+ | Created : 11 Aug 2006                                        |
+ | Modified: 17 Jun 2009                                        |
+ | Modified: 16 Nov 2014 Ex < 0 MeV, CT output, CT with sig_FG  |
+ | Modified: 10 Feb 2015 dimRhox, dimSigx                       |
+ | Modified: 01 Jun 2015 allow modifying ExL and ExH of sigext  |
+ | Modified: 28 Aug 2015 ? replaced by " for root scripts      |
+ | and deleting kumac output files                              |
+ | Modified: 15 Feb 2016 Cosmetics                              |
+ | Modified: 19 Jul 2016 Extension of gSF starts at TL2         |
+ | and down and at TH1 and up in g-energy. NLD from H1 and up   |
+ | Modified: 01 Nov 2016 You may choose reduct. factor of RMI   |
+ | The code also suggests a temperature for the CT NLD formula  |
+ | Modified: 21 Dec 2016 Larger dim for sigextpaw.cnt           |
+ | Modified: 15 Mar 2017 New spin cutoff opt.(5) from Alexander |
+ | Modified: 01 Apr 2017 The upbend gSF is now lin. in log.     |
+ | Modified: 17 Apr 2017 TALYS nld spin-formated outputfile     |
+ | Modified: 13 Jun 2018 Smoothing of discrete level density    |
+ | Modified: 02 Aug 2018 Update printing of chi2 fit T          |
+ |______________________________________________________________|
+                                                                 
+Reading calibration and dimensions from: rhosp.rsg
+rhosp.rsg has dimension (0 : 51, 0 : 1) and calibration (a0, a1) = (-722.000000, 96.000000)
+Reading calibration and dimensions from: sigsp.rsg
+sigsp.rsg has dimension (0 : 61, 0 : 1) and calibration (a0, a1) = (-722.000000, 96.000000)
+
+Reading data and errors of experimental nuclear level density: rhopaw.rsg
+ No   Ex(keV)      Rho(1/MeV)     dRho(1/MeV)
+  0   -722.00       0.000e+00       0.000e+00 
+  1   -626.00       0.000e+00       0.000e+00 
+  2   -530.00       0.000e+00       0.000e+00 
+  3   -434.00       0.000e+00       0.000e+00 
+  4   -338.00       0.000e+00       0.000e+00 
+  5   -242.00       0.000e+00       0.000e+00 
+  6   -146.00       8.724e-02       3.248e-04 
+  7    -50.00       8.724e-02       2.395e-04 
+  8     46.00       3.512e+00       1.459e-01 
+  9    142.00       3.983e-01       4.124e-02 
+ 10    238.00       1.028e+00       5.076e-02 
+ 11    334.00       4.517e-01       3.388e-02 
+ 12    430.00       3.598e-01       3.591e-02 
+ 13    526.00       3.831e-01       3.704e-02 
+ 14    622.00       4.129e-01       3.519e-02 
+ 15    718.00       3.683e-01       3.860e-02 
+ 16    814.00       3.687e-01       3.705e-02 
+ 17    910.00       3.667e-01       3.651e-02 
+ 18   1006.00       4.022e-01       4.453e-02 
+ 19   1102.00       5.444e-01       5.095e-02 
+ 20   1198.00       7.504e-01       6.476e-02 
+ 21   1294.00       6.803e-01       6.067e-02 
+ 22   1390.00       7.190e-01       6.727e-02 
+ 23   1486.00       1.196e+00       9.115e-02 
+ 24   1582.00       1.222e+00       1.040e-01 
+ 25   1678.00       1.154e+00       9.205e-02 
+ 26   1774.00       1.490e+00       1.436e-01 
+ 27   1870.00       1.616e+00       1.432e-01 
+ 28   1966.00       1.222e+00       1.390e-01 
+ 29   2062.00       9.795e-01       1.348e-01 
+ 30   2158.00       9.763e-01       1.736e-01 
+ 31   2254.00       1.072e+00       2.098e-01 
+ 32   2350.00       1.052e+00       2.376e-01 
+ 33   2446.00       8.893e-01       2.571e-01 
+ 34   2542.00       9.110e-01       3.292e-01 
+ 35   2638.00       6.789e-01       4.709e-01 
+ 36   2734.00       0.000e+00       0.000e+00 
+ 37   2830.00       0.000e+00       0.000e+00 
+ 38   2926.00       0.000e+00       0.000e+00 
+ 39   3022.00       0.000e+00       0.000e+00 
+ 40   3118.00       0.000e+00       0.000e+00 
+ 41   3214.00       0.000e+00       0.000e+00 
+ 42   3310.00       0.000e+00       0.000e+00 
+ 43   3406.00       0.000e+00       0.000e+00 
+ 44   3502.00       0.000e+00       0.000e+00 
+ 45   3598.00       0.000e+00       0.000e+00 
+ 46   3694.00       0.000e+00       0.000e+00 
+ 47   3790.00       0.000e+00       0.000e+00 
+ 48   3886.00       0.000e+00       0.000e+00 
+ 49   3982.00       0.000e+00       0.000e+00 
+ 50   4078.00       0.000e+00       0.000e+00 
+ 51   4174.00       0.000e+00       0.000e+00 
+
+Reading data and errors of experimental transmision coefficient: sigpaw.rsg
+ No   Eg(keV)         Trans           dTrans
+  0   -722.00       0.000e+00       0.000e+00 
+  1   -626.00       0.000e+00       0.000e+00 
+  2   -530.00       0.000e+00       0.000e+00 
+  3   -434.00       0.000e+00       0.000e+00 
+  4   -338.00       0.000e+00       0.000e+00 
+  5   -242.00       0.000e+00       0.000e+00 
+  6   -146.00       0.000e+00       0.000e+00 
+  7    -50.00       0.000e+00       0.000e+00 
+  8     46.00       0.000e+00       0.000e+00 
+  9    142.00       0.000e+00       0.000e+00 
+ 10    238.00       0.000e+00       0.000e+00 
+ 11    334.00       0.000e+00       0.000e+00 
+ 12    430.00       0.000e+00       0.000e+00 
+ 13    526.00       0.000e+00       0.000e+00 
+ 14    622.00       0.000e+00       0.000e+00 
+ 15    718.00       0.000e+00       0.000e+00 
+ 16    814.00       0.000e+00       0.000e+00 
+ 17    910.00       0.000e+00       0.000e+00 
+ 18   1006.00       0.000e+00       0.000e+00 
+ 19   1102.00       0.000e+00       0.000e+00 
+ 20   1198.00       0.000e+00       0.000e+00 
+ 21   1294.00       0.000e+00       0.000e+00 
+ 22   1390.00       0.000e+00       0.000e+00 
+ 23   1486.00       0.000e+00       0.000e+00 
+ 24   1582.00       7.662e-01       7.680e-02 
+ 25   1678.00       7.655e-01       7.142e-02 
+ 26   1774.00       8.952e-01       8.055e-02 
+ 27   1870.00       9.057e-01       7.437e-02 
+ 28   1966.00       8.965e-01       8.558e-02 
+ 29   2062.00       8.684e-01       7.748e-02 
+ 30   2158.00       9.490e-01       8.547e-02 
+ 31   2254.00       9.239e-01       8.209e-02 
+ 32   2350.00       1.107e+00       9.687e-02 
+ 33   2446.00       1.180e+00       1.002e-01 
+ 34   2542.00       1.143e+00       9.483e-02 
+ 35   2638.00       1.109e+00       8.995e-02 
+ 36   2734.00       1.027e+00       7.945e-02 
+ 37   2830.00       1.036e+00       9.396e-02 
+ 38   2926.00       1.277e+00       1.113e-01 
+ 39   3022.00       1.266e+00       1.235e-01 
+ 40   3118.00       1.159e+00       1.234e-01 
+ 41   3214.00       1.315e+00       1.231e-01 
+ 42   3310.00       1.277e+00       1.168e-01 
+ 43   3406.00       1.382e+00       1.291e-01 
+ 44   3502.00       1.263e+00       1.312e-01 
+ 45   3598.00       1.257e+00       1.332e-01 
+ 46   3694.00       1.180e+00       1.163e-01 
+ 47   3790.00       9.772e-01       1.047e-01 
+ 48   3886.00       9.214e-01       1.067e-01 
+ 49   3982.00       6.953e-01       6.937e-02 
+ 50   4078.00       5.548e-01       6.377e-02 
+ 51   4174.00       5.491e-01       7.411e-02 
+ 52   4270.00       0.000e+00       0.000e+00 
+ 53   4366.00       0.000e+00       0.000e+00 
+ 54   4462.00       0.000e+00       0.000e+00 
+ 55   4558.00       0.000e+00       0.000e+00 
+ 56   4654.00       0.000e+00       0.000e+00 
+ 57   4750.00       0.000e+00       0.000e+00 
+ 58   4846.00       0.000e+00       0.000e+00 
+ 59   4942.00       0.000e+00       0.000e+00 
+ 60   5038.00       0.000e+00       0.000e+00 
+ 61   5134.00       0.000e+00       0.000e+00 
+
+Reading excitation energies of known levels: counting.dat
+Binning 37 known levels:
+ No   Ex(keV)   NoLev   RhoLeV(1/MeV)
+  0   -722.00       0       0.000e+00
+  1   -626.00       0       0.000e+00
+  2   -530.00       0       0.000e+00
+  3   -434.00       0       0.000e+00
+  4   -338.00       0       0.000e+00
+  5   -242.00       0       0.000e+00
+  6   -146.00       0       0.000e+00
+  7    -50.00       0       0.000e+00
+  8     46.00       2       2.083e+01
+  9    142.00       0       0.000e+00
+ 10    238.00       1       1.042e+01
+ 11    334.00       0       0.000e+00
+ 12    430.00       0       0.000e+00
+ 13    526.00       1       1.042e+01
+ 14    622.00       0       0.000e+00
+ 15    718.00       0       0.000e+00
+ 16    814.00       1       1.042e+01
+ 17    910.00       0       0.000e+00
+ 18   1006.00       0       0.000e+00
+ 19   1102.00       1       1.042e+01
+ 20   1198.00       1       1.042e+01
+ 21   1294.00       1       1.042e+01
+ 22   1390.00       1       1.042e+01
+ 23   1486.00       1       1.042e+01
+ 24   1582.00       2       2.083e+01
+ 25   1678.00       2       2.083e+01
+ 26   1774.00       2       2.083e+01
+ 27   1870.00       4       4.167e+01
+ 28   1966.00       3       3.125e+01
+ 29   2062.00       1       1.042e+01
+ 30   2158.00       1       1.042e+01
+ 31   2254.00       1       1.042e+01
+ 32   2350.00       0       0.000e+00
+ 33   2446.00       1       1.042e+01
+ 34   2542.00       2       2.083e+01
+ 35   2638.00       2       2.083e+01
+ 36   2734.00       3       3.125e+01
+ 37   2830.00       0       0.000e+00
+ 38   2926.00       0       0.000e+00
+ 39   3022.00       1       1.042e+01
+ 40   3118.00       2       2.083e+01
+ 41   3214.00       0       0.000e+00
+ 42   3310.00       0       0.000e+00
+ 43   3406.00       0       0.000e+00
+ 44   3502.00       0       0.000e+00
+ 45   3598.00       0       0.000e+00
+ 46   3694.00       0       0.000e+00
+ 47   3790.00       0       0.000e+00
+ 48   3886.00       0       0.000e+00
+ 49   3982.00       0       0.000e+00
+ 50   4078.00       0       0.000e+00
+ 51   4174.00       0       0.000e+00
+ 52   4270.00       0       0.000e+00
+You may want to smooth the discrete level density with the
+resolution of the experimental level density (FWHM = 100–500 keV).
+If no smoothing, set FWHM = 0.
+Excitation energy FWHM (keV) < 0.000>:
+Mass number A             <152>:
+Neutron or proton binding energy (Bn or Bp) (MeV)  < 7.270>:
+
+
+Choose constant temperature CT (1) or Fermi gas FG (2) formula <1>:
+
+
+You should take care to use formulas from the same reference.
+Example: If you use rigid moment of inertia from (E&B2006),
+you should also use temperature T from (E&B2006), as well.
+We recommend to use (E&B2006) (or maybe the old (G&C)) for nuclei heavier than A > 150,
+and (E&B2009) for lighter nuclei with A < 150.
+
+If you have chosen the CT formula, we recommend to use FG spin cutoff formula since
+the CT spin cutoff formula is a constant, which is rather unphysical. In the following,
+option (1) might be the most appropriate for the CT-model (instead of (3)).
+
+You may choose between 5 spin cutoff formulas.
+The chosen formula is written to the spincut.cnt file,
+which will be automatically read by the normalization program.
+Be sure that the spin cutoff parameter at Sn sigma(Sn) is the same as the
+one you used for the d2rho program in order to estimate rho(Sn).
+
+Please, choose your spin cutoff formula:
+1 The rigid moment of inertia formula (RMI) (E&B2006)
+2 The Gilbert and Cameron formula (G&C) Can. J. Phys 43(1965) 1446
+3 The constant temperature (CT) formula (E&B2009) and NPA 481 (1988) 189
+4 The Fermi gas formula with appropriate cutoff parameter (E&B2009)
+5 Interpolate between known cutoff parameters (Alex2017)
+Type 1 for RMI:  sig**2=0.0146*(A**(5/3))*T for FG+CT (E&B2006)
+Type 2 for G&C:  sig**2=0.0888*(A**(2/3))*a*T for FG+CT
+Type 3 for E&B:  sig**2=(0.98*(A**(0.29)))**2 for CT
+Type 4 for E&B:  sig**2=0.391*A**0.675*(E-0.5*Pa_prime)**0.312 for FG+CT
+Type 5 for Alex: sig**2=A + B * Ex
+
+
+Choose RMI(FG+CT) (1), G&C(FG+CT) (2), E&B(CT) (3), E&B(FG+CT) (4), or Alex (5) <3>:
+
+Be sure to use the correct Rho(Bn or Bp) according
+to type 1, 2, 3, 4 or 5. Run the d2rho program to find Rho
+or use the systematic value found by running Robin
+Level density at Bn or Bp (1/MeV)                <  600000>:
+Uncertainty of level density at Bn or Bp (1/MeV) <   60000>:
+
+You need to run the program Robin to get the constant temperature parameters T:
+Temperature parameter T (MeV) <  0.581>:
+
+The level density goes through Rho(Bn), thus determining the
+const. temp. shift parameter to be E0 =  -0.145 MeV
+
+ No   Ex(keV)   RhoLeV(1/MeV)
+  0   -722.00       0.000e+00
+  1   -626.00       0.000e+00
+  2   -530.00       0.000e+00
+  3   -434.00       0.000e+00
+  4   -338.00       0.000e+00
+  5   -242.00       0.000e+00
+  6   -146.00       0.000e+00
+  7    -50.00       0.000e+00
+-----------------------------
+  8     46.00       2.083e+01
+  9    142.00       0.000e+00
+ 10    238.00       1.042e+01
+ 11    334.00       0.000e+00
+ 12    430.00       0.000e+00
+ 13    526.00       1.042e+01
+ 14    622.00       0.000e+00
+ 15    718.00       0.000e+00
+ 16    814.00       1.042e+01
+ 17    910.00       0.000e+00
+ 18   1006.00       0.000e+00
+-----------------------------
+ 19   1102.00       1.042e+01
+ 20   1198.00       1.042e+01
+ 21   1294.00       1.042e+01
+ 22   1390.00       1.042e+01
+ 23   1486.00       1.042e+01
+ 24   1582.00       2.083e+01
+ 25   1678.00       2.083e+01
+ 26   1774.00       2.083e+01
+ 27   1870.00       4.167e+01
+ 28   1966.00       3.125e+01
+Lower fit limit L1 for known levels  <  8>:
+Higher fit limit L2 for known levels < 18>:
+
+ No   Ex(keV)      Rho(1/MeV)     dRho(1/MeV)
+ 20   1198.00       7.504e-01       6.476e-02 
+ 21   1294.00       6.803e-01       6.067e-02 
+ 22   1390.00       7.190e-01       6.727e-02 
+ 23   1486.00       1.196e+00       9.115e-02 
+ 24   1582.00       1.222e+00       1.040e-01 
+ 25   1678.00       1.154e+00       9.205e-02 
+ 26   1774.00       1.490e+00       1.436e-01 
+ 27   1870.00       1.616e+00       1.432e-01 
+ 28   1966.00       1.222e+00       1.390e-01 
+ 29   2062.00       9.795e-01       1.348e-01 
+---------------------------------------------
+ 30   2158.00       9.763e-01       1.736e-01 
+ 31   2254.00       1.072e+00       2.098e-01 
+ 32   2350.00       1.052e+00       2.376e-01 
+ 33   2446.00       8.893e-01       2.571e-01 
+ 34   2542.00       9.110e-01       3.292e-01 
+ 35   2638.00       6.789e-01       4.709e-01 
+---------------------------------------------
+ 36   2734.00       0.000e+00       0.000e+00 
+ 37   2830.00       0.000e+00       0.000e+00 
+ 38   2926.00       0.000e+00       0.000e+00 
+ 39   3022.00       0.000e+00       0.000e+00 
+ 40   3118.00       0.000e+00       0.000e+00 
+ 41   3214.00       0.000e+00       0.000e+00 
+ 42   3310.00       0.000e+00       0.000e+00 
+ 43   3406.00       0.000e+00       0.000e+00 
+ 44   3502.00       0.000e+00       0.000e+00 
+ 45   3598.00       0.000e+00       0.000e+00 
+Lower fit limit H1 for Rho around Bn or Bp  < 30>:
+Higher fit limit H2 for Rho around Bn or Bp < 35>:
+
+ No   Eg(keV)         Trans           dTrans
+  0   -722.00       0.000e+00       0.000e+00 
+  1   -626.00       0.000e+00       0.000e+00 
+  2   -530.00       0.000e+00       0.000e+00 
+  3   -434.00       0.000e+00       0.000e+00 
+  4   -338.00       0.000e+00       0.000e+00 
+  5   -242.00       0.000e+00       0.000e+00 
+  6   -146.00       0.000e+00       0.000e+00 
+  7    -50.00       0.000e+00       0.000e+00 
+  8     46.00       0.000e+00       0.000e+00 
+  9    142.00       0.000e+00       0.000e+00 
+ 10    238.00       0.000e+00       0.000e+00 
+ 11    334.00       0.000e+00       0.000e+00 
+ 12    430.00       0.000e+00       0.000e+00 
+ 13    526.00       0.000e+00       0.000e+00 
+ 14    622.00       0.000e+00       0.000e+00 
+ 15    718.00       0.000e+00       0.000e+00 
+ 16    814.00       0.000e+00       0.000e+00 
+ 17    910.00       0.000e+00       0.000e+00 
+ 18   1006.00       0.000e+00       0.000e+00 
+ 19   1102.00       0.000e+00       0.000e+00 
+ 20   1198.00       0.000e+00       0.000e+00 
+ 21   1294.00       0.000e+00       0.000e+00 
+ 22   1390.00       0.000e+00       0.000e+00 
+ 23   1486.00       0.000e+00       0.000e+00 
+---------------------------------------------
+ 24   1582.00       7.662e-01       7.680e-02 
+ 25   1678.00       7.655e-01       7.142e-02 
+ 26   1774.00       8.952e-01       8.055e-02 
+ 27   1870.00       9.057e-01       7.437e-02 
+ 28   1966.00       8.965e-01       8.558e-02 
+ 29   2062.00       8.684e-01       7.748e-02 
+ 30   2158.00       9.490e-01       8.547e-02 
+ 31   2254.00       9.239e-01       8.209e-02 
+ 32   2350.00       1.107e+00       9.687e-02 
+ 33   2446.00       1.180e+00       1.002e-01 
+ 34   2542.00       1.143e+00       9.483e-02 
+---------------------------------------------
+ 35   2638.00       1.109e+00       8.995e-02 
+ 36   2734.00       1.027e+00       7.945e-02 
+ 37   2830.00       1.036e+00       9.396e-02 
+ 38   2926.00       1.277e+00       1.113e-01 
+ 39   3022.00       1.266e+00       1.235e-01 
+ 40   3118.00       1.159e+00       1.234e-01 
+ 41   3214.00       1.315e+00       1.231e-01 
+ 42   3310.00       1.277e+00       1.168e-01 
+ 43   3406.00       1.382e+00       1.291e-01 
+ 44   3502.00       1.263e+00       1.312e-01 
+Lower fit limit L1 for low energy region of T(Eg)  < 24>:
+Higher fit limit L2 for low energy region of T(Eg) < 34>:
+
+ No   Eg(keV)         Trans           dTrans
+ 35   2638.00       1.109e+00       8.995e-02 
+ 36   2734.00       1.027e+00       7.945e-02 
+ 37   2830.00       1.036e+00       9.396e-02 
+ 38   2926.00       1.277e+00       1.113e-01 
+ 39   3022.00       1.266e+00       1.235e-01 
+ 40   3118.00       1.159e+00       1.234e-01 
+ 41   3214.00       1.315e+00       1.231e-01 
+ 42   3310.00       1.277e+00       1.168e-01 
+ 43   3406.00       1.382e+00       1.291e-01 
+ 44   3502.00       1.263e+00       1.312e-01 
+---------------------------------------------
+ 45   3598.00       1.257e+00       1.332e-01 
+ 46   3694.00       1.180e+00       1.163e-01 
+ 47   3790.00       9.772e-01       1.047e-01 
+ 48   3886.00       9.214e-01       1.067e-01 
+ 49   3982.00       6.953e-01       6.937e-02 
+---------------------------------------------
+ 50   4078.00       5.548e-01       6.377e-02 
+ 51   4174.00       5.491e-01       7.411e-02 
+ 52   4270.00       0.000e+00       0.000e+00 
+Lower fit limit H1 for high energy region of T(Eg)  < 45>:
+Higher fit limit H2 for high energy region of T(Eg) < 49>:
+
+Temperature parameter T (MeV) =   0.581
+CT shift parameter is E0(MeV) =  -0.145
+CT level density has been multiplied with eta =  1.000
+in order to match Rho(Bn or Bp) = 600000.0 (1/MeV)
+
+Spin cutoff parameter used at Bn or Bp =  4.207
+
+ Fitting T to chosen data in the higher region
+     T                E0          Chi2          Chi2/free
+   0.460 	     1.507 	  12.678 	   3.169
+   0.465 	     1.439 	  11.833 	   2.958
+   0.470 	     1.372 	  11.023 	   2.756
+   0.475 	     1.304 	  10.250 	   2.563
+   0.480 	     1.236 	   9.515 	   2.379
+   0.485 	     1.168 	   8.819 	   2.205
+   0.490 	     1.100 	   8.160 	   2.040
+   0.495 	     1.032 	   7.539 	   1.885
+   0.500 	     0.964 	   6.953 	   1.738
+   0.505 	     0.896 	   6.403 	   1.601
+   0.510 	     0.828 	   5.886 	   1.472
+   0.515 	     0.760 	   5.402 	   1.351
+   0.520 	     0.692 	   4.950 	   1.237
+   0.525 	     0.623 	   4.527 	   1.132
+   0.530 	     0.555 	   4.133 	   1.033
+   0.535 	     0.487 	   3.767 	   0.942
+   0.540 	     0.418 	   3.427 	   0.857
+   0.545 	     0.350 	   3.112 	   0.778
+   0.550 	     0.281 	   2.820 	   0.705
+   0.555 	     0.213 	   2.552 	   0.638
+   0.560 	     0.144 	   2.306 	   0.576
+   0.565 	     0.075 	   2.080 	   0.520
+   0.570 	     0.007 	   1.874 	   0.468
+
+   0.575 	    -0.062 	   1.686 	   0.422
+   0.580 	    -0.131 	   1.516 	   0.379
+   0.585 	    -0.200 	   1.364 	   0.341
+   0.590 	    -0.268 	   1.227 	   0.307
+   0.595 	    -0.337 	   1.105 	   0.276
+   0.600 	    -0.406 	   0.997 	   0.249
+   0.605 	    -0.475 	   0.903 	   0.226
+   0.610 	    -0.544 	   0.822 	   0.206
+   0.615 	    -0.613 	   0.753 	   0.188
+   0.620 	    -0.683 	   0.696 	   0.174
+   0.625 	    -0.752 	   0.649 	   0.162
+   0.630 	    -0.821 	   0.613 	   0.153
+   0.635 	    -0.890 	   0.587 	   0.147
+   0.640 	    -0.959 	   0.569 	   0.142
+   0.645 	    -1.029 	   0.560 	   0.140
+   0.650 	    -1.098 	   0.559 	   0.140
+   0.655 	    -1.167 	   0.566 	   0.142
+   0.660 	    -1.237 	   0.580 	   0.145
+   0.665 	    -1.306 	   0.601 	   0.150
+   0.670 	    -1.376 	   0.628 	   0.157
+   0.675 	    -1.445 	   0.662 	   0.165
+   0.680 	    -1.515 	   0.700 	   0.175
+   0.685 	    -1.585 	   0.744 	   0.186
+   0.690 	    -1.654 	   0.793 	   0.198
+   0.695 	    -1.724 	   0.847 	   0.212
+Number of free parameter in upper region: 4
+Note: Uncertainty can be rerived from intersection with (Chi2_min + 1)
+
+You may change your choice of T from the info of the Chi2 tests above
+Temperature parameter T (MeV) <  0.581>:
+The level density goes through Rho(Bn), thus determining the
+const. temp. shift parameter to be E0 =  -0.145 MeV
+
+First estimate of normalization parameters: A =  4.2171 and alpha = 1.4438
+Improved Chi2 for lower part:  29.56 -> 24.73 with count correction = 1.104 
+Improved Chi2 for higher part:  2.83 ->  0.30 with count correction = 1.020 
+Final estimate of normalization parameters: A =  4.7631 and alpha = 1.4004
+
+File fermigas.cnt (0:52) written to disk, (a0,a1)=( -722.00,  96.000)
+File rhotmopaw.cnt (0:1041) written to disk, (a0,a1)=( -722.00,  96.000)
+File rhopaw.cnt (0:105) written to disk, (a0,a1)=( -722.00,  96.000)
+File sigpaw.cnt (0:105) written to disk, (a0,a1)=( -722.00,  96.000)
+
+
+ A transmission function exp(a*Eg+b) has been fitted to the lower
+ data points with result: Chi2 = 0.411378 a = 1.822342 b = 0.626643 
+ From the lower fit-marker (L) for exp(a*Eg+b), we extrapolate down to
+ Eg = 0 MeV by the function (Eg**3)exp(c*Eg+d). Both functions have the same
+ absolute value and derivative at L. This determine the c and d parameters, which
+ control the upbend for low Eg. You may now change c and d. The suggested value
+ for the d parameter ensures continoues match at L, but may as well be changed.
+ (Some believe that (1/c) should correspond to the nuclear temperature T...)
+ Values are c = -0.073 /MeV (corresponds to T =13.63 MeV) and d=  2.250
+
+ Change c and d parameters? (0 = no, 1 = yes)       <0>:
+ Transmission function sigext = exp(a*Eg + b) is fitted to the 
+ upper data points with result: Chi2 = 0.290478 a = -0.053587 b = 7.053530 
+ Change a and b parameters? (0 = no, 1 = yes) <0>:
+
+File sigpawext.cnt (0:208) written to disk, (a0,a1)=( -722.00,  96.000)
+File extendLH.cnt (0:208) (0:208) written to disk, (a0,a1)=( -722.00,  96.000)
+File rholev.cnt (0:52) written to disk, (a0,a1)=( -722.00,  96.000)
+File spincut.cnt (0:156) written to disk, (a0,a1)=( -722.00,  96.000)
+File talys_nld_cnt.txt written to disk. The table has 43 rows and 35 columns.
+File counting.cpp written to disk. Run root to plot normalized NLD.
+File spincut.cpp written to disk. Run root to plot the spincut.
+File sigext.cpp written to disk. Run root to plot sigextpaw.cnt.
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ root counting.cpp -
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for linuxx8664gcc on Sep 02 2021, 14:20:23                 |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With c++ (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)                 |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+root [0] 
+Processing counting.cpp...
+Info in <TCanvas::Print>: pdf file counting.pdf has been created
+Info in <TCanvas::Print>: eps file counting.eps has been created
+Info in <TCanvas::Print>: ps file counting.ps has been created
+root [1] .q
+[suntan@granite jordan]$ normalization
+
+  ______________________________________________________________ 
+ |                                                              |
+ |               N O R M A L I Z A T I O N  1.5.6               |
+ |                                                              |
+ |  Program to normalize the gamma-ray strength function f(Eg)  |
+ |         to the total average radiation width Gamma           |
+ |                     measured at Bn or Bp                     |
+ |        (based on normalization.f by Andreas Schiller)        |
+ |                                                              |
+ |  Input files: rhotmopaw.cnt    Output files: input.nrm       |
+ |               sigextpaw.cnt                  strength.nrm    |
+ |               spincut.cnt                    trans.nrm       |
+ |               sigpaw.cnt                     transext.nrm    |
+ |               (input.nrm)                    strength.cpp    |
+ |                                                              |
+ | E-mail  : magne.guttormsen@fys.uio.no                        |
+ | Created : 14 Nov 2006                                        |
+ | Modified: 26 Mar 2014                                        |
+ | Modified: 28 Aug 2015 replace ? and deleting kumac files     |
+ | Modified: 19 Apr 2016 larger dim for root vec. + corr. table |
+ | Modified: 21 Dec 2016 larger dim for transext                |
+ | Modified: 04 Dec 2017 corrected dim (Fabio)                  |
+ |______________________________________________________________|
+                                                                 
+Reading calibration and dimensions from: rhosp.rsg
+Dimension (0 : 51, 0 : 1) and calibration (a0, a1) = ( -722.00,  96.000)
+s- (l=0) or p- (l=1) wave neutron/proton capture               <0>:
+Neutron or proton binding energy (Bn or Bp) (MeV)         < 7.260>:
+Target spin in (n,g) or (p,g) reaction (for the A-1 nucleus). Use
+values 0.0, 1.0,... for even and 0.5, 1.5,... for odd spins < 1.5>:
+Neutron resonance spacing parameter D (eV)                < 105.0>:
+Average total radiative resonance width G (meV)           < 150.0>:
+
+Reading data of experimental nuclear level density: rhotmopaw.cnt
+Reading data of experimental transmision coefficient: sigextpaw.cnt
+Reading data and errors of experimental transmision coefficient: sigpaw.cnt
+Reading spincutoff parameters: spincut.cnt
+
+ No Ex(keV) Rho(1/MeV)  2*Spincut**2  Eg(keV)    Sigext      Sigpaw      dSigpaw  
+  0  -722.0  0.000e+00    35.40       -722.0   -3.764e+00    0.000e+00 ( 0.000e+00)
+  1  -626.0  0.000e+00    35.40       -626.0   -2.436e+00    0.000e+00 ( 0.000e+00)
+  2  -530.0  0.000e+00    35.40       -530.0   -1.468e+00    0.000e+00 ( 0.000e+00)
+  3  -434.0  0.000e+00    35.40       -434.0   -8.004e-01    0.000e+00 ( 0.000e+00)
+  4  -338.0  0.000e+00    35.40       -338.0   -3.754e-01    0.000e+00 ( 0.000e+00)
+  5  -242.0  0.000e+00    35.40       -242.0   -1.368e-01    0.000e+00 ( 0.000e+00)
+  6  -146.0  3.387e-01    35.40       -146.0   -2.983e-02    0.000e+00 ( 0.000e+00)
+  7   -50.0  3.874e-01    35.40        -50.0   -1.190e-03    0.000e+00 ( 0.000e+00)
+  8    46.0  1.784e+01    35.40         46.0    9.200e-04    0.000e+00 ( 0.000e+00)
+  9   142.0  2.315e+00    35.40        142.0    2.687e-02    0.000e+00 ( 0.000e+00)
+ 10   238.0  6.836e+00    35.40        238.0    1.256e-01    0.000e+00 ( 0.000e+00)
+ 11   334.0  3.435e+00    35.40        334.0    3.448e-01    0.000e+00 ( 0.000e+00)
+ 12   430.0  3.130e+00    35.40        430.0    7.306e-01    0.000e+00 ( 0.000e+00)
+ 13   526.0  3.812e+00    35.40        526.0    1.328e+00    0.000e+00 ( 0.000e+00)
+ 14   622.0  4.700e+00    35.40        622.0    2.180e+00    0.000e+00 ( 0.000e+00)
+ 15   718.0  4.795e+00    35.40        718.0    3.330e+00    0.000e+00 ( 0.000e+00)
+ 16   814.0  5.491e+00    35.40        814.0    4.819e+00    0.000e+00 ( 0.000e+00)
+ 17   910.0  6.246e+00    35.40        910.0    6.685e+00    0.000e+00 ( 0.000e+00)
+ 18  1006.0  7.837e+00    35.40       1006.0    8.969e+00    0.000e+00 ( 0.000e+00)
+ 19  1102.0  1.214e+01    35.40       1102.0    1.171e+01    0.000e+00 ( 0.000e+00)
+ 20  1198.0  1.913e+01    35.40       1198.0    1.493e+01    0.000e+00 ( 0.000e+00)
+ 21  1294.0  1.984e+01    35.40       1294.0    1.869e+01    0.000e+00 ( 0.000e+00)
+ 22  1390.0  2.399e+01    35.40       1390.0    2.300e+01    0.000e+00 ( 0.000e+00)
+ 23  1486.0  4.566e+01    35.40       1486.0    2.791e+01    0.000e+00 ( 0.000e+00)
+ 24  1582.0  5.336e+01    35.40       1582.0    3.343e+01    3.345e+01 ( 3.353e+00)
+ 25  1678.0  5.763e+01    35.40       1678.0    3.983e+01    3.823e+01 ( 3.567e+00)
+ 26  1774.0  8.510e+01    35.40       1774.0    4.744e+01    5.114e+01 ( 4.602e+00)
+ 27  1870.0  1.056e+02    35.40       1870.0    5.651e+01    5.919e+01 ( 4.860e+00)
+ 28  1966.0  9.135e+01    35.40       1966.0    6.731e+01    6.702e+01 ( 6.397e+00)
+ 29  2062.0  8.376e+01    35.40       2062.0    8.018e+01    7.425e+01 ( 6.625e+00)
+ 30  2158.0  9.056e+01    35.40       2158.0    9.551e+01    9.282e+01 ( 8.360e+00)
+ 31  2254.0  1.068e+02    35.40       2254.0    1.138e+02    1.034e+02 ( 9.185e+00)
+ 32  2350.0  1.260e+02    35.40       2350.0    1.355e+02    1.417e+02 ( 1.240e+01)
+ 33  2446.0  1.487e+02    35.40       2446.0    1.614e+02    1.727e+02 ( 1.467e+01)
+ 34  2542.0  1.754e+02    35.40       2542.0    1.923e+02    1.914e+02 ( 1.588e+01)
+ 35  2638.0  2.069e+02    35.40       2638.0    2.124e+02    2.124e+02 ( 1.723e+01)
+ 36  2734.0  2.441e+02    35.40       2734.0    2.250e+02    2.250e+02 ( 1.741e+01)
+ 37  2830.0  2.879e+02    35.40       2830.0    2.597e+02    2.597e+02 ( 2.355e+01)
+ 38  2926.0  3.397e+02    35.40       2926.0    3.662e+02    3.662e+02 ( 3.192e+01)
+ 39  3022.0  4.007e+02    35.40       3022.0    4.154e+02    4.154e+02 ( 4.050e+01)
+ 40  3118.0  4.727e+02    35.40       3118.0    4.347e+02    4.347e+02 ( 4.628e+01)
+ 41  3214.0  5.576e+02    35.40       3214.0    5.643e+02    5.643e+02 ( 5.285e+01)
+ 42  3310.0  6.578e+02    35.40       3310.0    6.267e+02    6.267e+02 ( 5.735e+01)
+ 43  3406.0  7.759e+02    35.40       3406.0    7.764e+02    7.764e+02 ( 7.249e+01)
+ 44  3502.0  9.154e+02    35.40       3502.0    8.115e+02    8.115e+02 ( 8.429e+01)
+ 45  3598.0  1.080e+03    35.40       3598.0    9.541e+02    9.239e+02 ( 9.789e+01)
+ 46  3694.0  1.274e+03    35.40       3694.0    9.492e+02    9.920e+02 ( 9.775e+01)
+ 47  3790.0  1.503e+03    35.40       3790.0    9.443e+02    9.396e+02 ( 1.006e+02)
+ 48  3886.0  1.773e+03    35.40       3886.0    9.394e+02    1.013e+03 ( 1.173e+02)
+ 49  3982.0  2.091e+03    35.40       3982.0    9.346e+02    8.748e+02 ( 8.728e+01)
+ 50  4078.0  2.467e+03    35.40       4078.0    9.298e+02    7.985e+02 ( 9.178e+01)
+ 51  4174.0  2.910e+03    35.40       4174.0    9.251e+02    9.039e+02 ( 1.220e+02)
+ 52  4270.0  3.433e+03    35.40       4270.0    9.203e+02    0.000e+00 ( 0.000e+00)
+ 53  4366.0  4.050e+03    35.40       4366.0    9.156e+02    0.000e+00 ( 0.000e+00)
+ 54  4462.0  4.777e+03    35.40       4462.0    9.109e+02    0.000e+00 ( 0.000e+00)
+ 55  4558.0  5.636e+03    35.40       4558.0    9.062e+02    0.000e+00 ( 0.000e+00)
+ 56  4654.0  6.648e+03    35.40       4654.0    9.016e+02    0.000e+00 ( 0.000e+00)
+ 57  4750.0  7.843e+03    35.40       4750.0    8.969e+02    0.000e+00 ( 0.000e+00)
+ 58  4846.0  9.252e+03    35.40       4846.0    8.923e+02    0.000e+00 ( 0.000e+00)
+ 59  4942.0  1.091e+04    35.40       4942.0    8.878e+02    0.000e+00 ( 0.000e+00)
+ 60  5038.0  1.287e+04    35.40       5038.0    8.832e+02    0.000e+00 ( 0.000e+00)
+ 61  5134.0  1.519e+04    35.40       5134.0    8.787e+02    0.000e+00 ( 0.000e+00)
+ 62  5230.0  1.792e+04    35.40       5230.0    8.742e+02    0.000e+00 ( 0.000e+00)
+ 63  5326.0  2.114e+04    35.40       5326.0    8.697e+02    0.000e+00 ( 0.000e+00)
+ 64  5422.0  2.493e+04    35.40       5422.0    8.652e+02    0.000e+00 ( 0.000e+00)
+ 65  5518.0  2.941e+04    35.40       5518.0    8.608e+02    0.000e+00 ( 0.000e+00)
+ 66  5614.0  3.470e+04    35.40       5614.0    8.564e+02    0.000e+00 ( 0.000e+00)
+ 67  5710.0  4.093e+04    35.40       5710.0    8.520e+02    0.000e+00 ( 0.000e+00)
+ 68  5806.0  4.829e+04    35.40       5806.0    8.476e+02    0.000e+00 ( 0.000e+00)
+ 69  5902.0  5.696e+04    35.40       5902.0    8.432e+02    0.000e+00 ( 0.000e+00)
+ 70  5998.0  6.720e+04    35.40       5998.0    8.389e+02    0.000e+00 ( 0.000e+00)
+ 71  6094.0  7.927e+04    35.40       6094.0    8.346e+02    0.000e+00 ( 0.000e+00)
+ 72  6190.0  9.351e+04    35.40       6190.0    8.303e+02    0.000e+00 ( 0.000e+00)
+ 73  6286.0  1.103e+05    35.40       6286.0    8.261e+02    0.000e+00 ( 0.000e+00)
+ 74  6382.0  1.301e+05    35.40       6382.0    8.218e+02    0.000e+00 ( 0.000e+00)
+ 75  6478.0  1.535e+05    35.40       6478.0    8.176e+02    0.000e+00 ( 0.000e+00)
+ 76  6574.0  1.811e+05    35.40       6574.0    8.134e+02    0.000e+00 ( 0.000e+00)
+ 77  6670.0  2.136e+05    35.40       6670.0    8.092e+02    0.000e+00 ( 0.000e+00)
+ 78  6766.0  2.520e+05    35.40       6766.0    8.051e+02    0.000e+00 ( 0.000e+00)
+ 79  6862.0  2.973e+05    35.40       6862.0    8.010e+02    0.000e+00 ( 0.000e+00)
+ 80  6958.0  3.507e+05    35.40       6958.0    7.969e+02    0.000e+00 ( 0.000e+00)
+ 81  7054.0  4.137e+05    35.40       7054.0    7.928e+02    0.000e+00 ( 0.000e+00)
+ 82  7150.0  4.880e+05    35.40       7150.0    7.887e+02    0.000e+00 ( 0.000e+00)
+ 83  7246.0  5.757e+05    35.40       7246.0    7.847e+02    0.000e+00 ( 0.000e+00)
+
+Normalization integral =  1.2274513e+09
+Normalization factor =    8.5921587e+08
+File strength.nrm (0:105) written to disk, (a0,a1)=( -722.00,  96.000)
+File trans.nrm (0:105) written to disk, (a0,a1)=( -722.00,  96.000)
+File transext.nrm (0:529) written to disk, (a0,a1)=( -722.00,  96.000)
+File strength.cpp written to disk. Run root to plot strength.nrm
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ 
+[suntan@granite jordan]$ root strength.cpp -l
+root [0] 
+Processing strength.cpp...
+Info in <TCanvas::Print>: pdf file strength.pdf has been created
+Info in <TCanvas::Print>: eps file strength.eps has been created
+Info in <TCanvas::Print>: ps file strength.ps has been created
+root [1] 
+

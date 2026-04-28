@@ -1,0 +1,44 @@
+/home/artemis/Personal_Space/MSU/SuN_Stuff/ND_Nickel/rootfiles_raw/Ni60_gated_2D_matrices.root
+
+
+matrixName msum
+MeV: 1
+mode 2
+doInterpol 0
+doOslo 0
+alphaLimit -1 1
+alphaIter 100
+doEffi 0
+doAutoScale 0
+colour 1
+doGRF 0
+displayAverage 0
+displaySingle 1
+doSlidingWindow 0
+doBinVariation 0
+doBackground 1
+verbose 0
+gSF_norm 0.012
+lit_norm 1
+lit_alpha 0
+lit_alpha_error 0 0
+level1 867 1079
+level1_2 0 0
+bg_level1 576.764 631.455 1061.04 1105.97
+bg_level2 1154.91 1213.29 1530.16 1587.18
+level2 1194 1560
+level2_2 1300 1320
+excitation 6500 11500
+excitationMCLimits 2000 3000
+excitation_bin_1 400
+excitation_bin_2 800
+nOfBins 13
+eff_corr 1
+minCounts 50
+doWidthCal 0
+widthCal 0 0 0 0
+rhoFileName 
+rhoScale 1
+spinLow 0
+spinHigh 8
+discreteLevelFile  100
