@@ -1,0 +1,44 @@
+/home/artemis/Personal_Space/MSU/SuN_Stuff/ND_Nickel/rootfiles_raw/62Ni_Oslo_matrix.root
+/home/artemis/Personal_Space/MSU/SuN_Stuff/ND_Nickel/shapeIt_files/dataCRP/63cu_Erlandsson1980.txt
+
+matrixName msum
+MeV: 1
+mode 1
+doInterpol 1
+doOslo 1
+alphaLimit -1 1
+alphaIter 100
+doEffi 0
+doAutoScale 1
+colour 1
+doGRF 0
+displayAverage 0
+displaySingle 1
+doSlidingWindow 0
+doBinVariation 0
+doBackground 1
+verbose 0
+gSF_norm 1
+lit_norm 1
+lit_alpha 0
+lit_alpha_error 0 0
+level1 603 743
+level1_2 0 0
+bg_level1 558.041 604.217 744.658 810.316
+bg_level2 776.6 842.257 1055.37 1100.89
+level2 837 1061
+level2_2 0 0
+excitation 8201 10400
+excitationMCLimits 2000 3000
+excitation_bin_1 400
+excitation_bin_2 800
+nOfBins 6
+eff_corr 0.4
+minCounts 50
+doWidthCal 0
+widthCal 0 0 0 0
+rhoFileName 
+rhoScale 1
+spinLow 0
+spinHigh 8
+discreteLevelFile 100 100
