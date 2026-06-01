@@ -4,7 +4,7 @@
 projectile p
 element ni
 mass 58
-energy 1.012195122 15.18292683 1.012195122e-1
+energy 4.0
 #
 #select level density
 ldmodel 1

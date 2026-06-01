@@ -1,8 +1,6 @@
 # to make a geant input from a rainier output - Based on Hannah's better_root2geant
 import numpy as np
-import pandas as pd
-import uproot
-import os
+import ROOT
 import sys
 ###########################################################################################################################
 #From our README file: The format for the input file is:
@@ -18,38 +16,29 @@ import sys
 
 # question about isotope to set folder name
 if len(sys.argv) == 1:
-    iso = input("Which nickel? ")
     ene = input("What Ex? ")
-    real = input('How many to simulate? ')
+    ext=''
 elif len(sys.argv) == 2:
-    iso = sys.argv[1]
-    ene = input("What Ex? ")
-    real = input('How many to simulate? ')
+    ene = sys.argv[1]
+    ext=''
 elif len(sys.argv) == 3:
-    iso = sys.argv[1]
-    ene = sys.argv[2]
-    real = input('How many to simulate? ')
-else:
-    iso = sys.argv[1]
-    ene = sys.argv[2]
-    real = sys.argv[3]
-  
-comp=int(iso)+1
+    ene = sys.argv[1]
+    ext = sys.argv[2]
 
-f = 'ni'+str(iso)+'/Run0001.root'
+real=100000
+f = 'cu63/Run0001.root'
 t = 'tree'
-fOut_name = 'ni'+str(iso)+'/test_Jp_Mar/ni'+str(iso)+'_Ex_'+str(ene)+'_2.txt'
-
+fOut_name = 'cu63/cu63_Ex_'+str(ene)+'MeV_'+ext+'.txt'
+print(fOut_name)
 print("Reading tree {} in file {}".format(t, f))
-data = uproot.open(f)[t]
+file = ROOT.TFile.Open(f)
+tree = file.Get(t)
 
-names = data.keys()
+# read Egs branch
+Egs = []
 
-#print("Tree has the following branches:")
-#print("  [{}]".format(', '.join(names)))
-
-data.arrays(names)
-Egs = data["Egs"].array(library="np")
+for entry in tree:
+    Egs.append(np.array(entry.Egs))
 #print(type(Egs))
 # some lines are full of zeros, so we want to remove that
 # first find zero lines
@@ -97,4 +86,6 @@ with open(fOut_name,'w') as fOut:
 	fOut.write(str(total_to_simulate)+' '+str(events)+' '+str(max_gammas)+'\n')
 	fOut.write("\n".join(" ".join(map(str, x)) for x in table))
 fOut.close()
+
+print(f'created file {fOut_name}')
 
