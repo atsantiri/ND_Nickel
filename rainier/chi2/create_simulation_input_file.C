@@ -39,26 +39,26 @@
 #include "TTree.h"
 #include "TH1D.h"
 
-TH1D *make_sos_allsegs(TTree *tree, int min, int max, string name, int bins, int low, int high)
-{
+// TH1D *make_sos_allsegs(TTree *tree, int min, int max, string name, int bins, int low, int high)
+// {
 
-	TH1D *hist = new TH1D(name.c_str(), name.c_str(), bins, low, high);
+// 	TH1D *hist = new TH1D(name.c_str(), name.c_str(), bins, low, high);
 
-	for (int i = 0; i < 8; i++)
-	{
-		int side = i / 4;
-		string ch;
-		(side == 0) ? ch = "B" : ch = "T";
-		int seg = i % 4 + 1;
-		string gate = Form("eneAll> %d && eneAll< %d && ene%s%d>0", min, max, ch.c_str(), seg);
-		//   tree->Draw(Form("ene%s%d>>h(%d,%d,%d)",ch.c_str(), seg, bins, low, high), gate.c_str());
-		tree->Project(Form("h(%d,%d,%d)", bins, low, high), Form("ene%s%d", ch.c_str(), seg), gate.c_str(), "");
-		TH1D *h = (TH1D *)gDirectory->Get("h");
-		hist->Add(h);
-	}
+// 	for (int i = 0; i < 8; i++)
+// 	{
+// 		int side = i / 4;
+// 		string ch;
+// 		(side == 0) ? ch = "B" : ch = "T";
+// 		int seg = i % 4 + 1;
+// 		string gate = Form("eneAll> %d && eneAll< %d && ene%s%d>0", min, max, ch.c_str(), seg);
+// 		//   tree->Draw(Form("ene%s%d>>h(%d,%d,%d)",ch.c_str(), seg, bins, low, high), gate.c_str());
+// 		tree->Project(Form("h(%d,%d,%d)", bins, low, high), Form("ene%s%d", ch.c_str(), seg), gate.c_str(), "");
+// 		TH1D *h = (TH1D *)gDirectory->Get("h");
+// 		hist->Add(h);
+// 	}
 
-	return hist;
-}
+// 	return hist;
+// }
 
 TH1D *make_sos(TTree *tree, int min, int max, string name, int bins, int low, int high)
 {
@@ -68,7 +68,7 @@ TH1D *make_sos(TTree *tree, int min, int max, string name, int bins, int low, in
 
 	for (auto ch : chans)
 	{
-		string gate = Form("eneAll> %d && eneAll< %d && ene%s>0", min, max, ch.c_str());
+		string gate = Form("eneAll> %d && eneAll< %d && ene%s>0 && multi == 2", min, max, ch.c_str());
 		tree->Project(Form("h(%d,%d,%d)", bins, low, high), Form("ene%s", ch.c_str()), gate.c_str(), "");
 		TH1D *h = (TH1D *)gDirectory->Get("h");
 		hist->Add(h);
@@ -87,8 +87,8 @@ void create_simulation_input_file()
 	vector<string> param = {"cu63_Ex_10MeV_0.5p", "cu63_Ex_10MeV_0.5m", "cu63_Ex_10MeV_1.5p", "cu63_Ex_10MeV_1.5m", "cu63_Ex_10MeV_2.5p","cu63_Ex_10MeV_2.5m","cu63_Ex_10MeV_3.5m"};
 
 	// File names
-	string ext="_T1.05";
-	string fout_name = Form("sim_hsts_Jp%s.root",ext.c_str());
+	string ext="_noLEE";
+	string fout_name = Form("sim_hsts_Jp%s_multi2.root",ext.c_str());
 
 	// Gating conditions and histogram sizes
 	int bins = 100;
@@ -102,7 +102,7 @@ void create_simulation_input_file()
 	int gatemin = 9600;
 	int gatemax = 10400;
 
-	string gate = Form("eneAll > %d && eneAll < %d ", gatemin, gatemax);
+	string gate = Form("eneAll > %d && eneAll < %d && multi == 2", gatemin, gatemax);
 
 	vector<TH1D *> histograms_TAS;
 	vector<TH1D *> histograms_Seg;

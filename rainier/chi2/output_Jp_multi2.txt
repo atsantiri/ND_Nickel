@@ -1,0 +1,36 @@
+Start Date:                      2026-06-30.10:22:20
+End Date:                        2026-06-30.10:22:20
+Elapsed Time:                    0.084236 seconds
+Number of fit spectra:           3 (TAS Seg Mul)
+Number of components:            7
+Free and constrained variables:  7
+Free variables:                  7
+Minimizer:                       Minuit
+Algorithm:                       Migrad
+Max Iterations:                  100000000
+Max Function Calls:              1000000
+Actual Number of Function Calls: 1771
+Tolerance:                       0.0001
+Precision:                       -1
+Error Definition:                1
+Estimated Distance To Minimum:   3.99319e-09
+Print Level:                     0
+Status:                          0 (Minimization converged)
+Minimum Value:                   15290.5
+global_chi2:                     15290.5
+global_nBins:                    526
+Reduced global chi2:             29.4615
+Par 000    0.0928785      error: 0.0484081      percent error: 0.521198       
+Par 001    0.224489       error: 0.0467751      percent error: 0.208362       
+Par 002    0.218146       error: 0.054805       percent error: 0.251231       
+Par 003    1.66533e-14    error: 0.00693748     percent error: 4.16582e+11    
+Par 004    3.16414e-13    error: 0.00648556     percent error: 2.04971e+10    
+Par 005    0.577762       error: 0.0566444      percent error: 0.098041       
+Par 006    1.72599        error: 0.0345246      percent error: 0.0200027      
+nPar 000    0.03271213798005119521850048       error: 0.017096251601638943334871         percent error: 0.5226271548519614285055468        
+nPar 001    0.0790659154115380402583213        error: 0.01675498626395629728214054       percent error: 0.2119116205351775639176282        
+nPar 002    0.07683176308821593192277533       error: 0.01952929181446918377451638       percent error: 0.2541825285467708694930877        
+nPar 003    5.86536897894138286084421e-15      error: 0.002443404821614200000956529      percent error: 416581604735.6666870117188         
+nPar 004    1.1144201059988626567857e-13       error: 0.002284237742073351711685758      percent error: 20497097367.29824447631836         
+nPar 005    0.2034897775461877722502635        error: 0.02144263321084374090963465       percent error: 0.1053744982643009114875454        
+nPar 006    0.6079004059738897236542243        error: 0.02644086240502789217354795       percent error: 0.04349538533811008605978188       

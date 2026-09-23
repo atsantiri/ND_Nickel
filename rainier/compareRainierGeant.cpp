@@ -7,7 +7,7 @@
 TH1D *make_sos_df(ROOT::RDataFrame &d, int min, int max, TString name, int bins, double low, double high)
 {
     TH1D *hist = new TH1D(name, name, bins, low, high);
-    auto df = d.Filter(Form("eneAll > %d && eneAll < %d", min, max));
+    auto df = d.Filter(Form("eneAll > %d && eneAll < %d && multi ==2", min, max));
     std::vector<std::string> chans = {"B2", "B3", "T2", "T3"};
 
     for (auto &ch : chans)
@@ -38,7 +38,8 @@ double normToInt(TH1D *h1, TH1D *h2, int min, int max)
 void compareRainierGeant()
 {
     // TString rainIn = "geant_outputs/cu63_Ex_10keV.root";
-    std::vector<TString> files = {"cu63_Ex_10MeV_0.5p","cu63_Ex_10MeV_2.5p","cu63_Ex_10MeV_0.5p_T1.0","cu63_Ex_10MeV_2.5p_T1.0"};
+    std::vector<TString> files = {"cu63_Ex_10MeV_2.5p","cu63_Ex_10MeV_2.5p_noLEE"};
+    // std::vector<TString> files = {"cu63_Ex_10MeV_0.5p","cu63_Ex_10MeV_2.5p","cu63_Ex_10MeV_0.5p_T1.0","cu63_Ex_10MeV_2.5p_T1.0"};
     // std::vector<TString> files = {"cu63_Ex_10MeV_0.5p", "cu63_Ex_10MeV_0.5m", "cu63_Ex_10MeV_1.5p","cu63_Ex_10MeV_1.5m", "cu63_Ex_10MeV_2.5p"};
 
     TString dataIn = "../rootfiles_raw/runfiles/run_1205_thres_040_keV.root";

@@ -8,8 +8,8 @@
 ////////////////////// Run Settings ////////////////////////////////////////////
 const int g_nReal = 10;              // number of realizations of nuclear level scheme
 const int g_nEvent = 1e4;            // number of events per realization (and ExI in bExSpread)
-const int g_nEvUpdate = 1e3;         // print progress to screen at this interval
-const int g_nEvSave = g_nEvent / 50; // save checkpoint every now and then
+const int g_nEvUpdate = 1e4;         // print progress to screen at this interval
+const int g_nEvSave = g_nEvent / 1; // save checkpoint every now and then
 
 #define bSaveTree // to save cascades to a ROOT tree in the RunXXXX.root file
 
@@ -156,7 +156,7 @@ const double g_adGamE1[] = {4.96, 0.00};  // MeV GDR width
 ///// fM1 /////
 #define bM1_StdLor   // standard Lorentzian, parameterized by Prestwich
 // #define bM1_UsrDef // user defined
-#define bM1StrUpbend // Oslo observed low energy upbend aka enhancement
+// #define bM1StrUpbend // Oslo observed low energy upbend aka enhancement
 const double g_adSigM1[] = {3.930, 0.00}; // mb magnitude
 const double g_adEneM1[] = {9.950, 0.01}; // MeV centroid energy, non-zero
 const double g_adGamM1[] = {4.0, 0.00};   // MeV GDR width
@@ -198,8 +198,8 @@ const double g_dICCMax = 1.0;               // MeV; Uses last Ebin ICC value for
 
 ////////////////////// Excitation Settings /////////////////////////////////////
 // choose one, fill in corresponding params:
-#define bExSingle  // single population input
-// #define bExSelect // populate list of (Ex, J, pi) states
+// #define bExSingle  // single population input
+#define bExSelect // populate list of (Ex, J, pi) states
 // #define bExSpread  // populate from (eg. intrinsic) spin distribution for list of Ex
 // #define bExFullRxn // populate according to input file
 
@@ -207,9 +207,9 @@ const double g_dICCMax = 1.0;               // MeV; Uses last Ebin ICC value for
 // similar to (n,g)
 const double g_dExIMax = 10.; 
 // MeV, Ei - "capture state energy"
-const double g_dSpI = 0.5;    
+const double g_dSpI = 0.5;
 // hbar, Ji - "capture state spin"
-const double g_dParI = 0;     
+const double g_dParI =0;
 // Pi - "capture state parity" 0=(-), 1=(+)
 #endif
 

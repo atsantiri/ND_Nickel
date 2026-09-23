@@ -6,9 +6,10 @@
 
 void draw_comparison()
 {
-    TFile *fIn = new TFile("comparison.root", "READ");
+    TFile *fIn = new TFile("comparison_multi2.root", "READ");
 
-    std::vector<std::string> ext = {"_Tdef", "_T1", "_T105"};
+    std::vector<std::string> ext = {"_Tdef", "_T10", "_T105"};
+    // std::vector<std::string> ext = {"_Tdef", "_noLEE"};
     TCanvas *c0 = new TCanvas("c0", "TAS", 800, 600);
     auto dataTAS = (TH1D *)fIn->Get("data_TAS");
     dataTAS->Draw();
@@ -27,7 +28,7 @@ void draw_comparison()
     dataMul->Draw();
 
     int i = 0;
-    std::vector<int> cols = {2, 6, 7, 3, 25, 46};
+    std::vector<int> cols = {4, 6, 95, 3, 25, 46};
     for (auto e : ext)
     {
         c0->cd();

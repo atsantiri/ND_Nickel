@@ -3,4 +3,4 @@
 # export RAINIER_PATH=/path/to/RAINIER
 
 cp ${RAINIER_PATH}/RAINIER.C RAINIER_copy.C
-root -l -q RAINIER_copy.C++ 
+root -l -q RAINIER_copy.C++

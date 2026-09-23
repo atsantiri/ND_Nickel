@@ -5,7 +5,7 @@
 TH1D *make_sos_df(ROOT::RDataFrame &d, int min, int max, TString name, int bins, double low, double high)
 {
     TH1D *hist = new TH1D(name, name, bins, low, high);
-    auto df = d.Filter(Form("eneAll > %d && eneAll < %d", min, max));
+    auto df = d.Filter(Form("eneAll > %d && eneAll < %d && multi == 2", min, max));
     std::vector<std::string> chans = {"B2", "B3", "T2", "T3"};
 
     for (auto &ch : chans)
@@ -32,9 +32,9 @@ void make_exp_chi2_input()
     // SoS
     auto hsosdata = make_sos_df(d, mingate, maxgate, "data_Seg", 500, 1, 12001);
     // Mul
-    auto hmuldata = d.Filter(Form("eneAll > %d && eneAll < %d", mingate, maxgate)).Histo1D({"data_Mul", "mul;mul;counts", 8, 1, 9}, "multi");
+    auto hmuldata = d.Filter(Form("eneAll > %d && eneAll < %d && multi == 2", mingate, maxgate)).Histo1D({"data_Mul", "mul;mul;counts", 8, 1, 9}, "multi");
 
-    TString fout_name = TString::Format("exp_input_run_%d.root", run);
+    TString fout_name = TString::Format("exp_input_run_%d_multi2.root", run);
     TFile *fOut = new TFile(fout_name, "RECREATE");
     hdata.GetPtr()->Write();
     hsosdata->Write();

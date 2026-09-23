@@ -361,7 +361,7 @@ int fit_spectra(std::string fit_number,
     start_values.push_back(0.1/global_num_components); // Guess at true value
     step_sizes.push_back(0.001); // This is just a starting value as Minuit will adjust this if necessary
     lower_bounds.push_back(0.00000);
-    upper_bounds.push_back(0.20);
+    upper_bounds.push_back(100);
   }
 
 

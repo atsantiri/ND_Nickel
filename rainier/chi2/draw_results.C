@@ -142,7 +142,7 @@ int draw_results(std::string fit_number, std::string input_sim_name){
   }
 
   // ========== Apply normalized scaling factors 
-  string input_exp_name = "exp_input_run_1205.root";
+  string input_exp_name = "exp_input_run_1205_multi2.root";
   TFile* fInExp = new TFile(input_exp_name.c_str(),"READ"); 
   TH1D* exp_TAS = (TH1D*) fInExp->Get("data_TAS");
   TH1D* exp_Seg = (TH1D*) fInExp->Get("data_Seg");
@@ -184,13 +184,14 @@ int draw_results(std::string fit_number, std::string input_sim_name){
   TCanvas* c2 = create_canvas(exp_Seg, sim_Seg, fit_number);
   TCanvas* c3 = create_canvas(exp_Mul, sim_Mul, fit_number);
   // TCanvas* c4 = create_canvas(exp_Diag, sim_Diag);
-	TFile* fOut = new TFile("comparison.root","UPDATE");
+	TFile* fOut = new TFile("comparison_multi2.root","UPDATE");
+	// TFile* fOut = new TFile("comparison_multi2.root","RECREATE");
 	// exp_Seg->Write();
 	// exp_TAS->Write();
 	// exp_Mul->Write();
-  sim_Seg->Write("sim_Seg_Tdef");
-  sim_TAS->Write("sim_TAS_Tdef");
-  sim_Mul->Write("sim_Mul_Tdef");
+  sim_Seg->Write("sim_Seg_noLEE");
+  sim_TAS->Write("sim_TAS_noLEE");
+  sim_Mul->Write("sim_Mul_noLEE");
   // sim_Seg->Write(Form("sim_Seg%s",fit_number.c_str()));
   // sim_TAS->Write(Form("sim_TAS%s",fit_number.c_str()));
   // sim_Mul->Write(Form("sim_Mul%s",fit_number.c_str()));

@@ -1347,12 +1347,12 @@ void GetExI(int &nExI, int &nSpbI, int &nParI, int &nDisEx, int &nLvlInBinI,
   #ifdef bForceBinNum
   nExI = g_nConEBin - 1;
   #else
+  double dExI = g_dExIMax;
   nExI = round( (nExI - g_dECrit) / g_dConESpac );
   #endif
-  double dExI = g_dExIMax;
   nSpbI = int(g_dSpI);
   nParI = g_dParI;
-  //double dExI = g_adConExCen[nExI];
+  double dExI = g_adConExCen[nExI];
   std::tie(nLvlInBinI, nDisEx) = GetLevelIfExists(dExI, nExI, nSpbI,
                                                   nParI, nDisEx,
                                                   nLvlInBinI, ranEv);
@@ -2240,8 +2240,8 @@ void RAINIER(int g_nRunNum = 1) {
   double dElapsedSec = double(tEnd.GetSec() - tBegin.GetSec());
   cout << "Time elapsed during RAINIER execution: " << dElapsedSec << " sec"
     << endl;
-  //gROOT->ProcessLine(".L $RAINIER_PATH/Analyze.C++"); // load the separate analysis file
-  //gROOT->ProcessLine("RetrievePars()"); // linking files is always wonky in ROOT
+  gROOT->ProcessLine(".L $RAINIER_PATH/Analyze.C++"); // load the separate analysis file
+  gROOT->ProcessLine("RetrievePars()"); // linking files is always wonky in ROOT
 } // main
 
 // copy of the function above to ensure that one can run RAINIER directly, or runRAINIER.sh in a seperate folder
