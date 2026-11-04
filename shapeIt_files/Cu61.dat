@@ -24,16 +24,16 @@ lit_alpha 0
 lit_alpha_error 0 0
 level1 862 1081
 level1_2 0 0
-bg_level1 825.496 883.46 1069.88 1127.85
+bg_level1 587.72 644.793 1069.88 1127.85
 bg_level2 1085.49 1142.84 1541.95 1580.18
 level2 1200 1537
-level2_2 1200 1350
+level2_2 1300 1320
 excitation 7500 10000
 excitationMCLimits 2000 3000
 excitation_bin_1 500
 excitation_bin_2 800
 nOfBins 5
-eff_corr 1.9
+eff_corr 2.2
 minCounts 50
 doWidthCal 0
 widthCal 0 0 0 0

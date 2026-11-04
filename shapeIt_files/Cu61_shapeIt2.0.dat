@@ -1,0 +1,66 @@
+/home/artemis/ND_Nickel/rootfiles_raw/60Ni_Oslo_matrix.root
+/home/artemis/ND_Nickel/shapeIt_files/dataCRP/61Cu_1982NI+63Cu_1964Fu.txt
+
+matrixName msum
+MeV: 1
+mode 2
+doInterpol 1
+doOslo 1
+alphaLimit -1 1
+alphaIter 100
+doEffi 0
+doAutoScale 1
+colour 1
+doGRF 0
+displayAverage 0
+displaySingle 1
+doSlidingWindow 0
+doBinVariation 0
+doBackground 1
+verbose 0
+gSF_norm 1
+lit_norm 1
+lit_alpha 0
+lit_alpha_error 0 0
+level1 862 1081
+level1_2 0 0
+level1_3 0 0
+doDoublet1 0
+doTriplet1 0
+fixDoubletWidth1 0
+fixTripletWidth1 0
+bg_level1 587.72 644.793 1069.88 1127.85
+bg_level2 1085.49 1142.84 1541.95 1580.18
+level2 1200 1537
+level2_2 1300 1320
+level2_3 0 0
+doDoublet2 1
+doTriplet2 0
+fixDoubletWidth2 1
+fixTripletWidth2 0
+excitation 7500 10000
+excitationMCLimits 2000 3000
+excitation_bin_1 500
+excitation_bin_2 800
+nOfBins 5
+eff_corr 2.2
+minCounts 50
+doWidthCal 0
+widthCal 0 0 0 0
+fixPeakPos1 0
+peakPos1 0
+fixPeakPos2 0
+peakPos2 0
+fixDoubletPeakPos1 0
+doubletPeakPos1 0
+fixDoubletPeakPos2 0
+doubletPeakPos2 0
+fixTripletPeakPos1 0
+tripletPeakPos1 0
+fixTripletPeakPos2 0
+tripletPeakPos2 0
+rhoFileName 
+rhoScale 1
+spinLow 0
+spinHigh 8
+discreteLevelFile 100 100

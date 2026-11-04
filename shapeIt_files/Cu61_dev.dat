@@ -1,5 +1,5 @@
 /home/artemis/ND_Nickel/rootfiles_raw/60Ni_Oslo_matrix.root
-/home/artemis/ND_Nickel/shapeIt_files/dataCRP/61Cu_1982NI.txt
+/home/artemis/ND_Nickel/shapeIt_files/dataCRP/61Cu_1982NI+63Cu_1964Fu.txt
 
 matrixName msum
 MeV: 1
@@ -18,22 +18,22 @@ doSlidingWindow 0
 doBinVariation 0
 doBackground 1
 verbose 0
-gSF_norm 1
+gSF_norm 4
 lit_norm 1
 lit_alpha 0
 lit_alpha_error 0 0
-level1 868 1026
+level1 867 1079
 level1_2 0 0
-bg_level1 792.448 867.814 1070.84 1146.21
-bg_level2 1124.67 1200.04 1515.35 1590.71
-level2 1200 1500
-level2_2 0 0
-excitation 7500 10500
+bg_level1 576.764 631.455 1061.04 1105.97
+bg_level2 1154.91 1213.29 1530.16 1587.18
+level2 1194 1560
+level2_2 1300 1320
+excitation 7500 11000
 excitationMCLimits 2000 3000
 excitation_bin_1 400
 excitation_bin_2 800
-nOfBins 8
-eff_corr 0.4
+nOfBins 9
+eff_corr 2
 minCounts 50
 doWidthCal 0
 widthCal 0 0 0 0
