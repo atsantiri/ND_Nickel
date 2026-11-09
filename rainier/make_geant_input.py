@@ -16,19 +16,26 @@ import sys
 
 # question about isotope to set folder name
 if len(sys.argv) == 1:
+    dir = input("What directory?")
     ene = input("What Ex? ")
     ext=''
 elif len(sys.argv) == 2:
-    ene = sys.argv[1]
+    dir = sys.argv[1]
+    ene = input("What Ex? ")
     ext=''
 elif len(sys.argv) == 3:
-    ene = sys.argv[1]
-    ext = sys.argv[2]
+    dir = sys.argv[1]
+    ene = sys.argv[2]
+    ext = ""
+elif len(sys.argv) == 4:
+    dir = sys.argv[1]
+    ene = sys.argv[2]
+    ext = sys.argv[3] 
 
 real=100000
-f = 'cu63/Run0001.root'
+f = f'{dir}/Run0001.root'
 t = 'tree'
-fOut_name = 'cu63/cu63_Ex_'+str(ene)+'MeV_'+ext+'.txt'
+fOut_name = f'{dir}/{dir}_Ex_'+str(ene)+'MeV_'+ext+'.txt'
 print(fOut_name)
 print("Reading tree {} in file {}".format(t, f))
 file = ROOT.TFile.Open(f)
